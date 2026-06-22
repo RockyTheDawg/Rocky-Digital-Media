@@ -74,7 +74,7 @@ document.addEventListener("click", async (event) => {
 });
 
 bookingForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
+  // event.preventDefault();
 
   if (!bookingForm.checkValidity()) {
     bookingForm.reportValidity();
