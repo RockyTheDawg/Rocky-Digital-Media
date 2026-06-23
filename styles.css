@@ -902,17 +902,32 @@ select option {
     transform 160ms ease;
 }
 
+.paw-trigger {
+  position: fixed;
+  left: auto !important;
+  right: 18px;
+  bottom: 18px;
+  z-index: 35;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0.78;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
 .paw-trigger span {
   display: block;
-  width: 27px;
-  height: 27px;
-  background:
-    radial-gradient(circle at 24% 35%, currentColor 0 10%, transparent 11%),
-    radial-gradient(circle at 43% 20%, currentColor 0 10%, transparent 11%),
-    radial-gradient(circle at 62% 21%, currentColor 0 10%, transparent 11%),
-    radial-gradient(circle at 78% 38%, currentColor 0 10%, transparent 11%),
-    radial-gradient(ellipse at 50% 68%, currentColor 0 18%, transparent 19%);
-  transform: rotate(38deg);
+  font-size: 22px;
+  line-height: 1;
+  filter: brightness(0) invert(1);
 }
 
 .paw-trigger:hover {
