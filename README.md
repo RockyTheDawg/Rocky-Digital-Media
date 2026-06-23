@@ -1,6 +1,6 @@
-# Rocky Digital Media
+# Rocky Digital Media!
 
-A photography booking website for RockyTheDog, built to help people view services, check pricing, request handler support, and find social/contact links in one place.
+This is a photography booking website for RockyTheDog (OWNER), built to help people view services, check pricing, request handler support, and much more!
 
 ## Live Site
 
@@ -21,7 +21,6 @@ Rocky Digital Media is a small photography-focused site for convention and event
 - Mobile-friendly layout
 - Custom floating paw button
 
-## Social Links
+## Contacts
 
-- Instagram: https://instagram.com/mrrockythedog
-- TikTok:
+If you wish to contact me for whatever reason, please refer the email on the profile or use officialrockymedia@gmail.com for inquiries. 
