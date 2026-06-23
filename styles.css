@@ -836,3 +836,28 @@ select option {
 #home-title {
   font-family: "Courier New", Courier, monospace;
 }
+
+.social-board {
+  background: rgba(18, 16, 15, 0.32);
+}
+
+.social-board a,
+.social-board button {
+  background: rgba(255, 249, 240, 0.08);
+}
+
+.social-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.paw-trigger {
+  left: auto;
+  right: 18px;
+  bottom: 18px;
+  background: transparent;
+  opacity: 0.72;
+}
