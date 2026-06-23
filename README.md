@@ -1,16 +1,27 @@
-Rocky
-Rocky's official website for links, socials, and contact info.
+# Rocky Digital Media
 
-Live site: leave blank 
+A photography booking website for RockyTheDog, built to help people view services, check pricing, request handler support, and find social/contact links in one place.
 
-About
-This site is about RockyTheDog and all his socials. Consider checking it out and taking a look around!
+## Live Site
 
-Links
-Instagram: [https://instagram.com/mrrockythedog](https://instagram.com/mrrockythedog)
-X: [https://x.com/SmackerTheDog](https://x.com/SmackerTheDog)
-TikTok: [https://tiktok.com/@SmackerTheDog](https://tiktok.com/@SmackerTheDog)
-YouTube: [https://youtube.com/@rockythedog360](https://youtube.com/@rockythedog360)
-Contact
-Discord: rockythedog
-Telegram: @rockythedog100
+https://mrpancake100.github.io/Rocky-Digital-Media/
+
+## About
+
+Rocky Digital Media is a small photography-focused site for convention and event photo services. The site includes booking information, pricing, frequently asked questions, handler request details, and ways to contact Rocky.
+
+## Features
+
+- Booking request form
+- Pricing section for photo services
+- Handler request form
+- FAQ dropdown section
+- Social and contact links
+- Website credits panel
+- Mobile-friendly layout
+- Custom floating paw button
+
+## Social Links
+
+- Instagram: https://instagram.com/mrrockythedog
+- TikTok:
