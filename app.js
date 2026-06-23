@@ -1,6 +1,7 @@
 const tabLinks = document.querySelectorAll("[data-tab-link]");
 const panels = document.querySelectorAll("[data-tab-panel]");
 const bookingForm = document.querySelector("#booking-form");
+const handlerForm = document.querySelector("#handler-form");
 const formOutput = document.querySelector("#form-output");
 const lightbox = document.querySelector("#lightbox");
 const lightboxMedia = lightbox?.querySelector(".lightbox-media");
