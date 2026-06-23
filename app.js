@@ -89,16 +89,16 @@ bookingForm?.addEventListener("submit", async (event) => {
     headers: { Accept: "application/json" },
   });
 
-  bookingForm.innerHTML = `
-    <div class="form-output show">
-      Thank for booking with Rocky’s Media! I be in contact in 24-48hrs with more info based on your preferred contact method!
-      <br><br>
-      If you have any questions Feel free to shoot me a email at
-      <a href="mailto:officialrockymedia@gmail.com"><em>officialrockymedia@gmail.com</em></a>.
-      <br><br>
-      To submit a new request, please refresh the page.
-    </div>
-  `;
+bookingForm.innerHTML = `
+  <div class="form-output show">
+    Thank you for booking with Rocky's Media! I'll be in contact within 24-48 hours with more information based on your preferred contact method.
+    <br><br>
+    If you have any questions, feel free to email me at
+    <a href="mailto:officialrockymedia@gmail.com"><em>officialrockymedia@gmail.com</em></a>.
+    <br><br>
+    <span class="form-note">To submit a new request, refresh the page or click another tab.</span>
+  </div>
+`;
 });
 
 document.querySelectorAll(".photo-tile").forEach((tile) => {
