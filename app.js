@@ -30,8 +30,17 @@ tabLinks.forEach((link) => {
     const target = link.dataset.tabLink;
     if (!target) return;
 
-   event.preventDefault();
-resetSubmittedForms();
+  event.preventDefault();
+
+if (
+  bookingForm?.dataset.submitted === "true" ||
+  handlerForm?.dataset.submitted === "true"
+) {
+  window.location.href = `#${target}`;
+  window.location.reload();
+  return;
+}
+
 activateTab(target);
   });
 });
