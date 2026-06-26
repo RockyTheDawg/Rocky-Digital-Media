@@ -4,7 +4,7 @@ Live site: https://rockythedawg.github.io/Rocky-Snack-Shack-of-Chaos/
 
 ## About
 
-This site is based off easter eggs as a turn around is a known reason in floof cabin (.gg/floofcabin) as my nickanme "Rocky "Hungry Rocks" theDog. Everything is all for giigles and jokes and had a fun time making this. 
+This site is about RockyTheDog, his socials, and a very serious Aussie shepherd snack agenda. It is a furry, food-themed joke site made for fun, boredom cures, and random easter eggs.
 
 Visitors can feed Rocky, click around for hidden surprises, type secret commands, and discover silly popups across the page. Consider checking it out and taking a look around!
 
@@ -35,8 +35,8 @@ Visitors can feed Rocky, click around for hidden surprises, type secret commands
 
 - Site made by RockyTheDog
 - Credit to River (@RiverTheCat)
-- Site idea inspired by River (@RiverTheCat)
-- Images were taken from Google.
+- Site inspired by River (@RiverTheCat)
+- Images were taken from Google
 
 ## Contact
 
@@ -73,5 +73,3 @@ Upload these files to the main/root area of the repository:
 Keep the existing `assets` folder. The site needs it for the dog, background, treat bag, and River cameo images.
 
 Do not upload the `outputs` folder itself.
-
-## Enjoy and have fun! 
