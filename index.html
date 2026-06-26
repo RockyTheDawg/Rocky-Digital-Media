@@ -3,150 +3,113 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Feed Rocky</title>
-  <meta name="description" content="Yoooo Wanna have fun messing with Rocky? Why not feed him, or mess around with the buttons perhaps. Wut u waiting for, click the link- I SAID CLICK IT!" />
-  <meta property="og:title" content="Feed Rocky" />
-  <meta property="og:description" content="Yoooo Wanna have fun messing with Rocky? Why not feed him, or mess around with the buttons perhaps. Wut u waiting for, click the link- I SAID CLICK IT!" />
-  <meta property="og:image" content="https://rockythedawg.github.io/Rocky-Snack-Shack-of-Chaos/aussie-tab-logo-transparent-512.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://rockythedawg.github.io/Rocky-Snack-Shack-of-Chaos/" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feed Rocky" />
-  <meta name="twitter:description" content="Yoooo Wanna have fun messing with Rocky? Why not feed him, or mess around with the buttons perhaps. Wut u waiting for, click the link- I SAID CLICK IT!" />
-  <meta name="twitter:image" content="https://rockythedawg.github.io/Rocky-Snack-Shack-of-Chaos/aussie-tab-logo-transparent-512.png" />
-  <link rel="icon" type="image/png" href="aussie-tab-logo-transparent-512.png" />
+  <title>Rocky's Media</title>
+  <meta name="description" content="Rocky's Media booking, handler requests, pricing, FAQ, and social links." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="funhouse" aria-label="Rocky FunHouse">
-    <button class="background-nose-button" id="backgroundNoseButton" type="button" aria-label="Boop the big background dog nose"></button>
+  <nav class="tabs" aria-label="Main sections">
+    <a class="tab" href="#home" data-tab-link="home">Home</a>
+    <a class="tab" href="#booking" data-tab-link="booking">Booking</a>
+    <a class="tab" href="#pricing" data-tab-link="pricing">Pricing</a>
+    <a class="tab" href="#handler" data-tab-link="handler">Handler Request</a>
+    <a class="tab" href="#faq" data-tab-link="faq">FAQ</a>
+    <a class="tab" href="#socials" data-tab-link="socials">Socials</a>
+  </nav>
 
-    <section class="hero">
-      <h1>
-        <a href="https://github.com/RockyTheDawg/Rocky-Snack-Shack-of-Chaos" target="_blank" rel="noreferrer">
-          Rocky-Snack-Shack-of-Chaos
-        </a>
-      </h1>
-      <p class="subtitle">Bored? Have a lot of free time?, need something to do? Well start by feeding me...</p>
-    </section>
-
-    <section class="feed-scene" aria-label="Feed Rocky">
-      <div class="dog-popout" id="dogPopout" aria-label="Rocky the Aussie shepherd">
-        <img class="dog-photo" src="assets/rocky-puppy.png" alt="Rocky the Aussie puppy" />
-        <button class="nose-button" id="noseButton" type="button" aria-label="Boop Rocky's nose"></button>
+  <main>
+    <section class="panel hero-panel active" id="home" data-tab-panel="home" aria-labelledby="home-title">
+      <div class="section-copy">
+        <p class="eyebrow">Furry con photography • group photos • memories</p>
+        <h1 id="home-title">ROCKY</h1>
+        <p class="lede">Whether you're booking a photo session, need a handler, or are just exploring, we have everything you need to make your next con a blast and memorable!</p>
       </div>
-      <div class="food-ground" id="foodGround" aria-label="Food on the ground"></div>
     </section>
 
-    <nav class="side-rail" aria-label="Secret buttons">
-      <button class="icon-button amazon-package" id="amazonPackage" type="button" aria-label="Open Amazon treats">📦</button>
-      <button class="icon-button fortune-cookie" id="fortuneCookie" type="button" aria-label="Rocky fortune cookie">🥠</button>
-      <button class="icon-button taco-recipe-button" id="tacoRecipeButton" type="button" aria-label="Open a random taco recipe">🌮</button>
-      <button class="icon-button secret-paw" id="secretPaw" type="button" aria-label="Hidden zoomies paw">🐾</button>
-      <button class="icon-button commands-button" id="commandsButton" type="button" aria-label="Open typed commands">🎾</button>
-      <button class="icon-button credits-button" id="creditsButton" type="button" aria-label="Open credits">🦴</button>
-      <button class="icon-button autograph-pencil" id="autographPencil" type="button" aria-label="Rocky autograph pencil">✏️</button>
-    </nav>
+    <section class="panel split" id="booking" data-tab-panel="booking" aria-labelledby="booking-title">
+      <div class="section-copy">
+        <h2 id="booking-title">Plan your next con photoshoot with Rocky!</h2>
+        <p>Ready to take your con to the next level? Book a photoshoot and start your adventure! Whether it's your first con or you're a veteran congoer, show off your fursuit, partial, or full suit for memories and much more!</p>
+        <details class="disclosure" open>
+          <summary>Booking disclosure <span aria-hidden="true">⌄</span></summary>
+          <p>When booking a slot, submission does not guarantee a slot until payment is made in full and everything is communicated. Please note: convention rules, handler needs, accessibility needs, and public-space safety always come first. Please read our refund policy in the FAQ.</p>
+        </details>
+      </div>
 
-    <button class="hidden-treat-bag" id="treatBag" type="button" aria-label="Hidden treat bag">
-      <img src="assets/dog-treat.png" alt="" />
-      <span>treats</span>
-    </button>
+      <form class="booking-form" id="booking-form" action="https://formspree.io/f/xojoqobk" method="POST">
+        <label>Name or handle<input name="name" type="text" placeholder="Your name / fursona" required /></label>
+        <label>Preferred contact method<select name="contact_method" required><option value="">Choose contact method</option><option>Discord</option><option>Telegram</option><option>Email</option><option>Instagram</option></select></label>
+        <label>Contact info<input name="contact_info" type="text" placeholder="Choose a method first" required /></label>
+        <label>Convention<input name="convention" list="conventions" placeholder="Example: AWU" required /></label>
+        <label>Preferred day<select name="day" required><option value="">Choose a day</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></label>
+        <label>Photoshoot details<textarea name="details" placeholder="Tell me what kind of photos you want, group size, location ideas, and anything else important." required></textarea></label>
+        <label class="checkline"><input name="understanding" type="checkbox" required /><span>I understand this is a request and not a confirmed slot yet until payment is made in full.</span></label>
+        <button class="submit-button" type="submit">Create booking request</button>
+      </form>
+    </section>
+
+    <section class="panel" id="pricing" data-tab-panel="pricing" aria-labelledby="pricing-title">
+      <div class="section-copy"><h2 id="pricing-title">Pricing</h2></div>
+      <div class="price-grid">
+        <article class="price-card"><h3>Solo</h3><p class="price">$15</p><p>One fursuiter or person, quick photos, and simple posing help.</p></article>
+        <article class="price-card featured"><h3>Duo</h3><p class="price">$25</p><p>Two people or suits with extra time for matching poses and retakes.</p></article>
+        <article class="price-card"><h3>Small Group</h3><p class="price">$35</p><p>Great for friends who want a clean group photo at con.</p></article>
+        <article class="price-card"><h3>Large Group</h3><p class="price">Ask</p><p>For bigger meetups or groups that need more time and planning.</p></article>
+      </div>
+      <p class="pricing-disclaimer">Please note, all photos are taken in high-definition resolution unless mentioned otherwise. You will be able to see a preview after each photo and have the option to retake it or request an edit, such as brightening the photo or removing unnecessary background distractions.</p>
+    </section>
+
+    <section class="panel split" id="handler" data-tab-panel="handler" aria-labelledby="handler-title">
+      <div class="section-copy">
+        <h2 id="handler-title">Handler Request</h2>
+        <p>Need help navigating the con, maybe need someone to help carry your stuff to take the ease off your hand, or perhaps you need someone to come along and help take photos for you or groups and/or friends? I got you!</p>
+        <details class="disclosure" open>
+          <summary>Handler disclosure <span aria-hidden="true">⌄</span></summary>
+          <p>Handler requests are not guaranteed until everything is communicated and confirmed. Convention rules, accessibility needs, handler needs, and public-space safety always come first.</p>
+        </details>
+      </div>
+
+      <form class="booking-form" id="handler-form" action="https://formspree.io/f/xojoqobk" method="POST">
+        <label>Name or handle<input name="name" type="text" placeholder="Your name / fursona" required /></label>
+        <label>Preferred contact method<select name="contact_method" required><option value="">Choose contact method</option><option>Discord</option><option>Telegram</option><option>Email</option><option>Instagram</option></select></label>
+        <label>Contact info<input name="contact_info" type="text" placeholder="Choose a method first" required /></label>
+        <label>Convention<input name="convention" list="conventions" placeholder="Example: AWU" required /></label>
+        <label>Preferred day<select name="day" required><option value="">Choose a day</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></label>
+        <label>Handler details<textarea name="details" placeholder="Tell me what help you need, where you expect to be, accessibility needs, suit limits, crowd concerns, and anything else important." required></textarea></label>
+        <label class="checkline"><input name="understanding" type="checkbox" required /><span>I understand this is a handler request and not a confirmed slot yet until payment is made in full.</span></label>
+        <button class="submit-button" type="submit">Create handler request</button>
+      </form>
+    </section>
+
+    <section class="panel" id="faq" data-tab-panel="faq" aria-labelledby="faq-title">
+      <div class="section-copy"><h2 id="faq-title">FAQ</h2></div>
+      <div class="faq-list">
+        <details><summary>What is your refund policy?</summary><p>Refunds are based on how far in advance you cancel. Cancellations made 14 or more days before the event receive a full refund, cancellations made 7-13 days before the event receive a partial refund, and cancellations made less than 7 days before the event are not refunded.</p></details>
+        <details><summary>How far in advance can I book?</summary><p>There is no limit on how far in advance you can book. It depends on the convention and the day.</p></details>
+        <details><summary>Do you give discounts?</summary><p>At this time, we do not offer discounts. Sorry!</p></details>
+        <details><summary>What equipment do you use when taking photos?</summary><p>At this time, I use an iPhone 17 Pro Max or the fursuiter's personal device. I won't change your camera settings unless you ask me to.</p></details>
+        <details><summary>Who can I contact if I have any questions, concerns, or comments?</summary><p>If you have questions, concerns, or anything else that may come your way, you can email me at <a href="mailto:officialrockymedia@gmail.com">officialrockymedia@gmail.com</a> and we'll get back to you as soon as possible.</p></details>
+      </div>
+    </section>
+
+    <section class="panel split" id="socials" data-tab-panel="socials" aria-labelledby="socials-title">
+      <div class="section-copy"><h2 id="socials-title">You can find my social links here!</h2></div>
+      <div class="social-board" aria-label="Social links">
+        <a href="https://instagram.com/mrrockythedog" target="_blank" rel="noreferrer">Instagram</a>
+        <button type="button" data-copy="rockythedog">Discord</button>
+        <a href="https://t.me/rockythedog100" target="_blank" rel="noreferrer">Telegram</a>
+        <a href="https://www.furtrack.com/user/RockyTheDog/photography" target="_blank" rel="noreferrer">Furtrack</a>
+      </div>
+    </section>
   </main>
 
-  <div class="mood-card" id="moodCard" role="status" aria-live="polite">Rocky mood: hungry</div>
-  <div class="debt-card" id="debtCard" role="status" aria-live="polite">
-    <strong>Calculating snack debt...</strong>
-    <span>Food debt? Haha funny one...you never tax me EVER!</span>
-  </div>
-  <div class="receipt" id="receipt" role="status" aria-live="polite">
-    <strong>Rocky Snack Receipt</strong>
-    <div id="receiptLines"></div>
-    <span>Tax: absolutely not</span>
-    <span>Total: more snacks</span>
-  </div>
-  <div class="river-badge" id="riverBadge">Inspired by River (@RiverTheCat)</div>
-  <div class="river-cameo" id="riverCameo" aria-hidden="true">
-    <img src="assets/river-cat.png" alt="" />
-  </div>
-  <div class="paw-trail" id="pawTrail" aria-hidden="true"></div>
-  <div class="hotdog-rain" id="hotdogRain" aria-hidden="true"></div>
-  <div class="autograph-layer" id="autographLayer" aria-hidden="true"></div>
+  <datalist id="conventions">
+    <option value="It's Ruff Out 2026"></option><option value="Furry Weekend Atlanta 2026"></option><option value="AnthrOhio 2026"></option><option value="Furlandia 2026"></option><option value="Anthrocon 2026"></option><option value="AWU - Anthro Weekend Utah 2026"></option><option value="Megaplex 2026"></option><option value="DenFur 2026"></option><option value="Anthro New England 2027"></option>
+  </datalist>
 
-  <div class="modal show" id="welcomeModal" aria-hidden="false">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Welcome">
-      <h2>Welcome!</h2>
-      <p>This site is for funnies and a cool way to cure boredom at times. Every button leads to something or does something, and typing in some words, such as "awoo" will have a cool affect! Ready to sniff around? Click LETS GO!</p>
-      <button class="primary-action" id="letsGoButton" type="button">LETS GO!</button>
-    </div>
-  </div>
-
-  <div class="modal" id="termsModal" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Fake terms">
-      <h2>Terms</h2>
-      <p>By entering this site, you agree to feed Rocky indefinitely.</p>
-      <button class="primary-action" id="termsAccept" type="button">I accept the snack contract</button>
-    </div>
-  </div>
-
-  <div class="modal" id="creditsModal" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Credits">
-      <button class="close-button" id="creditsClose" type="button" aria-label="Close credits">x</button>
-      <h2>Credits</h2>
-      <p>Site made by RockyTheDog</p>
-      <p>Credit to River (@RiverTheCat)</p>
-      <p>Images were taken from Google</p>
-    </div>
-  </div>
-
-  <div class="modal" id="commandsModal" aria-hidden="true">
-    <div class="panel commands-panel" role="dialog" aria-modal="true" aria-label="Typed commands">
-      <button class="close-button" id="commandsClose" type="button" aria-label="Close typed commands">x</button>
-      <h2>Typed Commands</h2>
-      <form class="command-entry" id="commandForm">
-        <label for="commandInput">Type a command</label>
-        <div>
-          <input id="commandInput" type="text" autocomplete="off" placeholder="awoo" />
-          <button type="submit">Run</button>
-        </div>
-      </form>
-      <dl>
-        <div><dt>AWOO</dt><dd>Makes the title howl.</dd></div>
-        <div><dt>HOTDOGZ</dt><dd>Makes hotdogs rain.</dd></div>
-        <div><dt>RIVER</dt><dd>Shows the River cameo.</dd></div>
-        <div><dt>BARK</dt><dd>Opens the Bark Translator.</dd></div>
-        <div><dt>SQUIRREL</dt><dd>Sends Rocky into chaos mode.</dd></div>
-        <div><dt>BRAIN</dt><dd>Turns the title into ONLY SNACKS.</dd></div>
-      </dl>
-    </div>
-  </div>
-
-  <div class="modal" id="barkModal" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Bark Translator">
-      <button class="close-button" id="barkClose" type="button" aria-label="Close bark translator">x</button>
-      <h2>Bark Translator</h2>
-      <p>woof = feed me now</p>
-      <p>bark = Craving dessert</p>
-      <p>awoo = Have any Dr Pepper?</p>
-    </div>
-  </div>
-
-  <div class="modal" id="courtModal" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Snack Court">
-      <button class="close-button" id="courtClose" type="button" aria-label="Close snack court">x</button>
-      <h2>Snack Court</h2>
-      <p>Rocky has been found <strong>not guilty by reason of hungry.</strong></p>
-    </div>
-  </div>
-
-  <div class="modal video-modal" id="videoModal" aria-hidden="true">
-    <div class="video-panel" role="dialog" aria-modal="true" aria-label="Secret treat bag video">
-      <button class="close-button" id="videoClose" type="button" aria-label="Close video">x</button>
-      <iframe id="rickrollFrame" title="Secret treat bag video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <a href="https://youtu.be/dQw4w9WgXcQ?si=sCEXMA3Zv0sk_Dd3" target="_blank" rel="noreferrer">Open video if the player refuses snacks</a>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <button class="paw-trigger" id="credits-trigger" aria-label="Open website credits"><span>🐾</span></button>
+  <aside class="credits-panel" id="credits-panel" aria-label="Website credits"><div><strong>Credits</strong><button id="credits-close" type="button" aria-label="Close website credits">x</button></div><p>Website made by RockyTheDog</p><a href="https://buymeacoffee.com/rockythedog" target="_blank" rel="noreferrer">Support me: BuyMeCoffee</a></aside>
+  <dialog class="lightbox" id="lightbox"><button id="lightbox-close" type="button" aria-label="Close preview">x</button><div class="lightbox-media"></div><p></p></dialog>
+  <script src="app.js"></script>
 </body>
 </html>
