@@ -73,6 +73,13 @@ select option { color: var(--ink); background: #12100f; }
 .faq-list { display: grid; gap: 0.75rem; width: min(58rem, 100%); margin-inline: auto; text-align: left; }
 #faq { justify-items: center; }
 .faq-list details { padding: 1rem; }
+.staff-header { margin-bottom: 1rem; }
+.staff-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; width: min(74rem, 100%); align-items: stretch; }
+.staff-card { display: grid; gap: 1rem; min-width: 0; padding: 1.25rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(12, 10, 9, 0.7); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22); }
+.staff-image-slot { min-height: clamp(14rem, 24vw, 18rem); aspect-ratio: 4 / 5; width: 100%; border: 1px solid rgba(255, 249, 240, 0.2); border-radius: 12px; background: transparent; padding: 1rem; }
+.staff-info { display: grid; gap: 0.35rem; text-align: left; }
+.staff-info h3 { margin: 0; color: var(--ink); font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.staff-info p { margin: 0; color: var(--ink); font-weight: 700; }
 .social-board { display: grid; grid-template-columns: repeat(2, minmax(12rem, 1fr)); gap: 0.75rem; width: min(40rem, 100%); margin-inline: 0; padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: rgba(18, 16, 15, 0.32); }
 .social-board a, .social-board button { min-height: 4rem; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: rgba(255, 249, 240, 0.08); font-weight: 950; text-decoration: none; cursor: pointer; }
 .paw-trigger { position: fixed; z-index: 20; left: auto !important; right: 18px !important; bottom: 18px !important; border: 0; background: transparent !important; color: white !important; opacity: 0.95; cursor: pointer; }
@@ -114,6 +121,8 @@ select option { color: var(--ink); background: #12100f; }
   .tabs { top: 0.5rem; overflow-x: auto; justify-content: flex-start; width: calc(100vw - 1rem); transform: translateX(-50%); }
   .panel { min-height: 100svh; padding: 5rem 1rem 5rem; }
   .booking-form, .price-grid, .social-board { grid-template-columns: 1fr; }
+  .staff-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .staff-image-slot { min-height: 13rem; }
   h1, h2 { max-width: 10ch; font-size: clamp(3rem, 17vw, 4.5rem); }
   .disclosure { text-align: left; }
 }
