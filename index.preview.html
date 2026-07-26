@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cap'n Blox — Preview</title>
+  <meta name="description" content="Preview of Cap'n Blox site plus suggestions (preview only)." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Small preview-only styles */
+    body.preview-note { padding-top: 4.5rem; }
+    .preview-banner { position: fixed; left: 0; right: 0; top: 0; background: #222; color: #fff; padding: 0.45rem 1rem; z-index: 30; font-weight: 700; text-align: center; }
+    .suggestions { max-width: 80ch; margin: 1.5rem auto; background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); }
+    .staff-list, .staff-grid { list-style: none; padding: 0; margin: 0; }
+    .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem,1fr)); gap: 1rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(12rem,1fr)); gap: 0.5rem; }
+    .gallery-grid img { width: 100%; height: auto; display: block; border-radius: 6px; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    .preview-note .tabs { top: 3rem; }
+  </style>
+</head>
+<body class="preview-note">
+  <div class="preview-banner">Preview page — contains current site plus optional suggestions (preview-only)</div>
+
+  <nav class="tabs" aria-label="Main sections">
+    <a class="tab" href="#home" data-tab-link="home">Home</a>
+    <a class="tab" href="#staff" data-tab-link="staff">Meet the Staff</a>
+    <a class="tab" href="#about" data-tab-link="about">About Us</a>
+    <a class="tab" href="#faq" data-tab-link="faq">FAQ</a>
+    <a class="tab" href="#socials" data-tab-link="socials">Socials</a>
+    <a class="tab" href="#suggestions" data-tab-link="suggestions">Suggestions (preview)</a>
+  </nav>
+
+  <main>
+    <!-- Current site content (copied from index.html) -->
+    <section class="panel hero-panel active" id="home" data-tab-panel="home" aria-labelledby="home-title">
+      <div class="section-copy centered-copy">
+        <p class="eyebrow">Official M.E.G. / Backrooms developer hub</p>
+        <h1 id="home-title">Cap'n Blox</h1>
+        <p class="lede">insert words here</p>
+      </div>
+    </section>
+
+    <section class="panel center-panel" id="staff" data-tab-panel="staff" aria-labelledby="staff-title">
+      <div class="section-copy centered-copy">
+        <h2 id="staff-title">Meet the Staff</h2>
+        <p><em>insert name here</em></p>
+      </div>
+    </section>
+
+    <section class="panel center-panel" id="about" data-tab-panel="about" aria-labelledby="about-title">
+      <div class="section-copy centered-copy"><h2 id="about-title">About Cap'n Blox & M.E.G.</h2></div>
+      <div class="section-copy"><p>Cap'n Blox's Official Site hosts the Materials &amp; Exploration Group (M.E.G.) developer resources for Backrooms projects, documentation, and community archives. The goal is to provide reliable tooling and canonical references for contributors and curious developers.</p></div>
+    </section>
+
+    <section class="panel center-panel" id="faq" data-tab-panel="faq" aria-labelledby="faq-title">
+      <div class="section-copy centered-copy"><h2 id="faq-title">FAQ</h2></div>
+      <div class="faq-list">
+        <details>
+          <summary>Where can I find the Discord link?</summary>
+          <p><a href="https://discord.gg/B8fgWyBYvR" target="_blank" rel="noreferrer">discord.gg/B8fgWyBYvR</a></p>
+        </details>
+
+        <details>
+          <summary>How can I report bugs, errors, etc?</summary>
+          <p>You can report issues on our Discord server. Alternatively, you can fill out a forum form here (will add a link in the future).</p>
+        </details>
+
+        <details>
+          <summary>Where can I find releases?</summary>
+          <p>You can find everything here! (will make it a link in the future)</p>
+        </details>
+
+        <details>
+          <summary>How can I sign up to be a part of the team?</summary>
+          <p>At this time, we're not hiring. Keep an eye on Discord for future openings and announcements.</p>
+        </details>
+
+        <details>
+          <summary>What platforms can I play this on?</summary>
+          <p>Currently you can play on Mobile, Console, and PC. PC is recommended for the best experience.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="panel split" id="socials" data-tab-panel="socials" aria-labelledby="socials-title">
+      <div class="section-copy"><h2 id="socials-title">All of my socials</h2></div>
+      <div class="social-board" aria-label="Social links">
+        <a href="https://docs.google.com/document/d/1SuSWFBCAiyttiyKr59f6LrgkQspfZfSHirozs-Dz_QA/edit?usp=sharing" target="_blank" rel="noreferrer">Change logs</a>
+        <a href="https://discord.gg/B8fgWyBYvR" target="_blank" rel="noreferrer">Discord</a>
+        <a href="https://www.roblox.com/share?code=2c77ffa0c7902b46bc9e94d30c60cf19&type=ExperienceDetails&stamp=1784904229070" target="_blank" rel="noreferrer">Roblox Game</a>
+        <a href="https://www.tiktok.com/@ovujw32phone15edstb" target="_blank" rel="noreferrer">TikTok</a>
+      </div>
+    </section>
+
+    <!-- Suggestions preview (rendered examples, preview-only) -->
+    <section class="panel center-panel" id="suggestions" data-tab-panel="suggestions" aria-labelledby="suggestions-title">
+      <div class="section-copy centered-copy"><h2 id="suggestions-title">Suggestions Preview (preview-only)</h2></div>
+      <div class="section-copy suggestions">
+        <h3>1) Staff list template</h3>
+        <ul class="staff-list">
+          <li><strong>Cap'n Blox</strong> — Lead Worldbuilder &amp; Developer</li>
+          <li><strong>Insert Name</strong> — Role (Systems)</li>
+          <li><strong>Insert Name</strong> — Role (Maps &amp; Tools)</li>
+        </ul>
+
+        <hr />
+        <h3>2) Staff grid example</h3>
+        <div class="staff-grid">
+          <article><h3>Insert Name</h3><p>Role — short bio</p></article>
+          <article><h3>Insert Name</h3><p>Role — short bio</p></article>
+        </div>
+
+        <hr />
+        <h3>3) Internal Gallery (example)</h3>
+        <div class="gallery-grid">
+          <img src="https://via.placeholder.com/400x250?text=Gallery+1" alt="Gallery example 1" />
+          <img src="https://via.placeholder.com/400x250?text=Gallery+2" alt="Gallery example 2" />
+          <img src="https://via.placeholder.com/400x250?text=Gallery+3" alt="Gallery example 3" />
+        </div>
+
+        <hr />
+        <h3>4) Fav icon suggestion (example)</h3>
+        <p>Recommended head link: <code>&lt;link rel="icon" type="image/png" href="/assets/favicon.png" /&gt;</code></p>
+
+        <hr />
+        <h3>5) Releases link example</h3>
+        <p><a href="https://github.com/capnblox/releases" target="_blank" rel="noreferrer">GitHub Releases (example)</a></p>
+
+        <hr />
+        <h3>6) Report a bug (button)</h3>
+        <p><a class="submit-button" href="https://github.com/capnblox/repo/issues/new" target="_blank" rel="noreferrer">Report a bug (GitHub Issues)</a></p>
+
+        <hr />
+        <h3>7) Data-driven socials (JSON example)</h3>
+        <pre>{
+  "socials": [
+    {"name":"Discord","url":"https://discord.gg/B8fgWyBYvR"},
+    {"name":"Change logs","url":"https://docs.google.com/..."}
+  ]
+}</pre>
+
+        <hr />
+        <h3>8) SEO &amp; accessibility example (meta)</h3>
+        <pre>&lt;meta property="og:title" content="Cap'n Blox's Official Site" /&gt;
+&lt;meta name="twitter:card" content="summary" /&gt;</pre>
+
+        <hr />
+        <h3>9) Staff edit UX (admin button)</h3>
+        <p><button class="submit-button" disabled>Preview: Edit staff (admin)</button> — (example only)</p>
+
+        <hr />
+        <h3>10) Credits panel polishing</h3>
+        <p>Credits panel is already sized to avoid overlap; could add a slide-in animation if desired.</p>
+      </div>
+    </section>
+  </main>
+
+  <button class="paw-trigger" id="credits-trigger" aria-label="Open website credits"><span>Credits</span></button>
+  <aside class="credits-panel" id="credits-panel" aria-label="Website credits"><div><strong>Credits</strong><button id="credits-close" type="button" aria-label="Close website credits">x</button></div><p>Official site by Cap'n Blox &amp; the M.E.G.</p><a href="mailto:contact@capnblox.dev">Contact</a></aside>
+
+  <script src="app.js"></script>
+  <script>
+    // Basic tab behavior for the preview (re-uses the same data-tab attributes as the real site)
+    (function(){
+      const tabLinks = document.querySelectorAll('[data-tab-link]');
+      const panels = document.querySelectorAll('[data-tab-panel]');
+
+      function activate(name) {
+        panels.forEach(p => p.classList.toggle('active', p.dataset.tabPanel === name));
+        document.querySelectorAll('.tab').forEach(link => link.classList.toggle('active', link.dataset.tabLink === name));
+        history.replaceState(null,'', `#${name}`);
+      }
+
+      tabLinks.forEach(link => link.addEventListener('click', (e)=>{
+        const target = link.dataset.tabLink; if (!target) return; e.preventDefault(); activate(target);
+      }));
+
+      const initial = location.hash.slice(1) || 'home';
+      activate(initial);
+    })();
+  </script>
+</body>
+</html>

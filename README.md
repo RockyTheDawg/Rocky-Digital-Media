@@ -1,22 +1,21 @@
-# Rocky's Media
+# Cap'n Blox — Official Site
 
-Rocky's Media is a photography and handler request website for furry conventions.
+Cap'n Blox's Official M.E.G. developer hub for Backrooms worldbuilding, tooling, archives, and contributor resources.
 
 ## Live Site
 
-https://rockythedawg.github.io/Rocky-Digital-Media/
+This repository is compatible with GitHub Pages; the site lives at the repository root (index.html).
 
 ## Contact
 
-Email: officialrockymedia@gmail.com
+Email: contact@capnblox.dev
 
 ## Socials
 
-Instagram: https://instagram.com/mrrockythedog  
-Telegram: https://t.me/rockythedog100  
-Furtrack: https://www.furtrack.com/user/RockyTheDog/photography  
-Discord: rockythedog
+GitHub: https://github.com/capnblox
+Roblox Game: https://www.roblox.com/share?code=2c77ffa0c7902b46bc9e94d30c60cf19&type=ExperienceDetails&stamp=1784904229070
+Discord: discord.gg/B8fgWyBYvR
 
 ## Credits
 
-Website made by RockyTheDog.
+Official site maintained by Cap'n Blox and the M.E.G. contributors.

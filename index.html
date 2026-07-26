@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rocky's Media</title>
-  <meta name="description" content="Rocky's Media booking, handler requests, pricing, FAQ, and social links." />
-  <link rel="icon" type="image/png" href="Rocky-tab.png" />
-  <link rel="apple-touch-icon" href="Rocky-tab.png" />
+  <title>Cap'n Blox's Official Site</title>
+  <meta name="description" content="Cap'n Blox's Official M.E.G. / Backrooms developer hub — staff, archives, FAQ, and socials." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle' font-size='44'%3E%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle' font-size='44'%3E%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <nav class="tabs" aria-label="Main sections">
     <a class="tab" href="#home" data-tab-link="home">Home</a>
-    <a class="tab" href="#booking" data-tab-link="booking">Booking</a>
-    <a class="tab" href="#pricing" data-tab-link="pricing">Pricing</a>
-    <a class="tab" href="#handler" data-tab-link="handler">Handler Request</a>
+    <a class="tab" href="#staff" data-tab-link="staff">Meet the Staff</a>
+    <a class="tab" href="#gallery" data-tab-link="gallery">Gallery</a>
+    <a class="tab" href="#about" data-tab-link="about">About Us</a>
     <a class="tab" href="#faq" data-tab-link="faq">FAQ</a>
     <a class="tab" href="#socials" data-tab-link="socials">Socials</a>
   </nav>
@@ -22,91 +22,85 @@
   <main>
     <section class="panel hero-panel active" id="home" data-tab-panel="home" aria-labelledby="home-title">
       <div class="section-copy centered-copy">
-        <p class="eyebrow">Furry con photography • group photos • memories</p>
-        <h1 id="home-title">ROCKY</h1>
-        <p class="lede">Whether you're booking a photo session, need a handler, or are just exploring, we have everything you need to make your next con a blast and memorable!</p>
+        <h1 id="home-title">Cap'n Blox</h1>
+        <p class="lede">Welcome to the official home of Cap'n Blox.</p>
       </div>
     </section>
 
-    <section class="panel split" id="booking" data-tab-panel="booking" aria-labelledby="booking-title">
+    <section class="panel center-panel" id="staff" data-tab-panel="staff" aria-labelledby="staff-title">
+      <div class="section-copy centered-copy">
+        <h2 id="staff-title">Meet the Staff</h2>
+        <p><em>insert name here</em></p>
+      </div>
+    </section>
+
+    <section class="panel split" id="gallery" data-tab-panel="gallery" aria-labelledby="gallery-title">
       <div class="section-copy narrow-copy">
-        <h2 id="booking-title">Plan your next con photoshoot with Rocky!</h2>
-        <p>Ready to take your con to the next level? Book a photoshoot and start your adventure. Whether it's your first con or you're a veteran congoer, show off your fursuit, partial, or full suit for memories and much more.</p>
-        <details class="disclosure" open>
-          <summary>Booking disclosure</summary>
-          <p>Submitting this form does not guarantee a slot. Your booking is confirmed only after payment is made in full and all details are communicated. Convention rules, handler needs, accessibility needs, and public-space safety always come first. Please read the refund policy in the FAQ.</p>
-        </details>
+        <h2 id="gallery-title">Gallery</h2>
+        <p>Staff can upload images to /gallery.json (or add files under /assets/gallery/) and they will appear here. Click any image to open, tap the image to zoom, or use arrows to navigate.</p>
+      </div>
+      <div class="gallery-grid" id="gallery-grid" aria-live="polite" aria-label="Gallery images">
+        <!-- Thumbnails will be rendered here by app.js. If gallery.json is absent, a small set of placeholders will be shown. -->
       </div>
 
-      <form class="booking-form" id="booking-form" action="https://formspree.io/f/xojoqobk" method="POST">
-        <label>Name or handle<input name="name" type="text" placeholder="Your name / fursona" required /></label>
-        <label>Preferred contact method<select name="contact_method" required><option value="">Choose contact method</option><option>Discord</option><option>Telegram</option><option>Email</option><option>Instagram</option></select></label>
-        <label>Contact info<input name="contact_info" type="text" placeholder="Username, email, or handle" required /></label>
-        <label>Convention<select name="convention" required><option value="">Choose a convention</option><option>It's Ruff Out 2026</option><option>Furry Weekend Atlanta 2026</option><option>AnthrOhio 2026</option><option>Furlandia 2026</option><option>Anthrocon 2026</option><option>AWU - Anthro Weekend Utah 2026</option><option>Megaplex 2026</option><option>DenFur 2026</option><option>Anthro New England 2027</option><option>Other / Not listed</option></select></label>
-        <label>Preferred day<select name="day" required><option value="">Choose a day</option><option>Friday</option><option>Saturday</option><option>Sunday</option><option>Other / Not sure yet</option></select></label>
-        <label>Photoshoot details<textarea name="details" placeholder="Tell me what kind of photos you want, group size, location ideas, and anything else important." required></textarea></label>
-        <label class="checkline"><input name="understanding" type="checkbox" required /><span>I understand this is a request and not a confirmed slot until payment is made in full.</span></label>
-        <button class="submit-button" type="submit">Create booking request</button>
-      </form>
-    </section>
-
-    <section class="panel center-panel" id="pricing" data-tab-panel="pricing" aria-labelledby="pricing-title">
-      <div class="section-copy centered-copy"><h2 id="pricing-title">Pricing</h2></div>
-      <div class="price-grid">
-        <article class="price-card"><h3>Solo</h3><p class="price">$15</p><p>One fursuiter or person, quick photos, and simple posing help.</p></article>
-        <article class="price-card featured"><h3>Duo</h3><p class="price">$25</p><p>Two people or suits with extra time for matching poses and retakes.</p></article>
-        <article class="price-card"><h3>Small Group</h3><p class="price">$35</p><p>Great for friends who want clean group photos at con.</p></article>
-        <article class="price-card"><h3>Large Group</h3><p class="price">Ask</p><p>For bigger meetups or groups that need more time and planning.</p></article>
+      <!-- Modal for viewing images -->
+      <div class="gallery-modal" id="gallery-modal" aria-hidden="true">
+        <button class="modal-close" id="gallery-close" aria-label="Close">✕</button>
+        <button class="modal-prev" id="gallery-prev" aria-label="Previous">‹</button>
+        <img id="gallery-image" src="" alt="" />
+        <button class="modal-next" id="gallery-next" aria-label="Next">›</button>
       </div>
-      <p class="pricing-disclaimer">All photos are taken in high-definition resolution unless mentioned otherwise. You will be able to preview each photo and choose to retake it or request an edit, such as brightening the photo or removing unnecessary background distractions.</p>
     </section>
 
-    <section class="panel split" id="handler" data-tab-panel="handler" aria-labelledby="handler-title">
-      <div class="section-copy narrow-copy">
-        <h2 id="handler-title">Handler Request</h2>
-        <p>Need help navigating the con, carrying your things, or having someone come along to help with photos for you, groups, or friends? I got you!</p>
-        <details class="disclosure" open>
-          <summary>Handler disclosure</summary>
-          <p>Handler requests are not guaranteed until everything is communicated and confirmed. Convention rules, accessibility needs, handler needs, and public-space safety always come first.</p>
-        </details>
-      </div>
-
-      <form class="booking-form" id="handler-form" action="https://formspree.io/f/xojoqobk" method="POST">
-        <label>Name or handle<input name="name" type="text" placeholder="Your name / fursona" required /></label>
-        <label>Preferred contact method<select name="contact_method" required><option value="">Choose contact method</option><option>Discord</option><option>Telegram</option><option>Email</option><option>Instagram</option></select></label>
-        <label>Contact info<input name="contact_info" type="text" placeholder="Username, email, or handle" required /></label>
-        <label>Convention<select name="convention" required><option value="">Choose a convention</option><option>It's Ruff Out 2026</option><option>Furry Weekend Atlanta 2026</option><option>AnthrOhio 2026</option><option>Furlandia 2026</option><option>Anthrocon 2026</option><option>AWU - Anthro Weekend Utah 2026</option><option>Megaplex 2026</option><option>DenFur 2026</option><option>Anthro New England 2027</option><option>Other / Not listed</option></select></label>
-        <label>Preferred day<select name="day" required><option value="">Choose a day</option><option>Friday</option><option>Saturday</option><option>Sunday</option><option>Other / Not sure yet</option></select></label>
-        <label>Handler details<textarea name="details" placeholder="Tell me what help you need, where you expect to be, accessibility needs, suit limits, crowd concerns, and anything else important." required></textarea></label>
-        <label class="checkline"><input name="understanding" type="checkbox" required /><span>I understand this is a handler request and not a confirmed slot until payment is made in full.</span></label>
-        <button class="submit-button" type="submit">Create handler request</button>
-      </form>
+    <section class="panel center-panel" id="about" data-tab-panel="about" aria-labelledby="about-title">
+      <div class="section-copy centered-copy"><h2 id="about-title">About Us!</h2></div>
+      <div class="section-copy"><p>Insert desc here</p></div>
     </section>
+
 
     <section class="panel center-panel" id="faq" data-tab-panel="faq" aria-labelledby="faq-title">
       <div class="section-copy centered-copy"><h2 id="faq-title">FAQ</h2></div>
       <div class="faq-list">
-        <details><summary>What is your refund policy?</summary><p>Refunds are based on how far in advance you cancel. Cancellations made 14 or more days before the event receive a full refund, cancellations made 7-13 days before the event receive a partial refund, and cancellations made less than 7 days before the event are not refunded.</p></details>
-        <details><summary>How far in advance can I book?</summary><p>There is no limit on how far in advance you can book. It depends on the convention and the day.</p></details>
-        <details><summary>Do you give discounts?</summary><p>At this time, we do not offer discounts. Sorry!</p></details>
-        <details><summary>What equipment do you use when taking photos?</summary><p>At this time, I use an iPhone 17 Pro Max or the fursuiter's personal device. I won't change your camera settings unless you ask me to.</p></details>
-        <details><summary>Who can I contact if I have any questions, concerns, or comments?</summary><p>If you have questions, concerns, or anything else that may come your way, you can email me at <a href="mailto:officialrockymedia@gmail.com">officialrockymedia@gmail.com</a>, and we'll get back to you as soon as possible.</p></details>
+        <details>
+          <summary>Will there be any event?</summary>
+          <p>Events will be held from time to time. At this time, everything is a work in progress. Make sure to join the Discord for more info!</p>
+        </details>
+
+        <details>
+          <summary>How can I report bugs, errors, etc?</summary>
+          <p>You can report issues on our Discord server. Alternatively, you can fill out a forum form here (will add a link in the future).</p>
+        </details>
+
+        <details>
+          <summary>Where can I find releases?</summary>
+          <p>You can find everything here! (will make it a link in the future)</p>
+        </details>
+
+        <details>
+          <summary>How can I sign up to be a part of the team?</summary>
+          <p>At this time, we're not hiring. Keep an eye on Discord for future openings and announcements.</p>
+        </details>
+
+        <details>
+          <summary>What platforms can I play this on?</summary>
+          <p>Currently you can play on Mobile, Console, and PC. PC is recommended for the best experience.</p>
+        </details>
       </div>
     </section>
 
     <section class="panel split" id="socials" data-tab-panel="socials" aria-labelledby="socials-title">
-      <div class="section-copy"><h2 id="socials-title">All of my socials</h2></div>
+      <div class="section-copy"><h2 id="socials-title">Social links.</h2></div>
       <div class="social-board" aria-label="Social links">
-        <a href="https://instagram.com/mrrockythedog" target="_blank" rel="noreferrer">Instagram</a>
-        <button type="button" data-copy="rockythedog">Discord</button>
-        <a href="https://t.me/rockythedog100" target="_blank" rel="noreferrer">Telegram</a>
-        <a href="https://www.furtrack.com/user/RockyTheDog/photography" target="_blank" rel="noreferrer">Furtrack</a>
+        <a href="https://docs.google.com/document/d/1SuSWFBCAiyttiyKr59f6LrgkQspfZfSHirozs-Dz_QA/edit?usp=sharing" target="_blank" rel="noreferrer">Change logs</a>
+        <a href="https://discord.gg/B8fgWyBYvR" target="_blank" rel="noreferrer">Discord</a>
+        <a href="https://www.roblox.com/share?code=2c77ffa0c7902b46bc9e94d30c60cf19&type=ExperienceDetails&stamp=1784904229070" target="_blank" rel="noreferrer">Roblox Game</a>
+        <a href="https://www.tiktok.com/@ovujw32phone15edstb" target="_blank" rel="noreferrer">TikTok</a>
       </div>
     </section>
   </main>
 
-  <button class="paw-trigger" id="credits-trigger" aria-label="Open website credits"><span>🐾</span></button>
-  <aside class="credits-panel" id="credits-panel" aria-label="Website credits"><div><strong>Credits</strong><button id="credits-close" type="button" aria-label="Close website credits">x</button></div><p>Website made by RockyTheDog</p><a href="https://buymeacoffee.com/rockythedog" target="_blank" rel="noreferrer">Support me: BuyMeCoffee</a></aside>
+  <button class="paw-trigger" id="credits-trigger" aria-label="Open website credits"><span>Credits</span></button>
+  <aside class="credits-panel" id="credits-panel" aria-label="Website credits"><div><strong>Credits</strong><button id="credits-close" type="button" aria-label="Close website credits">x</button></div><p>Site made by Cooleobloxman1</p><p>Media capture by Orang_juice2</p></aside>
   <script src="app.js"></script>
 </body>
 </html>
