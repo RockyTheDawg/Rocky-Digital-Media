@@ -75,8 +75,8 @@ select option { color: var(--ink); background: #12100f; }
 .faq-list details { padding: 1rem; }
 .staff-header { margin-bottom: 1rem; }
 .staff-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; width: min(74rem, 100%); align-items: stretch; }
-.staff-card { display: grid; gap: 1rem; min-width: 0; padding: 1.25rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(12, 10, 9, 0.7); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22); }
-.staff-image-slot { min-height: clamp(14rem, 24vw, 18rem); aspect-ratio: 4 / 5; width: 100%; border: 1px solid rgba(255, 249, 240, 0.2); border-radius: 12px; background: transparent; padding: 1rem; }
+.staff-card { display: grid; gap: 1rem; min-width: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.staff-image-slot { min-height: clamp(14rem, 24vw, 18rem); aspect-ratio: 4 / 5; width: 100%; border: 0; border-radius: 0; background: transparent; padding: 0; overflow: hidden; }
 .staff-info { display: grid; gap: 0.35rem; text-align: left; }
 .staff-info h3 { margin: 0; color: var(--ink); font-size: clamp(1.3rem, 2vw, 1.7rem); }
 .staff-info p { margin: 0; color: var(--ink); font-weight: 700; }
