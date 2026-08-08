@@ -87,6 +87,55 @@ main { position: relative; z-index: 1; }
 }
 .empty-panel { min-height: 100svh; }
 
+.gallery-panel { align-content: center; gap: 1.25rem; }
+.gallery-heading { width: min(42rem, 100%); text-align: center; }
+.gallery-heading h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 4.7rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.gallery-heading p:last-child { margin: 0.6rem 0 0; color: var(--muted); font: 700 0.94rem/1.4 Arial, Helvetica, sans-serif; }
+.gallery-heading strong { color: var(--ink); }
+.furtrack-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; width: min(70rem, 100%); }
+.furtrack-grid a {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--glass);
+}
+.furtrack-grid img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 220ms ease, filter 220ms ease; }
+.furtrack-grid span {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.8rem 0.75rem 0.7rem;
+  color: var(--ink);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
+  font: 800 0.78rem/1 Arial, Helvetica, sans-serif;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.furtrack-grid a:hover img, .furtrack-grid a:focus-visible img { transform: scale(1.03); filter: saturate(1.08); }
+.furtrack-grid a:hover span, .furtrack-grid a:focus-visible span { opacity: 1; transform: none; }
+.furtrack-grid a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.furtrack-profile-link {
+  min-height: 2.8rem;
+  display: grid;
+  place-items: center;
+  padding: 0 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--glass);
+  font: 800 0.85rem/1 Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+}
+.furtrack-profile-link:hover { border-color: var(--accent); }
+
 .booking-panel { align-items: start; overflow-y: auto; }
 .booking-form {
   width: min(58rem, 100%);
@@ -190,6 +239,8 @@ select option, select optgroup { color: var(--ink); background: #121716; }
   .form-grid { grid-template-columns: 1fr; }
   .convention-details { grid-template-columns: 1fr; }
   .form-output { grid-template-columns: 1fr; }
+  .furtrack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .furtrack-grid span { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
