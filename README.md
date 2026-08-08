@@ -1,21 +1,25 @@
-# Cap'n Blox — Official Site
+# Rocky Digital Media
 
-Cap'n Blox's Official M.E.G. developer hub for Backrooms worldbuilding, tooling, archives, and contributor resources.
+Rocky Digital Media is a furry convention and travel photography portfolio. The site uses a compact six-tab layout and is built as a lightweight static site for GitHub Pages.
 
-## Live Site
+## Sections
 
-This repository is compatible with GitHub Pages; the site lives at the repository root (index.html).
+- Home
+- Conventions
+- Travel
+- Gallery
+- About
+- Contact
+
+## Updating gallery photos
+
+The current gallery examples are listed near the top of `app.js`. Replace each `src`, `alt`, and `caption` with your own photo URL, description, and title.
 
 ## Contact
 
-Email: contact@capnblox.dev
-
-## Socials
-
-GitHub: https://github.com/capnblox
-Roblox Game: https://www.roblox.com/share?code=2c77ffa0c7902b46bc9e94d30c60cf19&type=ExperienceDetails&stamp=1784904229070
-Discord: discord.gg/B8fgWyBYvR
-
-## Credits
-
-Official site maintained by Cap'n Blox and the M.E.G. contributors.
+- Instagram: https://instagram.com/mrrockythedog
+- X: https://x.com/SmackerTheDog
+- TikTok: https://tiktok.com/@SmackerTheDog
+- YouTube: https://youtube.com/@rockythedog360
+- Discord: `rockythedog`
+- Telegram: https://t.me/rockythedog100

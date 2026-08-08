@@ -1,227 +1,164 @@
-const tabLinks = document.querySelectorAll("[data-tab-link]");
-const panels = document.querySelectorAll("[data-tab-panel]");
-const bookingForm = document.querySelector("#booking-form");
-const handlerForm = document.querySelector("#handler-form");
+const tabLinks = [...document.querySelectorAll("[data-tab-link]")];
+const tabJumps = [...document.querySelectorAll("[data-tab-jump]")];
+const panels = [...document.querySelectorAll("[data-tab-panel]")];
 const creditsTrigger = document.querySelector("#credits-trigger");
 const creditsPanel = document.querySelector("#credits-panel");
 const creditsClose = document.querySelector("#credits-close");
 
-// Gallery elements
-const galleryGrid = document.querySelector('#gallery-grid');
-const galleryModal = document.querySelector('#gallery-modal');
-const galleryImage = document.querySelector('#gallery-image');
-const galleryClose = document.querySelector('#gallery-close');
-const galleryNext = document.querySelector('#gallery-next');
-const galleryPrev = document.querySelector('#gallery-prev');
-let galleryItems = [];
-let currentIndex = -1;
+function activateTab(name, updateHash = true) {
+  const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
 
-function activateTab(name) {
   panels.forEach((panel) => {
-    panel.classList.toggle("active", panel.dataset.tabPanel === name);
+    const active = panel.dataset.tabPanel === validName;
+    panel.classList.toggle("active", active);
+    panel.setAttribute("aria-hidden", String(!active));
   });
 
-  document.querySelectorAll(".tab").forEach((link) => {
-    link.classList.toggle("active", link.dataset.tabLink === name);
+  tabLinks.forEach((link) => {
+    const active = link.dataset.tabLink === validName;
+    link.classList.toggle("active", active);
+    link.setAttribute("aria-current", active ? "page" : "false");
   });
 
-  if (location.hash.slice(1) !== name) {
-    history.replaceState(null, "", `#${name}`);
+  if (updateHash && location.hash.slice(1) !== validName) {
+    history.replaceState(null, "", `#${validName}`);
   }
 }
 
-tabLinks.forEach((link) => {
+[...tabLinks, ...tabJumps].forEach((link) => {
   link.addEventListener("click", (event) => {
-    const target = link.dataset.tabLink;
+    const target = link.dataset.tabLink || link.dataset.tabJump;
     if (!target) return;
-
     event.preventDefault();
-
-    if (
-      bookingForm?.dataset.submitted === "true" ||
-      handlerForm?.dataset.submitted === "true"
-    ) {
-      window.location.href = `#${target}`;
-      window.location.reload();
-      return;
-    }
-
     activateTab(target);
   });
 });
 
-window.addEventListener("hashchange", () => {
-  const target = location.hash.slice(1);
-  const exists = [...panels].some((panel) => panel.dataset.tabPanel === target);
-  activateTab(exists ? target : "home");
+window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
+activateTab(location.hash.slice(1) || "home", false);
+
+const galleryItems = [
+  {
+    src: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=84",
+    alt: "Crowd gathered beneath warm string lights",
+    caption: "Convention nights"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=84",
+    alt: "Friends sharing a candid moment outdoors",
+    caption: "Friends in frame"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=84",
+    alt: "Traveler looking across a mountain landscape",
+    caption: "The long way home"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=84",
+    alt: "Still lake and cabin surrounded by mountains",
+    caption: "Quiet places"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=84",
+    alt: "City skyline at dusk",
+    caption: "Between destinations"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=84",
+    alt: "Open road running through a desert landscape",
+    caption: "Road stories"
+  }
+];
+
+const galleryGrid = document.querySelector("#gallery-grid");
+const galleryModal = document.querySelector("#gallery-modal");
+const galleryImage = document.querySelector("#gallery-image");
+const galleryCaption = document.querySelector("#gallery-caption");
+const galleryClose = document.querySelector("#gallery-close");
+const galleryNext = document.querySelector("#gallery-next");
+const galleryPrev = document.querySelector("#gallery-prev");
+let currentIndex = 0;
+let lastGalleryTrigger = null;
+
+galleryItems.forEach((item, index) => {
+  const button = document.createElement("button");
+  button.className = "gallery-card";
+  button.type = "button";
+  button.innerHTML = `<img src="${item.src}" alt="${item.alt}" loading="lazy"><span>${item.caption}</span>`;
+  button.addEventListener("click", () => openGallery(index, button));
+  galleryGrid?.appendChild(button);
 });
 
-activateTab(location.hash.slice(1) || "home");
-
-// --- Gallery logic ---
-
-async function loadGallery() {
-  // Try to fetch a gallery.json at the site root (or fallback to examples)
-  try {
-    const res = await fetch('/gallery.json');
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data) && data.length) {
-        galleryItems = data;
-      }
-    }
-  } catch (e) {
-    // ignore
-  }
-
-  if (!galleryItems || galleryItems.length === 0) {
-    // fallback sample images
-    galleryItems = [
-      'https://via.placeholder.com/1200x800?text=Gallery+1',
-      'https://via.placeholder.com/1200x800?text=Gallery+2',
-      'https://via.placeholder.com/1200x800?text=Gallery+3'
-    ];
-  }
-
-  renderGallery();
+function updateGallery() {
+  const item = galleryItems[currentIndex];
+  if (!item || !galleryImage || !galleryCaption) return;
+  galleryImage.src = item.src;
+  galleryImage.alt = item.alt;
+  galleryCaption.textContent = item.caption;
 }
 
-function renderGallery() {
-  if (!galleryGrid) return;
-  galleryGrid.innerHTML = '';
-  galleryItems.forEach((src, i) => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = `Gallery image ${i + 1}`;
-    img.tabIndex = 0;
-    img.dataset.index = i;
-    img.addEventListener('click', () => openGallery(i));
-    img.addEventListener('keydown', (e) => { if (e.key === 'Enter') openGallery(i); });
-    galleryGrid.appendChild(img);
-  });
-}
-
-function openGallery(index) {
-  if (!galleryModal || !galleryImage) return;
+function openGallery(index, trigger) {
+  if (!galleryModal) return;
   currentIndex = index;
-  galleryImage.src = galleryItems[index];
-  galleryImage.alt = `Gallery image ${index + 1}`;
-  galleryImage.classList.remove('zoomed');
-  galleryModal.classList.add('open');
-  galleryModal.setAttribute('aria-hidden', 'false');
+  lastGalleryTrigger = trigger;
+  updateGallery();
+  galleryModal.classList.add("open");
+  galleryModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  galleryClose?.focus();
 }
 
 function closeGallery() {
   if (!galleryModal) return;
-  galleryModal.classList.remove('open');
-  galleryModal.setAttribute('aria-hidden', 'true');
-  galleryImage.src = '';
-  currentIndex = -1;
+  galleryModal.classList.remove("open");
+  galleryModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  lastGalleryTrigger?.focus();
 }
 
-function showNext(delta = 1) {
-  if (galleryItems.length === 0) return;
+function showGallery(delta) {
   currentIndex = (currentIndex + delta + galleryItems.length) % galleryItems.length;
-  galleryImage.src = galleryItems[currentIndex];
-  galleryImage.alt = `Gallery image ${currentIndex + 1}`;
-  galleryImage.classList.remove('zoomed');
+  updateGallery();
 }
 
-// events
-galleryClose?.addEventListener('click', closeGallery);
-galleryPrev?.addEventListener('click', () => showNext(-1));
-galleryNext?.addEventListener('click', () => showNext(1));
-
-galleryModal?.addEventListener('click', (e) => {
-  // close if click outside the image
-  if (e.target === galleryModal) closeGallery();
+galleryClose?.addEventListener("click", closeGallery);
+galleryPrev?.addEventListener("click", () => showGallery(-1));
+galleryNext?.addEventListener("click", () => showGallery(1));
+galleryModal?.addEventListener("click", (event) => {
+  if (event.target === galleryModal) closeGallery();
 });
 
-galleryImage?.addEventListener('click', () => {
-  // toggle zoom
-  galleryImage.classList.toggle('zoomed');
+window.addEventListener("keydown", (event) => {
+  if (!galleryModal?.classList.contains("open")) return;
+  if (event.key === "ArrowRight") showGallery(1);
+  if (event.key === "ArrowLeft") showGallery(-1);
+  if (event.key === "Escape") closeGallery();
 });
-
-window.addEventListener('keydown', (e) => {
-  if (!galleryModal.classList.contains('open')) return;
-  if (e.key === 'ArrowRight') showNext(1);
-  if (e.key === 'ArrowLeft') showNext(-1);
-  if (e.key === 'Escape') closeGallery();
-});
-
-// load gallery on startup
-loadGallery();
-
-// --- end gallery logic ---
-
 
 creditsTrigger?.addEventListener("click", () => {
-  const isOpen = creditsPanel.classList.toggle("open");
-  creditsTrigger.setAttribute(
-    "aria-label",
-    isOpen ? "Close website credits" : "Open website credits"
-  );
+  const isOpen = creditsPanel?.classList.toggle("open") ?? false;
+  creditsTrigger.setAttribute("aria-label", isOpen ? "Close website credits" : "Open website credits");
 });
 
 creditsClose?.addEventListener("click", () => {
-  creditsPanel.classList.remove("open");
-  creditsTrigger.setAttribute("aria-label", "Open website credits");
+  creditsPanel?.classList.remove("open");
+  creditsTrigger?.setAttribute("aria-label", "Open website credits");
 });
 
 document.addEventListener("click", async (event) => {
   const copyButton = event.target.closest("[data-copy]");
   if (!copyButton) return;
 
-  const value = copyButton.dataset.copy;
+  const label = copyButton.querySelector("strong");
+  const originalText = label?.textContent;
 
   try {
-    await navigator.clipboard.writeText(value);
-    const oldText = copyButton.innerHTML;
-    copyButton.innerHTML = "Copied";
-    setTimeout(() => {
-      copyButton.innerHTML = oldText;
+    await navigator.clipboard.writeText(copyButton.dataset.copy);
+    if (label) label.textContent = "Copied!";
+    window.setTimeout(() => {
+      if (label) label.textContent = originalText;
     }, 1400);
   } catch {
-    alert(value);
+    window.prompt("Copy this Discord username:", copyButton.dataset.copy);
   }
-});
-
-function showThanks(form, firstLine) {
-  form.dataset.submitted = "true";
-  form.innerHTML = `
-    <div class="form-output show">
-      ${firstLine} The M.E.G. team will review and follow up within 24-48 hours.
-      <br><br>
-      For questions or developer access, email us at
-      <a href="mailto:contact@capnblox.dev"><em>contact@capnblox.dev</em></a>.
-      <br><br>
-    </div>
-  `;
-}
-
-async function submitForm(form, firstLine) {
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    return;
-  }
-
-  const data = new FormData(form);
-
-  await fetch(form.action, {
-    method: "POST",
-    body: data,
-    headers: { Accept: "application/json" },
-  });
-
-  showThanks(form, firstLine);
-}
-
-bookingForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await submitForm(bookingForm, "Thanks — your submission to Cap'n Blox's team was received!");
-});
-
-handlerForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await submitForm(handlerForm, "Thanks — your submission to Cap'n Blox's team was received!");
 });
