@@ -1,6 +1,9 @@
 const tabLinks = [...document.querySelectorAll("[data-tab-link]")];
-const tabJumps = [...document.querySelectorAll("[data-tab-jump]")];
 const panels = [...document.querySelectorAll("[data-tab-panel]")];
+const bookingForm = document.querySelector("#booking-form");
+const conventionSelect = document.querySelector("#convention-select");
+const conventionDetails = document.querySelector("#convention-details");
+const bookingOutput = document.querySelector("#booking-output");
 const creditsTrigger = document.querySelector("#credits-trigger");
 const creditsPanel = document.querySelector("#credits-panel");
 const creditsClose = document.querySelector("#credits-close");
@@ -25,115 +28,81 @@ function activateTab(name, updateHash = true) {
   }
 }
 
-[...tabLinks, ...tabJumps].forEach((link) => {
+tabLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
-    const target = link.dataset.tabLink || link.dataset.tabJump;
-    if (!target) return;
     event.preventDefault();
-    activateTab(target);
+    activateTab(link.dataset.tabLink);
   });
 });
 
 window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
 activateTab(location.hash.slice(1) || "home", false);
 
-const galleryItems = [
-  {
-    src: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=84",
-    alt: "Crowd gathered beneath warm string lights",
-    caption: "Convention nights"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=84",
-    alt: "Friends sharing a candid moment outdoors",
-    caption: "Friends in frame"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=84",
-    alt: "Traveler looking across a mountain landscape",
-    caption: "The long way home"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=84",
-    alt: "Still lake and cabin surrounded by mountains",
-    caption: "Quiet places"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=84",
-    alt: "City skyline at dusk",
-    caption: "Between destinations"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=84",
-    alt: "Open road running through a desert landscape",
-    caption: "Road stories"
+function buildConventionOptions() {
+  if (!conventionSelect || !Array.isArray(window.rockyConventions)) return;
+
+  [2026, 2027].forEach((year) => {
+    const group = document.createElement("optgroup");
+    group.label = String(year);
+
+    window.rockyConventions
+      .filter((convention) => convention.year === year)
+      .forEach((convention) => {
+        const option = document.createElement("option");
+        option.value = convention.name;
+        option.textContent = convention.short;
+        option.dataset.index = String(window.rockyConventions.indexOf(convention));
+        group.appendChild(option);
+      });
+
+    conventionSelect.appendChild(group);
+  });
+}
+
+function getSelectedConvention() {
+  const option = conventionSelect?.selectedOptions[0];
+  if (!option?.dataset.index) return null;
+  return window.rockyConventions[Number(option.dataset.index)];
+}
+
+conventionSelect?.addEventListener("change", () => {
+  const convention = getSelectedConvention();
+  if (!convention || !conventionDetails) return;
+
+  conventionDetails.innerHTML = `
+    <strong>${convention.name}</strong>
+    <span>${convention.dates}</span>
+    <span>${convention.location}</span>
+    <a href="${convention.url}" target="_blank" rel="noreferrer">View listing</a>
+  `;
+});
+
+bookingForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!bookingForm.checkValidity()) {
+    bookingForm.reportValidity();
+    return;
   }
-];
 
-const galleryGrid = document.querySelector("#gallery-grid");
-const galleryModal = document.querySelector("#gallery-modal");
-const galleryImage = document.querySelector("#gallery-image");
-const galleryCaption = document.querySelector("#gallery-caption");
-const galleryClose = document.querySelector("#gallery-close");
-const galleryNext = document.querySelector("#gallery-next");
-const galleryPrev = document.querySelector("#gallery-prev");
-let currentIndex = 0;
-let lastGalleryTrigger = null;
+  const data = new FormData(bookingForm);
+  const convention = getSelectedConvention();
 
-galleryItems.forEach((item, index) => {
-  const button = document.createElement("button");
-  button.className = "gallery-card";
-  button.type = "button";
-  button.innerHTML = `<img src="${item.src}" alt="${item.alt}" loading="lazy"><span>${item.caption}</span>`;
-  button.addEventListener("click", () => openGallery(index, button));
-  galleryGrid?.appendChild(button);
+  bookingOutput.innerHTML = `
+    <strong>Booking draft ready</strong>
+    <span>First name: ${escapeHtml(data.get("firstName"))}</span>
+    <span>Fursona: ${escapeHtml(data.get("fursonaName"))}</span>
+    <span>Species: ${escapeHtml(data.get("species"))}</span>
+    <span>Convention: ${escapeHtml(convention?.name || "")}</span>
+  `;
 });
 
-function updateGallery() {
-  const item = galleryItems[currentIndex];
-  if (!item || !galleryImage || !galleryCaption) return;
-  galleryImage.src = item.src;
-  galleryImage.alt = item.alt;
-  galleryCaption.textContent = item.caption;
+function escapeHtml(value) {
+  const element = document.createElement("span");
+  element.textContent = String(value ?? "");
+  return element.innerHTML;
 }
 
-function openGallery(index, trigger) {
-  if (!galleryModal) return;
-  currentIndex = index;
-  lastGalleryTrigger = trigger;
-  updateGallery();
-  galleryModal.classList.add("open");
-  galleryModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-  galleryClose?.focus();
-}
-
-function closeGallery() {
-  if (!galleryModal) return;
-  galleryModal.classList.remove("open");
-  galleryModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-  lastGalleryTrigger?.focus();
-}
-
-function showGallery(delta) {
-  currentIndex = (currentIndex + delta + galleryItems.length) % galleryItems.length;
-  updateGallery();
-}
-
-galleryClose?.addEventListener("click", closeGallery);
-galleryPrev?.addEventListener("click", () => showGallery(-1));
-galleryNext?.addEventListener("click", () => showGallery(1));
-galleryModal?.addEventListener("click", (event) => {
-  if (event.target === galleryModal) closeGallery();
-});
-
-window.addEventListener("keydown", (event) => {
-  if (!galleryModal?.classList.contains("open")) return;
-  if (event.key === "ArrowRight") showGallery(1);
-  if (event.key === "ArrowLeft") showGallery(-1);
-  if (event.key === "Escape") closeGallery();
-});
+buildConventionOptions();
 
 creditsTrigger?.addEventListener("click", () => {
   const isOpen = creditsPanel?.classList.toggle("open") ?? false;
@@ -143,22 +112,4 @@ creditsTrigger?.addEventListener("click", () => {
 creditsClose?.addEventListener("click", () => {
   creditsPanel?.classList.remove("open");
   creditsTrigger?.setAttribute("aria-label", "Open website credits");
-});
-
-document.addEventListener("click", async (event) => {
-  const copyButton = event.target.closest("[data-copy]");
-  if (!copyButton) return;
-
-  const label = copyButton.querySelector("strong");
-  const originalText = label?.textContent;
-
-  try {
-    await navigator.clipboard.writeText(copyButton.dataset.copy);
-    if (label) label.textContent = "Copied!";
-    window.setTimeout(() => {
-      if (label) label.textContent = originalText;
-    }, 1400);
-  } catch {
-    window.prompt("Copy this Discord username:", copyButton.dataset.copy);
-  }
 });

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rocky Digital Media | Furry Convention & Travel Photography</title>
-  <meta name="description" content="Furry convention portraits, candid event coverage, and travel photography by Rocky Digital Media.">
+  <title>Rocky Digital Media</title>
+  <meta name="description" content="Rocky Digital Media photography bookings, travel, gallery, and contact information.">
   <meta name="theme-color" content="#101817">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%B7%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
@@ -12,7 +12,7 @@
 <body>
   <nav class="tabs" aria-label="Main sections">
     <a class="tab" href="#home" data-tab-link="home">Home</a>
-    <a class="tab" href="#conventions" data-tab-link="conventions">Conventions</a>
+    <a class="tab" href="#booking" data-tab-link="booking">Booking</a>
     <a class="tab" href="#travel" data-tab-link="travel">Travel</a>
     <a class="tab" href="#gallery" data-tab-link="gallery">Gallery</a>
     <a class="tab" href="#about" data-tab-link="about">About</a>
@@ -21,112 +21,132 @@
 
   <main>
     <section class="panel hero-panel active" id="home" data-tab-panel="home" aria-labelledby="home-title">
-      <div class="section-copy centered-copy hero-copy">
-        <p class="eyebrow">Furry convention + travel photography</p>
-        <h1 id="home-title">Rocky Digital Media</h1>
-        <p class="lede">Bright characters, honest moments, and stories gathered on the road.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#gallery" data-tab-jump="gallery">View the work</a>
-          <a class="button button-secondary" href="#contact" data-tab-jump="contact">Plan a shoot</a>
+      <h1 id="home-title">Rocky Digital Media</h1>
+    </section>
+
+    <section class="panel booking-panel" id="booking" data-tab-panel="booking" aria-labelledby="booking-title">
+      <form class="booking-form" id="booking-form">
+        <header class="booking-heading">
+          <p class="eyebrow">Convention photography</p>
+          <h2 id="booking-title">Booking</h2>
+        </header>
+
+        <div class="form-grid">
+          <label>
+            <span>First name</span>
+            <input type="text" name="firstName" autocomplete="given-name" required>
+          </label>
+
+          <label>
+            <span>Fursona name</span>
+            <input type="text" name="fursonaName" autocomplete="nickname" required>
+          </label>
+
+          <label>
+            <span>Species</span>
+            <select name="species" required>
+              <option value="" selected disabled>Select a species</option>
+              <optgroup label="Canines">
+                <option>Wolf</option>
+                <option>Fox</option>
+                <option>Dog / Domestic canine</option>
+                <option>Coyote</option>
+                <option>Jackal</option>
+                <option>African wild dog</option>
+              </optgroup>
+              <optgroup label="Felines">
+                <option>Cat / Domestic feline</option>
+                <option>Lion</option>
+                <option>Tiger</option>
+                <option>Leopard</option>
+                <option>Snow leopard</option>
+                <option>Cheetah</option>
+                <option>Lynx / Bobcat</option>
+                <option>Panther</option>
+              </optgroup>
+              <optgroup label="Mammals">
+                <option>Bear</option>
+                <option>Hyena</option>
+                <option>Raccoon</option>
+                <option>Red panda</option>
+                <option>Otter</option>
+                <option>Ferret / Weasel</option>
+                <option>Skunk</option>
+                <option>Rabbit / Hare</option>
+                <option>Deer</option>
+                <option>Goat</option>
+                <option>Sheep / Ram</option>
+                <option>Cow / Bovine</option>
+                <option>Horse / Equine</option>
+                <option>Bat</option>
+                <option>Rat / Mouse</option>
+                <option>Squirrel</option>
+                <option>Kangaroo</option>
+                <option>Opossum</option>
+              </optgroup>
+              <optgroup label="Avian, aquatic, and reptile">
+                <option>Bird / Avian</option>
+                <option>Shark</option>
+                <option>Dolphin</option>
+                <option>Orca</option>
+                <option>Fish / Aquatic</option>
+                <option>Reptile</option>
+                <option>Dinosaur / Raptor</option>
+                <option>Amphibian</option>
+                <option>Insect / Arthropod</option>
+              </optgroup>
+              <optgroup label="Fantasy and original species">
+                <option>Dragon</option>
+                <option>Dutch Angel Dragon</option>
+                <option>Gryphon / Griffin</option>
+                <option>Phoenix</option>
+                <option>Sergal</option>
+                <option>Protogen</option>
+                <option>Synth</option>
+                <option>Avali</option>
+                <option>Kobold</option>
+                <option>Demon</option>
+                <option>Alien</option>
+                <option>Hybrid / Mixed species</option>
+                <option>Original species</option>
+                <option>Other</option>
+              </optgroup>
+            </select>
+          </label>
+
+          <label>
+            <span>Convention</span>
+            <select name="convention" id="convention-select" required>
+              <option value="" selected disabled>Select a convention</option>
+            </select>
+          </label>
         </div>
-      </div>
-      <p class="scroll-note">Choose a tab to explore</p>
+
+        <div class="convention-details" id="convention-details" aria-live="polite">
+          Choose a convention to see its dates and location.
+        </div>
+
+        <button class="submit-button" type="submit">Prepare booking request</button>
+        <p class="form-note">This prepares a booking draft on your device. Request delivery will be connected after the booking inbox is selected.</p>
+        <output class="form-output" id="booking-output" aria-live="polite"></output>
+
+        <p class="calendar-credit">Convention choices checked August 8, 2026 using <a href="https://furrycons.com/calendar/" target="_blank" rel="noreferrer">FurryCons.com</a>.</p>
+      </form>
     </section>
 
-    <section class="panel center-panel" id="conventions" data-tab-panel="conventions" aria-labelledby="conventions-title">
-      <div class="section-copy centered-copy section-heading">
-        <p class="eyebrow">In the middle of the magic</p>
-        <h2 id="conventions-title">Convention coverage</h2>
-        <p>Portraits and event stories that feel as energetic, welcoming, and unforgettable as the community itself.</p>
-      </div>
-      <div class="service-grid" aria-label="Convention photography services">
-        <article class="service-card">
-          <span class="card-number">01</span>
-          <h3>Fursuit portraits</h3>
-          <p>Expressive solo, duo, and group portraits around the venue or city.</p>
-        </article>
-        <article class="service-card">
-          <span class="card-number">02</span>
-          <h3>Event stories</h3>
-          <p>Candid coverage of meetups, dances, panels, and memorable con moments.</p>
-        </article>
-        <article class="service-card">
-          <span class="card-number">03</span>
-          <h3>Creator coverage</h3>
-          <p>Polished photos for makers, performers, vendors, and social campaigns.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel split" id="travel" data-tab-panel="travel" aria-labelledby="travel-title">
-      <div class="section-copy narrow-copy">
-        <p class="eyebrow">Stories beyond the con</p>
-        <h2 id="travel-title">Always looking farther</h2>
-        <p>Travel photography from convention weekends, unfamiliar cities, roadside stops, and the wild places between them.</p>
-        <blockquote>Every trip leaves behind a collection of little moments worth remembering.</blockquote>
-      </div>
-      <div class="travel-stack" aria-label="Travel photography themes">
-        <article><span>City walks</span><strong>Street scenes, architecture, and local color</strong></article>
-        <article><span>On the road</span><strong>The journey, not only the destination</strong></article>
-        <article><span>Wild places</span><strong>Landscapes, weather, and quiet details</strong></article>
-      </div>
-    </section>
-
-    <section class="panel gallery-panel" id="gallery" data-tab-panel="gallery" aria-labelledby="gallery-title">
-      <div class="section-copy centered-copy gallery-heading">
-        <p class="eyebrow">Selected frames</p>
-        <h2 id="gallery-title">Gallery</h2>
-        <p>Convention energy, travel details, and stories caught between destinations.</p>
-      </div>
-      <div class="gallery-grid" id="gallery-grid" aria-live="polite" aria-label="Photography gallery"></div>
-
-      <div class="gallery-modal" id="gallery-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo viewer">
-        <button class="modal-close" id="gallery-close" type="button" aria-label="Close photo viewer">&times;</button>
-        <button class="modal-prev" id="gallery-prev" type="button" aria-label="Previous photo">&lsaquo;</button>
-        <figure>
-          <img id="gallery-image" src="" alt="">
-          <figcaption id="gallery-caption"></figcaption>
-        </figure>
-        <button class="modal-next" id="gallery-next" type="button" aria-label="Next photo">&rsaquo;</button>
-      </div>
-    </section>
-
-    <section class="panel split" id="about" data-tab-panel="about" aria-labelledby="about-title">
-      <div class="section-copy narrow-copy">
-        <p class="eyebrow">Behind the camera</p>
-        <h2 id="about-title">Hi, I'm Rocky.</h2>
-      </div>
-      <div class="about-copy">
-        <p class="about-lead">I photograph the people, characters, and places that make every adventure feel different.</p>
-        <p>Rocky Digital Media is built around friendly shoots, natural expressions, and photos that still feel like you. Whether we meet at a furry convention or cross paths while traveling, the goal is simple: make something vivid and worth keeping.</p>
-        <p>New work and trip notes will be added as the journey continues.</p>
-      </div>
-    </section>
-
-    <section class="panel split" id="contact" data-tab-panel="contact" aria-labelledby="contact-title">
-      <div class="section-copy narrow-copy">
-        <p class="eyebrow">Let's make something</p>
-        <h2 id="contact-title">Book a shoot or say hello.</h2>
-        <p>For convention availability, collaborations, or travel photography questions, reach out on the platform that works best for you.</p>
-      </div>
-      <div class="social-board" aria-label="Contact and social links">
-        <a href="https://instagram.com/mrrockythedog" target="_blank" rel="noreferrer"><span>Instagram</span><strong>@mrrockythedog</strong></a>
-        <a href="https://x.com/SmackerTheDog" target="_blank" rel="noreferrer"><span>X / Twitter</span><strong>@SmackerTheDog</strong></a>
-        <a href="https://tiktok.com/@SmackerTheDog" target="_blank" rel="noreferrer"><span>TikTok</span><strong>@SmackerTheDog</strong></a>
-        <a href="https://youtube.com/@rockythedog360" target="_blank" rel="noreferrer"><span>YouTube</span><strong>@rockythedog360</strong></a>
-        <button type="button" data-copy="rockythedog"><span>Discord</span><strong>rockythedog</strong></button>
-        <a href="https://t.me/rockythedog100" target="_blank" rel="noreferrer"><span>Telegram</span><strong>@rockythedog100</strong></a>
-      </div>
-    </section>
+    <section class="panel empty-panel" id="travel" data-tab-panel="travel" aria-label="Travel"></section>
+    <section class="panel empty-panel" id="gallery" data-tab-panel="gallery" aria-label="Gallery"></section>
+    <section class="panel empty-panel" id="about" data-tab-panel="about" aria-label="About"></section>
+    <section class="panel empty-panel" id="contact" data-tab-panel="contact" aria-label="Contact"></section>
   </main>
 
   <button class="credits-trigger" id="credits-trigger" type="button" aria-label="Open website credits">Credits</button>
   <aside class="credits-panel" id="credits-panel" aria-label="Website credits">
     <div><strong>Credits</strong><button id="credits-close" type="button" aria-label="Close website credits">&times;</button></div>
-    <p>Photography and stories by Rocky Digital Media.</p>
-    <p>Website maintained by RockyTheDawg.</p>
+    <p>Rocky Digital Media</p>
   </aside>
 
+  <script src="conventions.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
