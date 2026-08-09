@@ -1,0 +1,62 @@
+name: Review convention calendar updates
+
+on:
+  schedule:
+    - cron: "23 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: review-convention-calendar
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Install browser
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+
+      - name: Check FurryCons calendar
+        run: node scripts/sync-conventions.mjs
+
+      - name: Open or update review request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPDATE_BRANCH: automation/convention-calendar
+        run: |
+          if git diff --quiet -- conventions.js; then
+            echo "Convention data is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$UPDATE_BRANCH"
+          git add conventions.js
+          git commit -m "Review convention calendar updates"
+          git push --force --set-upstream origin "$UPDATE_BRANCH"
+
+          if [ "$(gh pr list --head "$UPDATE_BRANCH" --state open --json number --jq length)" = "0" ]; then
+            gh pr create \
+              --base main \
+              --head "$UPDATE_BRANCH" \
+              --title "Review convention calendar updates" \
+              --body "Daily review of U.S.-only convention additions, cancellations, dates, and locations from FurryCons.com. Merge only after checking the proposed changes."
+          else
+            echo "The existing convention review request was updated."
+          fi
