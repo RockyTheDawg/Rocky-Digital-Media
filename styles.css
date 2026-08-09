@@ -183,7 +183,9 @@ main { position: relative; z-index: 1; }
 a.social-link:hover { border-color: var(--accent); background: rgba(243, 198, 107, 0.09); transform: translateY(-2px); }
 .social-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .booking-panel { align-items: start; overflow-y: auto; }
-.booking-form {
+.contact-panel { align-content: center; }
+.booking-form,
+.contact-form {
   width: min(58rem, 100%);
   display: grid;
   gap: 1rem;
@@ -194,6 +196,7 @@ a.social-link:hover { border-color: var(--accent); background: rgba(243, 198, 10
   box-shadow: 0 1.25rem 4rem rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(16px);
 }
+.contact-form { width: min(42rem, 100%); }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
 label { display: grid; gap: 0.42rem; }
 label > span { color: var(--ink); font: 800 0.88rem/1.2 var(--font-body); }

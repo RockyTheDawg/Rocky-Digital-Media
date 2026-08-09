@@ -262,7 +262,37 @@
         </nav>
       </div>
     </section>
-    <section class="panel empty-panel" id="contact" data-tab-panel="contact" aria-label="Contact"></section>
+    <section class="panel contact-panel" id="contact" data-tab-panel="contact" aria-label="Contact">
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/xojoqobk" method="post">
+        <input type="hidden" name="_subject" value="New Rocky Digital Media contact message">
+        <input type="hidden" name="formType" value="Contact page message">
+
+        <div class="form-grid">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" placeholder="Your name" required>
+          </label>
+
+          <label>
+            <span>Email address</span>
+            <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </label>
+
+          <label class="form-wide">
+            <span>Subject</span>
+            <input type="text" name="subject" placeholder="What is your message about?" required>
+          </label>
+
+          <label class="form-wide">
+            <span>Message</span>
+            <textarea name="message" rows="6" placeholder="How can Rocky Digital Media help?" required></textarea>
+          </label>
+        </div>
+
+        <button class="submit-button" id="contact-submit" type="submit">Send message</button>
+        <output class="form-output" id="contact-output" aria-live="polite"></output>
+      </form>
+    </section>
   </main>
 
   <button class="credits-trigger" id="credits-trigger" type="button" aria-label="Open website credits">Credits</button>
