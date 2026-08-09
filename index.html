@@ -25,13 +25,9 @@
       <h1 id="home-title">Rocky Digital Media</h1>
     </section>
 
-    <section class="panel booking-panel" id="booking" data-tab-panel="booking" aria-labelledby="booking-title">
-      <form class="booking-form" id="booking-form" action="https://formspree.io/f/xojoqobk" method="POST">
+    <section class="panel booking-panel" id="booking" data-tab-panel="booking" aria-label="Booking">
+      <form class="booking-form" id="booking-form" action="https://formspree.io/f/xojoqobk" method="post">
         <input type="hidden" name="_subject" value="New Rocky Digital Media booking request">
-        <header class="booking-heading">
-          <p class="eyebrow">Convention photography</p>
-          <h2 id="booking-title">Booking</h2>
-        </header>
 
         <div class="form-grid">
           <label>
@@ -45,8 +41,18 @@
           </label>
 
           <label>
-            <span>Email address</span>
-            <input type="email" name="email" autocomplete="email" required>
+            <span>Preferred contact method</span>
+            <select name="contactMethod" id="contact-method" required>
+              <option value="" selected disabled>Select one method</option>
+              <option value="email">Email</option>
+              <option value="telegram">Telegram</option>
+              <option value="discord">Discord</option>
+            </select>
+          </label>
+
+          <label id="contact-detail-field" hidden>
+            <span id="contact-detail-label">Contact information</span>
+            <input type="text" id="contact-detail" name="contactDetail" disabled required>
           </label>
 
           <label>
@@ -134,26 +140,13 @@
           </label>
         </div>
 
-        <div class="convention-details" id="convention-details" aria-live="polite">
-          Choose a convention to see its dates and location.
-        </div>
-
         <button class="submit-button" id="booking-submit" type="submit">Send booking request</button>
-        <p class="form-note">Past and canceled conventions are removed automatically. When you submit the form, your answers are sent to Rocky Digital Media through Formspree.</p>
         <output class="form-output" id="booking-output" aria-live="polite"></output>
-
-        <p class="calendar-credit">Convention choices are limited to the 50 U.S. states for 2026 and 2027. The calendar was checked on August 8, 2026, using <a href="https://furrycons.com/calendar/" target="_blank" rel="noreferrer">FurryCons.com</a>.</p>
       </form>
     </section>
 
-    <section class="panel faq-panel" id="faq" data-tab-panel="faq" aria-labelledby="faq-title">
+    <section class="panel faq-panel" id="faq" data-tab-panel="faq" aria-label="Frequently asked questions">
       <div class="faq-shell">
-        <header class="faq-heading">
-          <p class="eyebrow">Helpful answers</p>
-          <h2 id="faq-title">FAQ</h2>
-          <p>Answers to common questions about Rocky Digital Media.</p>
-        </header>
-
         <div class="faq-list">
           <article class="faq-item">
             <h3>
@@ -169,21 +162,13 @@
         </div>
       </div>
     </section>
-    <section class="panel gallery-panel" id="gallery" data-tab-panel="gallery" aria-labelledby="gallery-title">
-      <header class="gallery-heading">
-        <p class="eyebrow">Furtrack</p>
-        <h2 id="gallery-title">Gallery</h2>
-        <p>Photos from the <strong>RockyTheDog</strong> photographer tag on Furtrack.</p>
-      </header>
-
-      <div class="furtrack-grid" id="furtrack-grid" aria-label="RockyTheDog photos on Furtrack"></div>
-      <p class="gallery-disclaimer">Photos displayed in the gallery are shown without profile or post links, helping keep the focus on the photography and the moments being captured. The profile link can be found in the Social tab.</p>
+    <section class="panel gallery-panel" id="gallery" data-tab-panel="gallery" aria-label="Gallery">
+      <div class="furtrack-grid" id="furtrack-grid" aria-label="Gallery photographs"></div>
+      <p class="gallery-disclaimer">These photos were taken and are managed by RockyTheDog through Furtrack.</p>
     </section>
-    <section class="panel about-panel" id="about" data-tab-panel="about" aria-labelledby="about-title">
+    <section class="panel about-panel" id="about" data-tab-panel="about" aria-label="About">
       <article class="about-shell">
         <header class="about-intro about-reveal" style="--reveal-order: 0">
-          <p class="eyebrow">Behind Rocky Digital Media</p>
-          <h2 id="about-title">About Me</h2>
           <p class="about-lead"><strong>Hey! I’m Rocky, the photographer and creator behind Rocky Digital Media.</strong></p>
           <p class="about-summary">Rocky Digital Media is a furry-owned and operated photography and digital media project that grew from my love for photography, technology, and the furry community. I created it to capture the people, fursuits, creativity, friendships, and unforgettable moments that make conventions so special.</p>
           <p class="about-summary">For me, photography isn’t just about getting a good picture. It’s about capturing a moment and giving someone something they can look back on and remember.</p>
@@ -263,14 +248,8 @@
         </footer>
       </article>
     </section>
-    <section class="panel social-panel" id="social" data-tab-panel="social" aria-labelledby="social-title">
+    <section class="panel social-panel" id="social" data-tab-panel="social" aria-label="Social links">
       <div class="social-shell">
-        <header class="social-heading">
-          <p class="eyebrow">Find Rocky online</p>
-          <h2 id="social-title">Social</h2>
-          <p>Photography and gallery links.</p>
-        </header>
-
         <nav class="social-link-grid" aria-label="Rocky social links">
           <a class="social-link" href="https://instagram.com/mrrockythedog" target="_blank" rel="noreferrer">
             <span><strong>Instagram</strong><small>@mrrockythedog</small></span>

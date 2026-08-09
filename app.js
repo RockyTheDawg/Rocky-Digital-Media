@@ -2,9 +2,12 @@ const tabLinks = [...document.querySelectorAll("[data-tab-link]")];
 const panels = [...document.querySelectorAll("[data-tab-panel]")];
 const bookingForm = document.querySelector("#booking-form");
 const conventionSelect = document.querySelector("#convention-select");
-const conventionDetails = document.querySelector("#convention-details");
 const bookingOutput = document.querySelector("#booking-output");
 const bookingSubmit = document.querySelector("#booking-submit");
+const contactMethod = document.querySelector("#contact-method");
+const contactDetailField = document.querySelector("#contact-detail-field");
+const contactDetailLabel = document.querySelector("#contact-detail-label");
+const contactDetail = document.querySelector("#contact-detail");
 const creditsTrigger = document.querySelector("#credits-trigger");
 const creditsPanel = document.querySelector("#credits-panel");
 const creditsClose = document.querySelector("#credits-close");
@@ -128,23 +131,50 @@ function parseConventionEndDate(dateRange) {
   return new Date(year, monthIndex, finalDay, 23, 59, 59, 999);
 }
 
-function getSelectedConvention() {
-  const option = conventionSelect?.selectedOptions[0];
-  if (!option?.dataset.index) return null;
-  return window.rockyConventions[Number(option.dataset.index)];
+const contactFieldOptions = {
+  email: {
+    label: "Fill in the blank with your email address",
+    name: "email",
+    type: "email",
+    autocomplete: "email",
+    placeholder: "you@example.com"
+  },
+  telegram: {
+    label: "Telegram username",
+    name: "telegramUsername",
+    type: "text",
+    autocomplete: "off",
+    placeholder: "@username"
+  },
+  discord: {
+    label: "Discord username",
+    name: "discordUsername",
+    type: "text",
+    autocomplete: "off",
+    placeholder: "username"
+  }
+};
+
+function updateContactDetailField() {
+  if (!contactDetailField || !contactDetailLabel || !contactDetail) return;
+
+  const option = contactFieldOptions[contactMethod?.value];
+  contactDetail.value = "";
+  contactDetailField.hidden = !option;
+  contactDetail.disabled = !option;
+  contactDetail.required = Boolean(option);
+
+  if (!option) return;
+
+  contactDetailLabel.textContent = option.label;
+  contactDetail.name = option.name;
+  contactDetail.type = option.type;
+  contactDetail.autocomplete = option.autocomplete;
+  contactDetail.placeholder = option.placeholder;
 }
 
-conventionSelect?.addEventListener("change", () => {
-  const convention = getSelectedConvention();
-  if (!convention || !conventionDetails) return;
-
-  conventionDetails.innerHTML = `
-    <strong>${convention.name}</strong>
-    <span>${convention.dates}</span>
-    <span>${convention.location}</span>
-    <a href="${convention.url}" target="_blank" rel="noreferrer">View listing</a>
-  `;
-});
+contactMethod?.addEventListener("change", updateContactDetailField);
+updateContactDetailField();
 
 bookingForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -159,8 +189,8 @@ bookingForm?.addEventListener("submit", async (event) => {
   bookingOutput?.classList.remove("error");
 
   try {
-    const response = await fetch(bookingForm.action, {
-      method: bookingForm.method,
+    const response = await fetch("https://formspree.io/f/xojoqobk", {
+      method: "POST",
       body: new FormData(bookingForm),
       headers: { Accept: "application/json" }
     });
@@ -169,10 +199,10 @@ bookingForm?.addEventListener("submit", async (event) => {
 
     bookingOutput.innerHTML = `
       <strong>Booking request sent!</strong>
-      <span>Thank you—Rocky Digital Media has received your answers and can reply using the email you provided.</span>
+      <span>Thanks! Rocky Digital Media will contact you using your selected method.</span>
     `;
     bookingForm.reset();
-    if (conventionDetails) conventionDetails.textContent = "Choose a convention to see its dates and location.";
+    updateContactDetailField();
   } catch {
     bookingOutput?.classList.add("error");
     bookingOutput.innerHTML = `
@@ -194,7 +224,7 @@ function buildFurtrackGallery() {
 
     const photo = document.createElement("img");
     photo.src = media.thumbnail;
-    photo.alt = `Fursuit photograph by RockyTheDog, image ${index + 1}`;
+    photo.alt = `Gallery photograph ${index + 1}`;
     photo.loading = "lazy";
     photo.decoding = "async";
 
