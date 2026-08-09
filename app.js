@@ -23,18 +23,21 @@ const galleryLightboxPrevious = document.querySelector("#gallery-lightbox-previo
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 const tabs = document.querySelector(".tabs");
 const aboutPanel = document.querySelector("#about");
+const policyPanel = document.querySelector("#policy");
 const policyViewport = document.querySelector("#policy-viewport");
 const policyDocument = document.querySelector("#policy-document");
+const policyPageWraps = [...document.querySelectorAll(".policy-page-wrap")];
 const policyPages = [...document.querySelectorAll(".policy-page")];
 const policyZoomControls = document.querySelector("#policy-zoom-controls");
 const policyZoomOut = document.querySelector("#policy-zoom-out");
 const policyZoomIn = document.querySelector("#policy-zoom-in");
 const policyZoomLevel = document.querySelector("#policy-zoom-level");
 const faqQuestions = [...document.querySelectorAll(".faq-question")];
+const autoHideNavPanels = [aboutPanel, policyPanel].filter(Boolean);
 let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
-let lastAboutScrollPosition = 0;
-let aboutScrollFrame = null;
+let lastAutoHideScrollPosition = 0;
+let autoHideScrollFrame = null;
 let policyZoomIndex = 0;
 let policyResizeFrame = null;
 let lastPolicyWheelTime = 0;
@@ -156,37 +159,42 @@ function resetSubmittedForm(tabName) {
   }
 }
 
-function getAboutScrollPosition() {
-  return Math.max(window.scrollY, aboutPanel?.scrollTop || 0);
+function getActiveAutoHidePanel() {
+  return autoHideNavPanels.find((panel) => panel.classList.contains("active"));
+}
+
+function getAutoHideScrollPosition() {
+  const activePanel = getActiveAutoHidePanel();
+  return Math.max(window.scrollY, activePanel?.scrollTop || 0);
 }
 
 function showTabs() {
-  tabs?.classList.remove("about-scroll-hidden");
+  tabs?.classList.remove("scroll-hidden");
 }
 
-function updateAboutTabsOnScroll() {
-  aboutScrollFrame = null;
+function updateAutoHideTabsOnScroll() {
+  autoHideScrollFrame = null;
 
-  if (!aboutPanel?.classList.contains("active")) {
+  if (!getActiveAutoHidePanel()) {
     showTabs();
     return;
   }
 
-  const currentPosition = getAboutScrollPosition();
-  const scrollDifference = currentPosition - lastAboutScrollPosition;
+  const currentPosition = getAutoHideScrollPosition();
+  const scrollDifference = currentPosition - lastAutoHideScrollPosition;
 
   if (currentPosition <= 24 || scrollDifference < -2) {
     showTabs();
   } else if (scrollDifference > 2) {
-    tabs?.classList.add("about-scroll-hidden");
+    tabs?.classList.add("scroll-hidden");
   }
 
-  lastAboutScrollPosition = currentPosition;
+  lastAutoHideScrollPosition = currentPosition;
 }
 
-function scheduleAboutTabsUpdate() {
-  if (aboutScrollFrame !== null) return;
-  aboutScrollFrame = requestAnimationFrame(updateAboutTabsOnScroll);
+function scheduleAutoHideTabsUpdate() {
+  if (autoHideScrollFrame !== null) return;
+  autoHideScrollFrame = requestAnimationFrame(updateAutoHideTabsOnScroll);
 }
 
 function updatePolicyZoom(anchorX = null) {
@@ -213,8 +221,8 @@ function updatePolicyZoom(anchorX = null) {
     : 0.5;
 
   policyDocument.style.width = `${Math.max(viewportWidth, pageWidth)}px`;
-  policyPages.forEach((page) => {
-    page.style.width = `${pageWidth}px`;
+  policyPageWraps.forEach((pageWrap) => {
+    pageWrap.style.width = `${pageWidth}px`;
   });
 
   if (policyZoomLevel) policyZoomLevel.textContent = `${Math.round(zoom * 100)}%`;
@@ -294,7 +302,9 @@ function activateTab(name, updateHash = true) {
   }
 
   showTabs();
-  lastAboutScrollPosition = validName === "about" ? getAboutScrollPosition() : 0;
+  lastAutoHideScrollPosition = ["about", "policy"].includes(validName)
+    ? getAutoHideScrollPosition()
+    : 0;
   if (validName === "policy") requestAnimationFrame(updatePolicyZoom);
 }
 
@@ -306,9 +316,11 @@ tabLinks.forEach((link) => {
 });
 
 window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
-window.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true });
+window.addEventListener("scroll", scheduleAutoHideTabsUpdate, { passive: true });
 window.addEventListener("resize", schedulePolicyZoomUpdate, { passive: true });
-aboutPanel?.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true });
+autoHideNavPanels.forEach((panel) => {
+  panel.addEventListener("scroll", scheduleAutoHideTabsUpdate, { passive: true });
+});
 tabs?.addEventListener("focusin", showTabs);
 policyZoomOut?.addEventListener("click", () => changePolicyZoom(-1));
 policyZoomIn?.addEventListener("click", () => changePolicyZoom(1));

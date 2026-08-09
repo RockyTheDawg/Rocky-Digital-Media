@@ -52,7 +52,7 @@ button, input, select, textarea { font: inherit; }
   backdrop-filter: blur(16px);
   will-change: transform;
 }
-.tabs.about-scroll-hidden { transform: translate(-50%, calc(-100% - 2rem)); }
+.tabs.scroll-hidden { transform: translate(-50%, calc(-100% - 2rem)); }
 .tab {
   min-height: 2.15rem;
   display: grid;
@@ -230,8 +230,9 @@ main { position: relative; z-index: 1; }
   gap: clamp(0.75rem, 2vw, 1.25rem);
   margin-inline: auto;
 }
+.policy-page-wrap { position: relative; width: auto; }
 .policy-page {
-  width: auto;
+  width: 100%;
   height: auto;
   max-width: none;
   max-height: none;
@@ -241,6 +242,17 @@ main { position: relative; z-index: 1; }
   box-shadow: 0 1.1rem 3rem rgba(0, 0, 0, 0.28);
   object-fit: contain;
 }
+.policy-page-link {
+  position: absolute;
+  z-index: 2;
+  left: 58.75%;
+  top: 38.7%;
+  width: 22.15%;
+  height: 2.2%;
+  border-radius: 0.15rem;
+}
+.policy-page-link:hover { background: rgba(0, 102, 204, 0.12); outline: 1px solid rgba(0, 102, 204, 0.42); }
+.policy-page-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .booking-panel { align-content: center; }
 .contact-panel { align-content: center; }
 .booking-form,
