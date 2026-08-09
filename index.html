@@ -41,18 +41,8 @@
           </label>
 
           <label>
-            <span>Preferred contact method</span>
-            <select name="contactMethod" id="contact-method" required>
-              <option value="" selected disabled>Select one method</option>
-              <option value="email">Email</option>
-              <option value="telegram">Telegram</option>
-              <option value="discord">Discord</option>
-            </select>
-          </label>
-
-          <label id="contact-detail-field" hidden>
-            <span id="contact-detail-label">Contact information</span>
-            <input type="text" id="contact-detail" name="contactDetail" disabled required>
+            <span>Enter your email address</span>
+            <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
           </label>
 
           <label>
