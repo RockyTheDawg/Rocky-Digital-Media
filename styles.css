@@ -84,7 +84,7 @@ main { position: relative; z-index: 1; }
 .hero-panel h1 {
   max-width: 15ch;
   margin: 0;
-  color: var(--ink);
+  color: #d19a6f;
   font-family: var(--font-title);
   font-size: clamp(3.25rem, 7vw, 6rem);
   font-weight: 900;
@@ -189,6 +189,7 @@ main { position: relative; z-index: 1; }
   letter-spacing: 0.04em;
 }
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .hero-panel h1,
   .about-card .about-motto {
     background: linear-gradient(90deg, #d19a6f 0%, #c9897d 28%, #a8b7c5 55%, #d19a6f 78%, #c9897d 100%);
     background-size: 260% 100%;
@@ -363,5 +364,6 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .hero-panel h1,
   .about-card .about-motto { animation: none; background-position: 50% 50%; }
 }
