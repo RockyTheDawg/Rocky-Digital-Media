@@ -38,11 +38,17 @@ let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
 let lastAutoHideScrollPosition = 0;
 let autoHideScrollFrame = null;
-let policyZoomIndex = 0;
+let policyZoom = 1;
 let policyResizeFrame = null;
-let lastPolicyWheelTime = 0;
+let policyPinchStartDistance = 0;
+let policyPinchStartZoom = 1;
+let policyPinchAnchorX = null;
+let policyPinchFrame = null;
+let pendingPolicyPinchZoom = 1;
 
-const policyZoomSteps = [1, 1.25, 1.5, 1.75, 2];
+const policyZoomMinimum = 1;
+const policyZoomMaximum = 2;
+const policyZoomStep = 0.25;
 
 const formConfirmations = {
   booking: {
@@ -244,7 +250,7 @@ function updatePolicyZoom(anchorX = null) {
   const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
   const availableHeight = Math.max(window.innerHeight - (10 * rootFontSize), 240);
   const fittedWidth = Math.min(viewportWidth, availableHeight * pageAspectRatio);
-  const zoom = policyZoomSteps[policyZoomIndex];
+  const zoom = policyZoom;
   const pageWidth = fittedWidth * zoom;
   const anchorPosition = Number.isFinite(anchorX)
     ? Math.min(viewportWidth, Math.max(0, anchorX))
@@ -259,8 +265,8 @@ function updatePolicyZoom(anchorX = null) {
   });
 
   if (policyZoomLevel) policyZoomLevel.textContent = `${Math.round(zoom * 100)}%`;
-  if (policyZoomOut) policyZoomOut.disabled = policyZoomIndex === 0;
-  if (policyZoomIn) policyZoomIn.disabled = policyZoomIndex === policyZoomSteps.length - 1;
+  if (policyZoomOut) policyZoomOut.disabled = zoom <= policyZoomMinimum;
+  if (policyZoomIn) policyZoomIn.disabled = zoom >= policyZoomMaximum;
 
   requestAnimationFrame(() => {
     policyViewport.scrollLeft = Math.max(
@@ -276,36 +282,77 @@ function schedulePolicyZoomUpdate() {
 }
 
 function changePolicyZoom(direction, anchorX = null) {
-  policyZoomIndex = Math.min(
-    policyZoomSteps.length - 1,
-    Math.max(0, policyZoomIndex + direction)
+  policyZoom = Math.min(
+    policyZoomMaximum,
+    Math.max(policyZoomMinimum, policyZoom + (direction * policyZoomStep))
   );
   updatePolicyZoom(anchorX);
 }
 
-function handlePolicyZoomWheel(event) {
-  if (!event.ctrlKey && !event.metaKey) return;
-
-  event.preventDefault();
-  if (event.deltaY === 0) return;
-
-  const currentTime = performance.now();
-  if (currentTime - lastPolicyWheelTime < 120) return;
-  lastPolicyWheelTime = currentTime;
-
-  const viewportBounds = policyViewport.getBoundingClientRect();
-  const pointerPosition = event.clientX - viewportBounds.left;
-  changePolicyZoom(event.deltaY < 0 ? 1 : -1, pointerPosition);
+function getPolicyTouchDistance(touches) {
+  const horizontalDistance = touches[1].clientX - touches[0].clientX;
+  const verticalDistance = touches[1].clientY - touches[0].clientY;
+  return Math.hypot(horizontalDistance, verticalDistance);
 }
 
-function handlePolicyControlWheel(event) {
-  event.preventDefault();
-  if (event.deltaY === 0) return;
+function getPolicyTouchAnchor(touches) {
+  if (!policyViewport) return null;
+  const viewportBounds = policyViewport.getBoundingClientRect();
+  return ((touches[0].clientX + touches[1].clientX) / 2) - viewportBounds.left;
+}
 
-  const currentTime = performance.now();
-  if (currentTime - lastPolicyWheelTime < 120) return;
-  lastPolicyWheelTime = currentTime;
-  changePolicyZoom(event.deltaY < 0 ? 1 : -1);
+function handlePolicyTouchStart(event) {
+  if (event.touches.length !== 2) return;
+
+  event.preventDefault();
+  policyPinchStartDistance = getPolicyTouchDistance(event.touches);
+  policyPinchStartZoom = policyZoom;
+  pendingPolicyPinchZoom = policyZoom;
+  policyPinchAnchorX = getPolicyTouchAnchor(event.touches);
+}
+
+function handlePolicyTouchMove(event) {
+  if (event.touches.length !== 2 || policyPinchStartDistance <= 0) return;
+
+  event.preventDefault();
+  const distance = getPolicyTouchDistance(event.touches);
+  const zoomRatio = distance / policyPinchStartDistance;
+  const limitedZoom = Math.min(
+    policyZoomMaximum,
+    Math.max(policyZoomMinimum, policyPinchStartZoom * zoomRatio)
+  );
+
+  pendingPolicyPinchZoom = Math.round(limitedZoom * 20) / 20;
+  policyPinchAnchorX = getPolicyTouchAnchor(event.touches);
+  if (policyPinchFrame !== null) return;
+
+  policyPinchFrame = requestAnimationFrame(() => {
+    policyPinchFrame = null;
+    if (Math.abs(policyZoom - pendingPolicyPinchZoom) < 0.01) return;
+    policyZoom = pendingPolicyPinchZoom;
+    updatePolicyZoom(policyPinchAnchorX);
+  });
+}
+
+function handlePolicyTouchEnd(event) {
+  if (event.touches.length >= 2 || policyPinchStartDistance <= 0) return;
+
+  policyPinchStartDistance = 0;
+  if (policyPinchFrame !== null) {
+    cancelAnimationFrame(policyPinchFrame);
+    policyPinchFrame = null;
+    policyZoom = pendingPolicyPinchZoom;
+  }
+  policyZoom = Math.min(
+    policyZoomMaximum,
+    Math.max(policyZoomMinimum, Math.round(policyZoom / policyZoomStep) * policyZoomStep)
+  );
+  updatePolicyZoom(policyPinchAnchorX);
+  policyPinchAnchorX = null;
+}
+
+function preventPolicyNativeGesture(event) {
+  event.preventDefault();
 }
 
 function activateTab(name, updateHash = true) {
@@ -367,8 +414,12 @@ autoHideNavPanels.forEach((panel) => {
 tabs?.addEventListener("focusin", showTabs);
 policyZoomOut?.addEventListener("click", () => changePolicyZoom(-1));
 policyZoomIn?.addEventListener("click", () => changePolicyZoom(1));
-policyZoomControls?.addEventListener("wheel", handlePolicyControlWheel, { passive: false });
-policyViewport?.addEventListener("wheel", handlePolicyZoomWheel, { passive: false });
+policyViewport?.addEventListener("touchstart", handlePolicyTouchStart, { passive: false });
+policyViewport?.addEventListener("touchmove", handlePolicyTouchMove, { passive: false });
+policyViewport?.addEventListener("touchend", handlePolicyTouchEnd, { passive: true });
+policyViewport?.addEventListener("touchcancel", handlePolicyTouchEnd, { passive: true });
+policyViewport?.addEventListener("gesturestart", preventPolicyNativeGesture, { passive: false });
+policyViewport?.addEventListener("gesturechange", preventPolicyNativeGesture, { passive: false });
 policyPages.forEach((page) => {
   if (!page.complete) page.addEventListener("load", schedulePolicyZoomUpdate, { once: true });
 });
