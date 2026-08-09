@@ -57,12 +57,18 @@ There’s plenty more to come, and I’m looking forward to capturing more memor
 
 ---
 
+## Live website!
+
+Ready to check out my website? Head over to https://www.rockydigitalmedia.com/#home and start booking! 
+
+---
+
 ## Copyright & Ownership
 
-**© Rocky Digital Media. All rights reserved.**
+ **© Rocky Digital Media. All rights reserved.**
 
-Rocky Digital Media, this website, and its original content are not offered for sale, ownership transfer, or trade.
+ Rocky Digital Media, this website, and its original content are not offered for sale, ownership transfer, or trade.
 
-Original Rocky Digital Media photography, branding, written content, and other original materials may not be copied, reproduced, distributed, or used without permission.
+ Original Rocky Digital Media photography, branding, written content, and other original materials may not be copied, reproduced, distributed, or used without permission.
 
-If you believe Rocky Digital Media content has been copied or used without authorization, please report the suspected infringement through the appropriate platform or service, including GitHub when applicable.
+ If you believe Rocky Digital Media content has been copied or used without authorization, please report the suspected infringement through the appropriate platform or service, including GitHub when applicable.
