@@ -172,6 +172,20 @@ function showTabs() {
   tabs?.classList.remove("scroll-hidden");
 }
 
+function keepActiveTabVisible(link, behaviour = "auto") {
+  if (!tabs || !link || tabs.scrollWidth <= tabs.clientWidth) return;
+
+  const maximumScroll = Math.max(0, tabs.scrollWidth - tabs.clientWidth);
+  const centredPosition = link.offsetLeft - ((tabs.clientWidth - link.offsetWidth) / 2);
+  const targetPosition = Math.min(maximumScroll, Math.max(0, centredPosition));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  tabs.scrollTo({
+    left: targetPosition,
+    behavior: prefersReducedMotion ? "auto" : behaviour
+  });
+}
+
 function updateAutoHideTabsOnScroll() {
   autoHideScrollFrame = null;
 
@@ -312,6 +326,9 @@ function activateTab(name, updateHash = true) {
     link.setAttribute("aria-current", active ? "page" : "false");
   });
 
+  const activeTabLink = tabLinks.find((link) => link.dataset.tabLink === validName);
+  requestAnimationFrame(() => keepActiveTabVisible(activeTabLink, previousName === validName ? "auto" : "smooth"));
+
   if (updateHash && location.hash.slice(1) !== validName) {
     history.replaceState(null, "", `#${validName}`);
   }
@@ -335,7 +352,11 @@ tabLinks.forEach((link) => {
 
 window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
 window.addEventListener("scroll", scheduleAutoHideTabsUpdate, { passive: true });
-window.addEventListener("resize", schedulePolicyZoomUpdate, { passive: true });
+window.addEventListener("resize", () => {
+  schedulePolicyZoomUpdate();
+  const activeTabLink = tabLinks.find((link) => link.classList.contains("active"));
+  requestAnimationFrame(() => keepActiveTabVisible(activeTabLink));
+}, { passive: true });
 autoHideNavPanels.forEach((panel) => {
   panel.addEventListener("scroll", scheduleAutoHideTabsUpdate, { passive: true });
 });
