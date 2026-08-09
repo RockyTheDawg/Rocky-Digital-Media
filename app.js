@@ -30,6 +30,100 @@ let aboutRevealObserver;
 let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
 
+const formConfirmations = {
+  booking: {
+    form: bookingForm,
+    output: bookingOutput,
+    submit: bookingSubmit,
+    message: `
+      <strong>Booking request sent!</strong>
+      <span>Thanks! Rocky Digital Media will contact you using your selected method.</span>
+    `
+  },
+  contact: {
+    form: contactForm,
+    output: contactOutput,
+    submit: contactSubmit,
+    message: `
+      <strong>Message sent!</strong>
+      <span>Thanks for reaching out. Rocky Digital Media will reply to the email address you provided.</span>
+    `
+  }
+};
+
+function showFormConfirmation(name) {
+  const confirmation = formConfirmations[name];
+  if (!confirmation?.form || !confirmation.output || !confirmation.submit) return;
+
+  confirmation.form.reset();
+  if (name === "booking") updateContactDetailField();
+  confirmation.form.dataset.submitted = "true";
+  confirmation.output.classList.remove("error");
+  confirmation.output.innerHTML = confirmation.message;
+  confirmation.submit.setAttribute("disabled", "");
+  confirmation.submit.textContent = "Submitted";
+}
+
+function reloadWithFormConfirmation(name) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("submitted", name);
+  url.hash = name;
+  window.location.replace(url.toString());
+}
+
+function restoreFormConfirmation() {
+  const url = new URL(window.location.href);
+  const name = url.searchParams.get("submitted");
+  if (!formConfirmations[name]) return;
+
+  url.searchParams.delete("submitted");
+  url.hash = name;
+  history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  activateTab(name, false);
+  showFormConfirmation(name);
+}
+
+function getEmailValidationMessage(value) {
+  const email = value.trim();
+  if (email.toLowerCase() === "you@example.com") return "";
+
+  const parts = email.split("@");
+  if (parts.length !== 2) {
+    return "Enter a valid email address. For testing, use only you@example.com.";
+  }
+
+  const [localPart, domain] = parts;
+  const validLocalPart = /^(?!\.)(?!.*\.\.)[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+(?<!\.)$/i;
+  const validDomain = /^(?=.{1,253}$)(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,63}$/i;
+  const reservedDomain = /(^|\.)(example\.(com|net|org)|invalid|localhost|test)$/i;
+
+  if (
+    email.length > 254 ||
+    localPart.length > 64 ||
+    !validLocalPart.test(localPart) ||
+    !validDomain.test(domain) ||
+    reservedDomain.test(domain)
+  ) {
+    return "Enter a valid email address. For testing, use only you@example.com.";
+  }
+
+  return "";
+}
+
+function validateEmailFields(form) {
+  if (!form) return true;
+
+  const emailFields = [...form.querySelectorAll('input[type="email"]:not(:disabled)')];
+  emailFields.forEach((field) => field.setCustomValidity(getEmailValidationMessage(field.value)));
+  return emailFields.every((field) => field.validity.valid);
+}
+
+[bookingForm, contactForm].forEach((form) => {
+  form?.addEventListener("input", (event) => {
+    if (event.target.matches('input[type="email"]')) event.target.setCustomValidity("");
+  });
+});
+
 aboutRevealItems.forEach((item, index) => {
   item.classList.add("about-reveal");
   item.style.setProperty("--reveal-order", String(index % 3));
@@ -223,10 +317,11 @@ function updateContactDetailField() {
 
 contactMethod?.addEventListener("change", updateContactDetailField);
 updateContactDetailField();
+restoreFormConfirmation();
 
 bookingForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (!bookingForm.checkValidity()) {
+  if (!validateEmailFields(bookingForm) || !bookingForm.checkValidity()) {
     bookingForm.reportValidity();
     return;
   }
@@ -247,10 +342,7 @@ bookingForm?.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error("Formspree did not accept the request.");
 
     bookingForm.dataset.submitted = "true";
-    bookingOutput.innerHTML = `
-      <strong>Booking request sent!</strong>
-      <span>Thanks! Rocky Digital Media will contact you using your selected method.</span>
-    `;
+    reloadWithFormConfirmation("booking");
   } catch {
     bookingOutput?.classList.add("error");
     bookingOutput.innerHTML = `
@@ -270,7 +362,7 @@ bookingForm?.addEventListener("submit", async (event) => {
 
 contactForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (!contactForm.checkValidity()) {
+  if (!validateEmailFields(contactForm) || !contactForm.checkValidity()) {
     contactForm.reportValidity();
     return;
   }
@@ -291,10 +383,7 @@ contactForm?.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error("Formspree did not accept the message.");
 
     contactForm.dataset.submitted = "true";
-    contactOutput.innerHTML = `
-      <strong>Message sent!</strong>
-      <span>Thanks for reaching out. Rocky Digital Media will reply to the email address you provided.</span>
-    `;
+    reloadWithFormConfirmation("contact");
   } catch {
     contactOutput?.classList.add("error");
     contactOutput.innerHTML = `
