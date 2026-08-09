@@ -185,9 +185,6 @@ main { position: relative; z-index: 1; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.5rem 0 0; background: transparent; font: 800 0.88rem/1.4 var(--font-body); }
 .about-closing p { margin: 0; color: var(--muted); }
 .about-closing strong { color: var(--accent); white-space: nowrap; }
-.about-reveal { opacity: 0; transform: translateY(1.15rem); transition: opacity 680ms ease, transform 680ms ease; transition-delay: calc(var(--reveal-order, 0) * 45ms); }
-.about-reveal.is-visible { opacity: 1; transform: none; }
-
 .booking-panel { align-content: center; }
 .contact-panel { align-content: center; }
 .booking-form,
@@ -278,5 +275,4 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .about-reveal { opacity: 1; transform: none; }
 }

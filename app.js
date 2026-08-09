@@ -21,12 +21,7 @@ const galleryLightboxCounter = document.querySelector("#gallery-lightbox-counter
 const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
 const galleryLightboxPrevious = document.querySelector("#gallery-lightbox-previous");
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
-const aboutPanel = document.querySelector("#about");
-const aboutRevealItems = aboutPanel
-  ? [...aboutPanel.querySelectorAll(".about-intro > *, .about-card > *, .about-closing > *")]
-  : [];
 const faqQuestions = [...document.querySelectorAll(".faq-question")];
-let aboutRevealObserver;
 let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
 
@@ -124,11 +119,6 @@ function validateEmailFields(form) {
   });
 });
 
-aboutRevealItems.forEach((item, index) => {
-  item.classList.add("about-reveal");
-  item.style.setProperty("--reveal-order", String(index % 3));
-});
-
 function resetSubmittedForm(tabName) {
   if (tabName === "booking" && bookingForm?.dataset.submitted === "true") {
     bookingForm.reset();
@@ -176,44 +166,7 @@ function activateTab(name, updateHash = true) {
     history.replaceState(null, "", `#${validName}`);
   }
 
-  if (validName === "about") {
-    requestAnimationFrame(restartAboutReveal);
-  }
 }
-
-function initializeAboutReveal() {
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!aboutPanel || reducedMotion || !("IntersectionObserver" in window)) {
-    aboutRevealItems.forEach((item) => item.classList.add("is-visible"));
-    return;
-  }
-
-  aboutRevealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      aboutRevealObserver.unobserve(entry.target);
-    });
-  }, {
-    root: aboutPanel,
-    rootMargin: "0px 0px -8% 0px",
-    threshold: 0.12
-  });
-}
-
-function restartAboutReveal() {
-  if (!aboutRevealObserver) return;
-
-  if (aboutPanel) aboutPanel.scrollTop = 0;
-
-  aboutRevealItems.forEach((item) => {
-    item.classList.remove("is-visible");
-    aboutRevealObserver.unobserve(item);
-    aboutRevealObserver.observe(item);
-  });
-}
-
-initializeAboutReveal();
 
 tabLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
