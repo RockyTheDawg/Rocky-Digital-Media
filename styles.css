@@ -183,7 +183,23 @@ main { position: relative; z-index: 1; }
 .about-card p { margin: 0 0 0.7rem; }
 .about-card p:last-child { margin-bottom: 0; }
 .about-card strong { color: var(--ink); }
-.about-card .about-motto { margin-top: 0.7rem; color: var(--accent); letter-spacing: 0.04em; }
+.about-card .about-motto {
+  margin-top: 0.7rem;
+  color: #d19a6f;
+  letter-spacing: 0.04em;
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .about-card .about-motto {
+    background: linear-gradient(90deg, #d19a6f 0%, #c9897d 28%, #a8b7c5 55%, #d19a6f 78%, #c9897d 100%);
+    background-size: 260% 100%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: aussie-motto-colour-flow 7s ease-in-out infinite alternate;
+  }
+}
 .copyright-card p { font-size: 0.76rem; line-height: 1.55; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.5rem 0 0; background: transparent; font: 800 0.88rem/1.4 var(--font-body); }
 .about-closing p { margin: 0; color: var(--muted); }
@@ -323,6 +339,7 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 .credits-copyright { display: block; margin: 0.65rem 0 0; color: var(--muted); font-size: 0.7rem; line-height: 1.5; }
 
 @keyframes panel-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@keyframes aussie-motto-colour-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 
 @media (max-width: 720px) {
   body { background-attachment: scroll; }
@@ -346,4 +363,5 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .about-card .about-motto { animation: none; background-position: 50% 50%; }
 }
