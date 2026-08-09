@@ -98,43 +98,41 @@ main { position: relative; z-index: 1; }
 .gallery-heading p:last-child { margin: 0.6rem 0 0; color: var(--muted); font: 700 0.94rem/1.4 Arial, Helvetica, sans-serif; }
 .gallery-heading strong { color: var(--ink); }
 .furtrack-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; width: min(70rem, 100%); }
-.furtrack-grid a {
-  position: relative;
+.furtrack-card {
+  margin: 0;
   aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 0.75rem;
   background: var(--glass);
 }
-.furtrack-grid img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 220ms ease, filter 220ms ease; }
-.furtrack-grid span {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 1.8rem 0.75rem 0.7rem;
-  color: var(--ink);
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
-  font: 800 0.78rem/1 Arial, Helvetica, sans-serif;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-.furtrack-grid a:hover img, .furtrack-grid a:focus-visible img { transform: scale(1.03); filter: saturate(1.08); }
-.furtrack-grid a:hover span, .furtrack-grid a:focus-visible span { opacity: 1; transform: none; }
-.furtrack-grid a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.furtrack-profile-link {
-  min-height: 2.8rem;
-  display: grid;
-  place-items: center;
-  padding: 0 1.15rem;
+.furtrack-grid img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+.about-panel { align-items: start; overflow-y: auto; }
+.readme-page {
+  width: min(58rem, 100%);
+  padding: clamp(1.15rem, 4vw, 2.5rem);
   border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--ink);
+  border-radius: 1rem;
   background: var(--glass);
-  font: 800 0.85rem/1 Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 1.25rem 4rem rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(16px);
 }
-.furtrack-profile-link:hover { border-color: var(--accent); }
+.readme-page h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+}
+.readme-page h3 { margin: 0 0 0.65rem; font-size: clamp(1.45rem, 3vw, 2rem); }
+.readme-page p, .readme-page li, .readme-page blockquote { color: var(--muted); font: 700 0.96rem/1.65 Arial, Helvetica, sans-serif; }
+.readme-page strong { color: var(--ink); }
+.readme-page section, .readme-footer { padding-top: 1.6rem; margin-top: 1.6rem; border-top: 1px solid var(--line); }
+.readme-hero > p { max-width: 48rem; }
+.about-highlights { display: flex; flex-wrap: wrap; gap: 0.55rem; padding: 0; list-style: none; }
+.about-highlights li { padding: 0.5rem 0.75rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: rgba(255, 255, 255, 0.05); font-size: 0.78rem; line-height: 1.2; }
+.about-motto { color: var(--accent); letter-spacing: 0.04em; }
+.readme-page blockquote { margin: 1.4rem 0 0; padding: 0.85rem 1rem; border-left: 3px solid var(--accent); background: rgba(243, 198, 107, 0.08); }
 
 .booking-panel { align-items: start; overflow-y: auto; }
 .booking-form {
@@ -240,7 +238,6 @@ select option, select optgroup { color: var(--ink); background: #121716; }
   .convention-details { grid-template-columns: 1fr; }
   .form-output { grid-template-columns: 1fr; }
   .furtrack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .furtrack-grid span { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

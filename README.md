@@ -67,7 +67,7 @@ Head over to my live website below
 
 ## Furtrack Gallery
 
-The website gallery shows the public photos currently visible under the `photographer:rockythedog` tag. Each thumbnail links to its original Furtrack post, with a profile link to https://www.furtrack.com/user/RockyTheDog/uploads.
+The website gallery shows the public photos currently visible under the `photographer:rockythedog` tag without adding profile or post links.
 
 ---
 

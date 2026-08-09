@@ -130,7 +130,7 @@
         <p class="form-note">This prepares a booking draft on your device. Request delivery will be connected after the booking inbox is selected.</p>
         <output class="form-output" id="booking-output" aria-live="polite"></output>
 
-        <p class="calendar-credit">North American convention choices, excluding Canada, checked August 8, 2026 using <a href="https://furrycons.com/calendar/" target="_blank" rel="noreferrer">FurryCons.com</a>.</p>
+        <p class="calendar-credit">Convention choices located in the 50 U.S. states for 2026 and 2027, checked August 8, 2026 using <a href="https://furrycons.com/calendar/" target="_blank" rel="noreferrer">FurryCons.com</a>.</p>
       </form>
     </section>
 
@@ -142,28 +142,69 @@
         <p>Photos publicly tagged to photographer <strong>rockythedog</strong>.</p>
       </header>
 
-      <div class="furtrack-grid" aria-label="RockyTheDog photos on Furtrack">
-        <a href="https://www.furtrack.com/p/1745535" target="_blank" rel="noreferrer">
-          <img src="https://orca2.furtrack.com/thumb/1745535.jpg" alt="Fursuit photo by RockyTheDog on Furtrack" loading="lazy">
-          <span>View on Furtrack</span>
-        </a>
-        <a href="https://www.furtrack.com/p/1745534" target="_blank" rel="noreferrer">
-          <img src="https://orca2.furtrack.com/thumb/1745534.jpg" alt="Fursuit photo by RockyTheDog on Furtrack" loading="lazy">
-          <span>View on Furtrack</span>
-        </a>
-        <a href="https://www.furtrack.com/p/1745533" target="_blank" rel="noreferrer">
-          <img src="https://orca2.furtrack.com/thumb/1745533.jpg" alt="Fursuit photo by RockyTheDog on Furtrack" loading="lazy">
-          <span>View on Furtrack</span>
-        </a>
-        <a href="https://www.furtrack.com/p/1745532" target="_blank" rel="noreferrer">
-          <img src="https://orca2.furtrack.com/thumb/1745532.jpg" alt="Fursuit photo by RockyTheDog on Furtrack" loading="lazy">
-          <span>View on Furtrack</span>
-        </a>
-      </div>
-
-      <a class="furtrack-profile-link" href="https://www.furtrack.com/user/RockyTheDog/uploads" target="_blank" rel="noreferrer">View RockyTheDog on Furtrack</a>
+      <div class="furtrack-grid" id="furtrack-grid" aria-label="RockyTheDog photos on Furtrack"></div>
     </section>
-    <section class="panel empty-panel" id="about" data-tab-panel="about" aria-label="About"></section>
+    <section class="panel about-panel" id="about" data-tab-panel="about" aria-labelledby="about-title">
+      <article class="readme-page">
+        <header class="readme-hero">
+          <p class="eyebrow">Furry convention photography</p>
+          <h2 id="about-title">Rocky Digital Media!</h2>
+          <p>Hey! I'm <strong>Rocky</strong>, the creator of <strong>Rocky Digital Media</strong> — a furry-owned photography and digital media project focused on capturing the people, fursuits, creativity, and unforgettable moments that make conventions special!</p>
+          <ul class="about-highlights" aria-label="Rocky Digital Media highlights">
+            <li>Furry Owned &amp; Operated</li>
+            <li>Convention &amp; Fursuit Photography</li>
+            <li>Developer &amp; Digital Creator</li>
+          </ul>
+        </header>
+
+        <section>
+          <h3>About Rocky Digital Media</h3>
+          <p><strong>Rocky Digital Media</strong> was created from my interest in photography, technology, and the furry community.</p>
+          <p>My goal is to capture memorable moments at furry conventions — from fursuit photos and portraits to unforgettable convention moments — while creating a welcoming and comfortable photography experience for everyone!</p>
+          <p>Whether you're showing off a new suit, attending your first convention, hanging out with friends, or just want a great photo to remember the weekend, I want to help capture it.</p>
+        </section>
+
+        <section>
+          <h3>Photography</h3>
+          <p>Some of the things I'm interested in photographing include:</p>
+          <ul>
+            <li>Fursuit Photography</li>
+            <li>Furry Conventions</li>
+            <li>Portrait Photography</li>
+            <li>Group Photos</li>
+            <li>Convention &amp; Event Photography</li>
+            <li>Outdoor / Location Photography</li>
+          </ul>
+          <p>I'm continuing to grow my photography skills, experiment with new styles, and build my portfolio through Rocky Digital Media.</p>
+        </section>
+
+        <section>
+          <h3>The Furry Community</h3>
+          <p>Rocky Digital Media is proudly <strong>furry-owned</strong>.</p>
+          <p>The furry community is filled with artists, makers, performers, photographers, developers, and incredibly creative people.</p>
+          <p>My goal is for Rocky Digital Media to contribute to that community by documenting the moments and people that make conventions memorable.</p>
+          <p class="about-motto"><strong>Creativity. Community. Memories.</strong></p>
+        </section>
+
+        <section>
+          <h3>What I'm Working On</h3>
+          <ul>
+            <li>Building the Rocky Digital Media photography portfolio</li>
+            <li>Expanding into more furry convention photography</li>
+            <li>Developing Rocky Digital Media's online presence</li>
+            <li>Experimenting with photography and digital media</li>
+            <li>Hopefully photographing more conventions in the future</li>
+          </ul>
+        </section>
+
+        <footer class="readme-footer">
+          <h3>Rocky Digital Media</h3>
+          <p>Interested in photography at a convention, collaborating on a project, or just checking out my work?</p>
+          <p><strong>See you at the next con!</strong></p>
+          <blockquote>This site is not up for sale, ownership transfer, or trade in any way! Report any unauthorized copies or infringement to GitHub, as this is not allowed!</blockquote>
+        </footer>
+      </article>
+    </section>
     <section class="panel empty-panel" id="contact" data-tab-panel="contact" aria-label="Contact"></section>
   </main>
 
@@ -174,6 +215,7 @@
   </aside>
 
   <script src="conventions.js"></script>
+  <script src="furtrack-media.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

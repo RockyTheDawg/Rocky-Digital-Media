@@ -7,6 +7,7 @@ const bookingOutput = document.querySelector("#booking-output");
 const creditsTrigger = document.querySelector("#credits-trigger");
 const creditsPanel = document.querySelector("#credits-panel");
 const creditsClose = document.querySelector("#credits-close");
+const furtrackGrid = document.querySelector("#furtrack-grid");
 
 function activateTab(name, updateHash = true) {
   const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
@@ -102,7 +103,26 @@ function escapeHtml(value) {
   return element.innerHTML;
 }
 
+function buildFurtrackGallery() {
+  if (!furtrackGrid || !Array.isArray(window.rockyFurtrackMedia)) return;
+
+  window.rockyFurtrackMedia.forEach((media, index) => {
+    const card = document.createElement("figure");
+    card.className = "furtrack-card";
+
+    const photo = document.createElement("img");
+    photo.src = media.thumbnail;
+    photo.alt = `Fursuit photograph by RockyTheDog, image ${index + 1}`;
+    photo.loading = "lazy";
+    photo.decoding = "async";
+
+    card.appendChild(photo);
+    furtrackGrid.appendChild(card);
+  });
+}
+
 buildConventionOptions();
+buildFurtrackGallery();
 
 creditsTrigger?.addEventListener("click", () => {
   const isOpen = creditsPanel?.classList.toggle("open") ?? false;
