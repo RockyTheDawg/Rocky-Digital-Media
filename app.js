@@ -11,6 +11,7 @@ const creditsClose = document.querySelector("#credits-close");
 const furtrackGrid = document.querySelector("#furtrack-grid");
 const aboutPanel = document.querySelector("#about");
 const aboutRevealItems = [...document.querySelectorAll(".about-reveal")];
+const faqQuestions = [...document.querySelectorAll(".faq-question")];
 let aboutRevealObserver;
 
 function activateTab(name, updateHash = true) {
@@ -168,7 +169,7 @@ bookingForm?.addEventListener("submit", async (event) => {
 
     bookingOutput.innerHTML = `
       <strong>Booking request sent!</strong>
-      <span>Thank you—Rocky Digital Media received your answers and can reply using the email you provided.</span>
+      <span>Thank you—Rocky Digital Media has received your answers and can reply using the email you provided.</span>
     `;
     bookingForm.reset();
     if (conventionDetails) conventionDetails.textContent = "Choose a convention to see its dates and location.";
@@ -204,6 +205,26 @@ function buildFurtrackGallery() {
 
 buildConventionOptions();
 buildFurtrackGallery();
+
+faqQuestions.forEach((question) => {
+  question.addEventListener("click", () => {
+    const shouldOpen = question.getAttribute("aria-expanded") !== "true";
+
+    faqQuestions.forEach((otherQuestion) => {
+      const answerId = otherQuestion.getAttribute("aria-controls");
+      const answer = answerId ? document.getElementById(answerId) : null;
+      otherQuestion.setAttribute("aria-expanded", "false");
+      if (answer) answer.hidden = true;
+    });
+
+    if (!shouldOpen) return;
+
+    const answerId = question.getAttribute("aria-controls");
+    const answer = answerId ? document.getElementById(answerId) : null;
+    question.setAttribute("aria-expanded", "true");
+    if (answer) answer.hidden = false;
+  });
+});
 
 creditsTrigger?.addEventListener("click", () => {
   const isOpen = creditsPanel?.classList.toggle("open") ?? false;
