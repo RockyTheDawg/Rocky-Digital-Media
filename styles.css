@@ -107,10 +107,11 @@ main { position: relative; z-index: 1; }
   background: var(--glass);
 }
 .furtrack-grid img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.gallery-disclaimer { width: min(56rem, 100%); margin: 0; color: rgba(219, 219, 216, 0.68); font: 600 0.73rem/1.5 Arial, Helvetica, sans-serif; text-align: center; }
 
 .about-panel { align-items: start; overflow-y: auto; }
 .about-shell {
-  width: min(68rem, 100%);
+  width: min(76rem, 100%);
   display: grid;
   gap: 0.85rem;
   margin-block: auto;
@@ -130,21 +131,41 @@ main { position: relative; z-index: 1; }
   letter-spacing: -0.05em;
 }
 .about-lead { max-width: 52rem; margin: 0.75rem 0 0; color: var(--muted); font: 700 clamp(0.95rem, 2vw, 1.08rem)/1.55 Arial, Helvetica, sans-serif; }
+.about-lead strong { color: var(--ink); }
+.about-summary { max-width: 64rem; margin: 0.65rem 0 0; color: var(--muted); font: 700 0.9rem/1.58 Arial, Helvetica, sans-serif; }
 .about-highlights { display: flex; flex-wrap: wrap; gap: 0.55rem; padding: 0; list-style: none; }
 .about-highlights li { padding: 0.5rem 0.75rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: rgba(255, 255, 255, 0.05); font-size: 0.78rem; line-height: 1.2; }
-.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+.about-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
 .about-card { position: relative; min-height: 10.5rem; padding: 1.15rem 1.25rem; border: 1px solid var(--line); border-radius: 0.9rem; background: rgba(12, 17, 16, 0.86); box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.18); backdrop-filter: blur(14px); }
 .about-card h3 { margin: 0 0 0.55rem; color: var(--ink); font-size: 1.35rem; }
 .about-card p, .about-card li { color: var(--muted); font: 700 0.88rem/1.52 Arial, Helvetica, sans-serif; }
-.about-card p { margin: 0; }
+.about-card p { margin: 0 0 0.7rem; }
+.about-card p:last-child { margin-bottom: 0; }
+.about-card strong { color: var(--ink); }
 .card-number { position: absolute; top: 1rem; right: 1.15rem; color: var(--accent) !important; font-size: 0.68rem !important; letter-spacing: 0.14em; }
-.service-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem 1rem; margin: 0; padding-left: 1.1rem; }
+.service-list { display: grid; grid-template-columns: 1fr; gap: 0.25rem; margin: 0 0 0.75rem; padding-left: 1.1rem; }
+.about-card > ul:not(.service-list) { margin: 0 0 0.75rem; padding-left: 1.1rem; }
 .about-card .about-motto { margin-top: 0.7rem; color: var(--accent); letter-spacing: 0.04em; }
+.copyright-card p { font-size: 0.76rem; line-height: 1.55; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 0.85rem 1.15rem; border: 1px solid var(--line); border-radius: 0.85rem; background: var(--glass); font: 800 0.88rem/1.4 Arial, Helvetica, sans-serif; }
 .about-closing p { margin: 0; color: var(--muted); }
 .about-closing strong { color: var(--accent); white-space: nowrap; }
 .about-reveal { opacity: 0; transform: translateY(1rem); transition: opacity 520ms ease, transform 520ms ease; transition-delay: calc(var(--reveal-order, 0) * 55ms); }
 .about-reveal.is-visible { opacity: 1; transform: none; }
+
+.social-panel { align-content: center; }
+.social-shell { width: min(48rem, 100%); display: grid; gap: 1.1rem; padding: clamp(1.2rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: 1rem; background: var(--glass); box-shadow: 0 1.25rem 4rem rgba(0, 0, 0, 0.28); backdrop-filter: blur(16px); }
+.social-heading { text-align: center; }
+.social-heading h2 { margin: 0; font-size: clamp(2.8rem, 6vw, 4.7rem); line-height: 0.95; letter-spacing: -0.04em; }
+.social-heading p:last-child { margin: 0.6rem 0 0; color: var(--muted); font: 700 0.9rem/1.45 Arial, Helvetica, sans-serif; }
+.social-link-grid { display: grid; gap: 0.65rem; }
+.social-link { min-height: 4.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 0.75rem; background: rgba(255, 255, 255, 0.05); text-decoration: none; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
+.social-link > span:first-child { display: grid; gap: 0.25rem; }
+.social-link strong { color: var(--ink); font: 900 1rem/1.1 Arial, Helvetica, sans-serif; }
+.social-link small { color: var(--muted); font: 700 0.75rem/1.2 Arial, Helvetica, sans-serif; }
+.social-link > span:last-child { color: var(--accent); font-size: 1.25rem; }
+.social-link:hover { border-color: var(--accent); background: rgba(243, 198, 107, 0.09); transform: translateY(-2px); }
+.social-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
 .booking-panel { align-items: start; overflow-y: auto; }
 .booking-form {
@@ -239,6 +260,10 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 
 @keyframes panel-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
 
+@media (max-width: 1000px) {
+  .about-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 720px) {
   body { background-attachment: scroll; }
   .tabs { top: 0.5rem; width: calc(100vw - 1rem); justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
@@ -250,7 +275,7 @@ select option, select optgroup { color: var(--ink); background: #121716; }
   .convention-details { grid-template-columns: 1fr; }
   .form-output { grid-template-columns: 1fr; }
   .furtrack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .about-grid, .service-list { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
   .about-card { min-height: 0; }
   .about-closing { align-items: flex-start; flex-direction: column; }
 }

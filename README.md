@@ -2,49 +2,73 @@
 
 ### Furry Convention Photography & Digital Media
 
-Rocky Digital Media is a **furry-owned photography project** focused on capturing the people, fursuits, creativity, and memorable moments that make conventions special.
+## About Me
 
-**Furry Owned & Operated** · **Convention Photography** · **Fursuit Portraits** · **Digital Creator**
+**Hey! I’m Rocky, the photographer and creator behind Rocky Digital Media.**
+
+Rocky Digital Media is a furry-owned and operated photography and digital media project that grew from my love for photography, technology, and the furry community. I created it to capture the people, fursuits, creativity, friendships, and unforgettable moments that make conventions so special.
+
+For me, photography isn’t just about getting a good picture. It’s about capturing a moment and giving someone something they can look back on and remember.
 
 ---
 
-## About
+## Behind the Camera
 
-Created by **Rocky** from a love of photography, technology, and the furry community. Every session is designed to feel welcoming, comfortable, and memorable—whether it is your first convention, a new suit reveal, or time spent with friends.
+Everyone is camera shy at some point, so why not step into the spotlight and share your memories with friends—whether you just met or have been lifelong friends?
 
-## Photography
+Whether it’s your first convention, your second, or enough that you’ve lost count—showing off your fursuit, getting photos with friends, or simply being part of a group—my goal is to capture photos that feel genuine to you and your character.
 
-- Fursuit and character portraits
-- Convention and event coverage
-- Group photos and candid moments
-- Outdoor and location sessions
+I’m always improving my photography, trying new styles and techniques, and learning from every convention and session. Rocky Digital Media is still growing, and I’m excited to see where photography takes it next.
 
-I am continuing to develop my photography skills, experiment with new visual styles, and grow the Rocky Digital Media portfolio.
+## What I Photograph
 
-## Community
+My photography currently focuses on:
 
-Rocky Digital Media is proudly furry-owned and focused on documenting the artists, makers, performers, and friends who bring conventions to life.
+- Fursuit portraits
+- Convention coverage
+- Group photos
+- Outdoor and location sessions at conventions I attend
+
+As Rocky Digital Media grows, I hope to photograph more conventions, meet more people throughout the community, and continue experimenting with new photography and digital media projects.
+
+## Part of the Community
+
+Rocky Digital Media is proudly furry-owned and operated.
+
+One of my favorite things about the furry community is the creativity behind it. Artists, makers, performers, fursuiters, photographers, creators, and friends all help make conventions what they are.
+
+Being part of that community gives me the opportunity to photograph it from within—not just the suits and events, but the personalities, friendships, and memories behind them.
+
+At the end of the day, that’s what Rocky Digital Media is about:
 
 **Creativity. Community. Memories.**
 
-## Currently Building
-
-- A growing convention photography portfolio
-- More convention and community coverage
-- New photography and digital media projects
-
 ## Gallery
 
-The website gallery displays selected public photos tagged to `photographer:rockythedog` without profile or post links.
+The Rocky Digital Media gallery features selected public photography tagged with `photographer:rockythedog`.
 
-## Website
+## What’s Next?
 
-[www.rockydigitalmedia.com](https://www.rockydigitalmedia.com/)
+Rocky Digital Media is continuing to grow. Right now, I’m focused on:
 
----
+- Building a larger convention photography portfolio
+- Photographing more conventions and community events
+- Exploring new photography styles and techniques
+- Creating new photography and digital media projects
+- Continuing to grow and improve as a photographer
+
+There’s plenty more to come, and I’m looking forward to capturing more memories along the way.
 
 ### See you at the next con!
 
-> © Rocky Digital Media. All rights reserved.
+---
 
-This website and its original content are not offered for sale, ownership transfer, or trade. Unauthorized copying, reproduction, or infringement may be reported through the appropriate platform or service.
+## Copyright & Ownership
+
+**© Rocky Digital Media. All rights reserved.**
+
+Rocky Digital Media, this website, and its original content are not offered for sale, ownership transfer, or trade.
+
+Original Rocky Digital Media photography, branding, written content, and other original materials may not be copied, reproduced, distributed, or used without permission.
+
+If you believe Rocky Digital Media content has been copied or used without authorization, please report the suspected infringement through the appropriate platform or service, including GitHub when applicable.
