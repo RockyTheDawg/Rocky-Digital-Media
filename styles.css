@@ -254,7 +254,9 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 .credits-panel.open { display: block; }
 .credits-panel div { display: flex; justify-content: space-between; align-items: center; }
 .credits-panel button { border: 0; color: var(--ink); background: transparent; font-size: 1.5rem; cursor: pointer; }
-.credits-panel small { display: block; margin: 0.55rem 0 0; color: var(--muted); font-size: 0.72rem; line-height: 1.45; }
+.credits-logo { margin: 0.65rem 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
+.credits-logo strong { padding: 0.06rem 0.2rem; border-radius: 0.2rem; color: #1f4d78; background: #e8eef5; }
+.credits-copyright { display: block; margin: 0.65rem 0 0; color: var(--muted); font-size: 0.7rem; line-height: 1.5; }
 
 @keyframes panel-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
 
