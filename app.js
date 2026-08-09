@@ -81,11 +81,15 @@ activateTab(location.hash.slice(1) || "home", false);
 function buildConventionOptions() {
   if (!conventionSelect || !Array.isArray(window.rockyConventions)) return;
 
-  [2026, 2027].forEach((year) => {
+  const availableConventions = window.rockyConventions.filter(isConventionAvailable);
+  const availableYears = [...new Set(availableConventions.map((convention) => convention.year))]
+    .sort((left, right) => left - right);
+
+  availableYears.forEach((year) => {
     const group = document.createElement("optgroup");
     group.label = String(year);
 
-    window.rockyConventions
+    availableConventions
       .filter((convention) => convention.year === year)
       .forEach((convention) => {
         const option = document.createElement("option");
@@ -97,6 +101,29 @@ function buildConventionOptions() {
 
     conventionSelect.appendChild(group);
   });
+}
+
+function isConventionAvailable(convention) {
+  if (convention.status === "canceled" || convention.status === "cancelled") return false;
+
+  const endDate = parseConventionEndDate(convention.dates);
+  return endDate ? endDate >= new Date() : true;
+}
+
+function parseConventionEndDate(dateRange) {
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  const year = Number(dateRange.match(/,\s*(\d{4})$/)?.[1]);
+  const months = dateRange.match(new RegExp(monthNames.join("|"), "g"));
+  const dateWithoutYear = dateRange.replace(/,\s*\d{4}$/, "");
+  const days = [...dateWithoutYear.matchAll(/\d+/g)].map((match) => Number(match[0]));
+  const monthIndex = monthNames.indexOf(months?.at(-1));
+  const finalDay = days.at(-1);
+
+  if (!year || monthIndex < 0 || !finalDay) return null;
+  return new Date(year, monthIndex, finalDay, 23, 59, 59, 999);
 }
 
 function getSelectedConvention() {
