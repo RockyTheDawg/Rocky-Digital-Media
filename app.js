@@ -175,13 +175,28 @@ function showTabs() {
 function updateAutoHideTabsOnScroll() {
   autoHideScrollFrame = null;
 
-  if (!getActiveAutoHidePanel()) {
+  const activePanel = getActiveAutoHidePanel();
+  if (!activePanel) {
     showTabs();
     return;
   }
 
   const currentPosition = getAutoHideScrollPosition();
   const scrollDifference = currentPosition - lastAutoHideScrollPosition;
+
+  if (activePanel === policyPanel) {
+    const policyTopAreaVisible = currentPosition <= 24 ||
+      (policyZoomControls?.getBoundingClientRect().bottom || 0) > 0;
+
+    if (policyTopAreaVisible) {
+      showTabs();
+    } else {
+      tabs?.classList.add("scroll-hidden");
+    }
+
+    lastAutoHideScrollPosition = currentPosition;
+    return;
+  }
 
   if (currentPosition <= 24 || scrollDifference < -2) {
     showTabs();
@@ -305,7 +320,10 @@ function activateTab(name, updateHash = true) {
   lastAutoHideScrollPosition = ["about", "policy"].includes(validName)
     ? getAutoHideScrollPosition()
     : 0;
-  if (validName === "policy") requestAnimationFrame(updatePolicyZoom);
+  if (validName === "policy") {
+    requestAnimationFrame(updatePolicyZoom);
+    requestAnimationFrame(updateAutoHideTabsOnScroll);
+  }
 }
 
 tabLinks.forEach((link) => {
