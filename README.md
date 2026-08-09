@@ -45,4 +45,6 @@ The website gallery displays selected public photos tagged to `photographer:rock
 
 ### See you at the next con!
 
-> This site is not for sale, ownership transfer, or trade. Please report unauthorized copies or infringement to GitHub.
+> © Rocky Digital Media. All rights reserved.
+
+This website and its original content are not offered for sale, ownership transfer, or trade. Unauthorized copying, reproduction, or infringement may be reported through the appropriate platform or service.
