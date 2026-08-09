@@ -188,6 +188,47 @@ main { position: relative; z-index: 1; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.5rem 0 0; background: transparent; font: 800 0.88rem/1.4 var(--font-body); }
 .about-closing p { margin: 0; color: var(--muted); }
 .about-closing strong { color: var(--accent); white-space: nowrap; }
+.policy-panel { align-items: start; }
+.policy-shell { width: min(70rem, 100%); display: grid; gap: 0.75rem; }
+.policy-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: var(--glass);
+  box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+}
+.policy-toolbar strong { font-size: 0.95rem; }
+.policy-actions { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.policy-action {
+  min-height: 2.5rem;
+  display: inline-grid;
+  place-items: center;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgba(2, 5, 4, 0.34);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+.policy-action:hover { border-color: var(--accent); }
+.policy-action-primary { border-color: var(--accent); color: #1b170f; background: var(--accent); }
+.policy-frame {
+  width: 100%;
+  height: calc(100svh - 11rem);
+  min-height: 34rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: #fff;
+}
+.policy-fallback { margin: 0; color: var(--muted); font-size: 0.76rem; text-align: center; }
+.policy-fallback a { color: var(--accent); }
 .booking-panel { align-content: center; }
 .contact-panel { align-content: center; }
 .booking-form,
@@ -274,6 +315,8 @@ select option, select optgroup { color: var(--ink); background: #121716; }
   .gallery-lightbox-arrow { width: 2.7rem; height: 2.7rem; font-size: 2rem; }
   .gallery-lightbox-previous { left: 0.45rem; }
   .gallery-lightbox-next { right: 0.45rem; }
+  .policy-toolbar { align-items: flex-start; flex-direction: column; }
+  .policy-frame { height: 68svh; min-height: 28rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
