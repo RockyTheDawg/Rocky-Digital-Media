@@ -193,13 +193,13 @@ main { position: relative; z-index: 1; }
   .hero-panel h1,
   .about-card .about-motto {
     background: linear-gradient(90deg, #d19a6f 0%, #c9897d 28%, #a8b7c5 55%, #d19a6f 78%, #c9897d 100%);
-    background-size: 260% 100%;
+    background-size: 200% 100%;
     background-position: 0% 50%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: aussie-motto-colour-flow 7s ease-in-out infinite alternate;
+    animation: aussie-motto-colour-flow 5.5s ease-in-out infinite alternate;
   }
 }
 .copyright-card p { font-size: 0.76rem; line-height: 1.55; }
