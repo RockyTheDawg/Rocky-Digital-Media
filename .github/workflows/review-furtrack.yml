@@ -1,0 +1,62 @@
+name: Review Furtrack gallery updates
+
+on:
+  schedule:
+    - cron: "41 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: review-furtrack-gallery
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Install browser
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+
+      - name: Check profile-linked Furtrack media
+        run: node scripts/sync-furtrack-profile.mjs
+
+      - name: Open or update review request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPDATE_BRANCH: automation/furtrack-gallery
+        run: |
+          if git diff --quiet -- furtrack-media.js; then
+            echo "Furtrack gallery data is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$UPDATE_BRANCH"
+          git add furtrack-media.js
+          git commit -m "Review Furtrack gallery updates"
+          git push --force --set-upstream origin "$UPDATE_BRANCH"
+
+          if [ "$(gh pr list --head "$UPDATE_BRANCH" --state open --json number --jq length)" = "0" ]; then
+            gh pr create \
+              --base main \
+              --head "$UPDATE_BRANCH" \
+              --title "Review Furtrack gallery updates" \
+              --body "Daily review of public media connected only through photography tags exposed by the RockyTheDog Furtrack profile. Merge only after checking the proposed gallery changes."
+          else
+            echo "The existing Furtrack review request was updated."
+          fi

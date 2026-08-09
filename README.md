@@ -45,7 +45,7 @@ At the end of the day, that’s what Rocky Digital Media is about:
 
 ## Gallery
 
-The Rocky Digital Media gallery features selected public photography tagged with `photographer:rockythedog`.
+The Rocky Digital Media gallery features selected public photography connected through photo/media tags listed on the `RockyTheDog` Furtrack profile.
 
 ## What’s Next?
 

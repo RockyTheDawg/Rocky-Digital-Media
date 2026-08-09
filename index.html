@@ -26,7 +26,8 @@
     </section>
 
     <section class="panel booking-panel" id="booking" data-tab-panel="booking" aria-labelledby="booking-title">
-      <form class="booking-form" id="booking-form">
+      <form class="booking-form" id="booking-form" action="https://formspree.io/f/xojoqobk" method="POST">
+        <input type="hidden" name="_subject" value="New Rocky Digital Media booking request">
         <header class="booking-heading">
           <p class="eyebrow">Convention photography</p>
           <h2 id="booking-title">Booking</h2>
@@ -41,6 +42,11 @@
           <label>
             <span>Fursona name</span>
             <input type="text" name="fursonaName" autocomplete="nickname" required>
+          </label>
+
+          <label>
+            <span>Email address</span>
+            <input type="email" name="email" autocomplete="email" required>
           </label>
 
           <label>
@@ -115,11 +121,16 @@
             </select>
           </label>
 
-          <label>
+          <label class="form-wide">
             <span>Convention</span>
             <select name="convention" id="convention-select" required>
               <option value="" selected disabled>Select a convention</option>
             </select>
+          </label>
+
+          <label class="form-wide">
+            <span>Session ideas or notes</span>
+            <textarea name="message" rows="4" placeholder="Tell me what kind of photos you’re interested in."></textarea>
           </label>
         </div>
 
@@ -127,8 +138,8 @@
           Choose a convention to see its dates and location.
         </div>
 
-        <button class="submit-button" type="submit">Prepare booking request</button>
-        <p class="form-note">Past and canceled conventions are removed automatically. Request delivery will be connected after the booking inbox is selected.</p>
+        <button class="submit-button" id="booking-submit" type="submit">Send booking request</button>
+        <p class="form-note">Past and canceled conventions are removed automatically. By submitting, your answers are sent to Rocky Digital Media through Formspree.</p>
         <output class="form-output" id="booking-output" aria-live="polite"></output>
 
         <p class="calendar-credit">Convention choices located in the 50 U.S. states for 2026 and 2027, checked August 8, 2026 using <a href="https://furrycons.com/calendar/" target="_blank" rel="noreferrer">FurryCons.com</a>.</p>
@@ -140,7 +151,7 @@
       <header class="gallery-heading">
         <p class="eyebrow">Furtrack</p>
         <h2 id="gallery-title">Gallery</h2>
-        <p>Photos publicly tagged to photographer <strong>rockythedog</strong>.</p>
+        <p>Photos from media tags connected to the <strong>RockyTheDog</strong> Furtrack profile.</p>
       </header>
 
       <div class="furtrack-grid" id="furtrack-grid" aria-label="RockyTheDog photos on Furtrack"></div>
@@ -247,10 +258,12 @@
             <span><strong>Furtrack</strong><small>RockyTheDog photography</small></span>
             <span aria-hidden="true">↗</span>
           </a>
-          <a class="social-link" href="https://buymeacoffee.com/rockythedog" target="_blank" rel="noreferrer">
-            <span><strong>Buy Me a Coffee</strong><small>Support Rocky</small></span>
-            <span aria-hidden="true">↗</span>
-          </a>
+          <div class="social-link social-placeholder" aria-label="Social link coming soon">
+            <span><strong>Coming soon</strong><small>Future social link</small></span>
+          </div>
+          <div class="social-link social-placeholder" aria-label="Social link coming soon">
+            <span><strong>Coming soon</strong><small>Future social link</small></span>
+          </div>
         </nav>
       </div>
     </section>

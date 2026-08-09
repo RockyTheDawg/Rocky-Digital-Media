@@ -4,6 +4,7 @@ const bookingForm = document.querySelector("#booking-form");
 const conventionSelect = document.querySelector("#convention-select");
 const conventionDetails = document.querySelector("#convention-details");
 const bookingOutput = document.querySelector("#booking-output");
+const bookingSubmit = document.querySelector("#booking-submit");
 const creditsTrigger = document.querySelector("#credits-trigger");
 const creditsPanel = document.querySelector("#credits-panel");
 const creditsClose = document.querySelector("#credits-close");
@@ -144,30 +145,44 @@ conventionSelect?.addEventListener("change", () => {
   `;
 });
 
-bookingForm?.addEventListener("submit", (event) => {
+bookingForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!bookingForm.checkValidity()) {
     bookingForm.reportValidity();
     return;
   }
 
-  const data = new FormData(bookingForm);
-  const convention = getSelectedConvention();
+  const originalButtonText = bookingSubmit?.textContent;
+  bookingSubmit?.setAttribute("disabled", "");
+  if (bookingSubmit) bookingSubmit.textContent = "Sending…";
+  bookingOutput?.classList.remove("error");
 
-  bookingOutput.innerHTML = `
-    <strong>Booking draft ready</strong>
-    <span>First name: ${escapeHtml(data.get("firstName"))}</span>
-    <span>Fursona: ${escapeHtml(data.get("fursonaName"))}</span>
-    <span>Species: ${escapeHtml(data.get("species"))}</span>
-    <span>Convention: ${escapeHtml(convention?.name || "")}</span>
-  `;
+  try {
+    const response = await fetch(bookingForm.action, {
+      method: bookingForm.method,
+      body: new FormData(bookingForm),
+      headers: { Accept: "application/json" }
+    });
+
+    if (!response.ok) throw new Error("Formspree did not accept the request.");
+
+    bookingOutput.innerHTML = `
+      <strong>Booking request sent!</strong>
+      <span>Thank you—Rocky Digital Media received your answers and can reply using the email you provided.</span>
+    `;
+    bookingForm.reset();
+    if (conventionDetails) conventionDetails.textContent = "Choose a convention to see its dates and location.";
+  } catch {
+    bookingOutput?.classList.add("error");
+    bookingOutput.innerHTML = `
+      <strong>Request not sent</strong>
+      <span>Please check your connection and try again.</span>
+    `;
+  } finally {
+    bookingSubmit?.removeAttribute("disabled");
+    if (bookingSubmit) bookingSubmit.textContent = originalButtonText || "Send booking request";
+  }
 });
-
-function escapeHtml(value) {
-  const element = document.createElement("span");
-  element.textContent = String(value ?? "");
-  return element.innerHTML;
-}
 
 function buildFurtrackGallery() {
   if (!furtrackGrid || !Array.isArray(window.rockyFurtrackMedia)) return;
