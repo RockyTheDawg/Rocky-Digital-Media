@@ -26,6 +26,7 @@ const aboutPanel = document.querySelector("#about");
 const policyViewport = document.querySelector("#policy-viewport");
 const policyDocument = document.querySelector("#policy-document");
 const policyPages = [...document.querySelectorAll(".policy-page")];
+const policyZoomControls = document.querySelector("#policy-zoom-controls");
 const policyZoomOut = document.querySelector("#policy-zoom-out");
 const policyZoomIn = document.querySelector("#policy-zoom-in");
 const policyZoomLevel = document.querySelector("#policy-zoom-level");
@@ -36,6 +37,7 @@ let lastAboutScrollPosition = 0;
 let aboutScrollFrame = null;
 let policyZoomIndex = 0;
 let policyResizeFrame = null;
+let lastPolicyWheelTime = 0;
 
 const policyZoomSteps = [1, 1.25, 1.5, 1.75, 2];
 
@@ -187,7 +189,7 @@ function scheduleAboutTabsUpdate() {
   aboutScrollFrame = requestAnimationFrame(updateAboutTabsOnScroll);
 }
 
-function updatePolicyZoom() {
+function updatePolicyZoom(anchorX = null) {
   policyResizeFrame = null;
   if (!policyViewport || !policyDocument || policyPages.length === 0) return;
 
@@ -203,8 +205,11 @@ function updatePolicyZoom() {
   const fittedWidth = Math.min(viewportWidth, availableHeight * pageAspectRatio);
   const zoom = policyZoomSteps[policyZoomIndex];
   const pageWidth = fittedWidth * zoom;
-  const previousCentre = policyViewport.scrollWidth > 0
-    ? (policyViewport.scrollLeft + (viewportWidth / 2)) / policyViewport.scrollWidth
+  const anchorPosition = Number.isFinite(anchorX)
+    ? Math.min(viewportWidth, Math.max(0, anchorX))
+    : viewportWidth / 2;
+  const previousAnchor = policyViewport.scrollWidth > 0
+    ? (policyViewport.scrollLeft + anchorPosition) / policyViewport.scrollWidth
     : 0.5;
 
   policyDocument.style.width = `${Math.max(viewportWidth, pageWidth)}px`;
@@ -219,7 +224,7 @@ function updatePolicyZoom() {
   requestAnimationFrame(() => {
     policyViewport.scrollLeft = Math.max(
       0,
-      (previousCentre * policyViewport.scrollWidth) - (policyViewport.clientWidth / 2)
+      (previousAnchor * policyViewport.scrollWidth) - anchorPosition
     );
   });
 }
@@ -229,12 +234,37 @@ function schedulePolicyZoomUpdate() {
   policyResizeFrame = requestAnimationFrame(updatePolicyZoom);
 }
 
-function changePolicyZoom(direction) {
+function changePolicyZoom(direction, anchorX = null) {
   policyZoomIndex = Math.min(
     policyZoomSteps.length - 1,
     Math.max(0, policyZoomIndex + direction)
   );
-  updatePolicyZoom();
+  updatePolicyZoom(anchorX);
+}
+
+function handlePolicyZoomWheel(event) {
+  if (!event.ctrlKey && !event.metaKey) return;
+
+  event.preventDefault();
+  if (event.deltaY === 0) return;
+
+  const currentTime = performance.now();
+  if (currentTime - lastPolicyWheelTime < 120) return;
+  lastPolicyWheelTime = currentTime;
+
+  const viewportBounds = policyViewport.getBoundingClientRect();
+  const pointerPosition = event.clientX - viewportBounds.left;
+  changePolicyZoom(event.deltaY < 0 ? 1 : -1, pointerPosition);
+}
+
+function handlePolicyControlWheel(event) {
+  event.preventDefault();
+  if (event.deltaY === 0) return;
+
+  const currentTime = performance.now();
+  if (currentTime - lastPolicyWheelTime < 120) return;
+  lastPolicyWheelTime = currentTime;
+  changePolicyZoom(event.deltaY < 0 ? 1 : -1);
 }
 
 function activateTab(name, updateHash = true) {
@@ -282,6 +312,8 @@ aboutPanel?.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true 
 tabs?.addEventListener("focusin", showTabs);
 policyZoomOut?.addEventListener("click", () => changePolicyZoom(-1));
 policyZoomIn?.addEventListener("click", () => changePolicyZoom(1));
+policyZoomControls?.addEventListener("wheel", handlePolicyControlWheel, { passive: false });
+policyViewport?.addEventListener("wheel", handlePolicyZoomWheel, { passive: false });
 policyPages.forEach((page) => {
   if (!page.complete) page.addEventListener("load", schedulePolicyZoomUpdate, { once: true });
 });

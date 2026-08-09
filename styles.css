@@ -215,6 +215,7 @@ main { position: relative; z-index: 1; }
 .policy-zoom-controls button:hover:not(:disabled) { background: rgba(255, 250, 241, 0.18); }
 .policy-zoom-controls button:disabled { color: rgba(255, 250, 241, 0.35); cursor: default; }
 .policy-zoom-controls output { min-width: 3.5rem; color: var(--ink); font: 800 0.78rem/1 var(--font-body); text-align: center; }
+.policy-zoom-hint { margin: -0.25rem 0 0; color: var(--muted); font-size: 0.72rem; text-align: center; }
 .policy-viewport {
   width: 100%;
   overflow-x: auto;
