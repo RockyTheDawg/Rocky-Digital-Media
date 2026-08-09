@@ -6,7 +6,7 @@
   --field: rgba(2, 5, 4, 0.42);
   --accent: #f3c66b;
   --font-body: Georgia, "Times New Roman", serif;
-  --font-title: "Comic Sans MS", "Comic Sans", cursive;
+  --font-title: "Bree Serif", Georgia, serif;
   --font-home-title: "Bree Serif", Georgia, serif;
 }
 
@@ -236,6 +236,7 @@ main { position: relative; z-index: 1; }
 .policy-zoom-controls button:disabled { color: rgba(255, 250, 241, 0.35); cursor: default; }
 .policy-zoom-controls output { min-width: 3.5rem; color: var(--ink); font: 800 0.78rem/1 var(--font-body); text-align: center; }
 .policy-zoom-hint { margin: -0.25rem 0 0; color: var(--muted); font-size: 0.72rem; text-align: center; }
+.policy-pinch-hint { display: none; margin: 0; color: var(--muted); font-size: 0.78rem; text-align: center; }
 .policy-viewport {
   width: 100%;
   overflow-x: auto;
@@ -352,6 +353,12 @@ select option, select optgroup { color: var(--ink); background: #121716; }
   .gallery-lightbox { padding-inline: clamp(3rem, 7vw, 5rem); }
   .policy-zoom-controls button { width: 2.75rem; height: 2.75rem; }
   .credits-trigger { min-height: 2.75rem; padding: 0.65rem; }
+}
+
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .policy-zoom-controls, .policy-zoom-hint { display: none; }
+  .policy-pinch-hint { display: block; }
+  .policy-viewport { touch-action: pan-x pan-y pinch-zoom; }
 }
 
 @media (max-width: 720px) {
