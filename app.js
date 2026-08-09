@@ -180,10 +180,14 @@ function keepActiveTabVisible(link, behaviour = "auto") {
   const targetPosition = Math.min(maximumScroll, Math.max(0, centredPosition));
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  tabs.scrollTo({
-    left: targetPosition,
-    behavior: prefersReducedMotion ? "auto" : behaviour
-  });
+  try {
+    tabs.scrollTo({
+      left: targetPosition,
+      behavior: prefersReducedMotion ? "auto" : behaviour
+    });
+  } catch (error) {
+    tabs.scrollLeft = targetPosition;
+  }
 }
 
 function updateAutoHideTabsOnScroll() {
@@ -407,12 +411,14 @@ function parseConventionEndDate(dateRange) {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  const year = Number(dateRange.match(/,\s*(\d{4})$/)?.[1]);
+  const yearMatch = dateRange.match(/,\s*(\d{4})$/);
+  const year = Number(yearMatch ? yearMatch[1] : 0);
   const months = dateRange.match(new RegExp(monthNames.join("|"), "g"));
   const dateWithoutYear = dateRange.replace(/,\s*\d{4}$/, "");
-  const days = [...dateWithoutYear.matchAll(/\d+/g)].map((match) => Number(match[0]));
-  const monthIndex = monthNames.indexOf(months?.at(-1));
-  const finalDay = days.at(-1);
+  const days = (dateWithoutYear.match(/\d+/g) || []).map((day) => Number(day));
+  const finalMonth = months && months.length > 0 ? months[months.length - 1] : "";
+  const monthIndex = monthNames.indexOf(finalMonth);
+  const finalDay = days.length > 0 ? days[days.length - 1] : 0;
 
   if (!year || monthIndex < 0 || !finalDay) return null;
   return new Date(year, monthIndex, finalDay, 23, 59, 59, 999);
