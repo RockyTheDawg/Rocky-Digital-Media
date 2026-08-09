@@ -47,9 +47,12 @@ button, input, select, textarea { font: inherit; }
   border-radius: 999px;
   background: rgba(13, 16, 15, 0.84);
   transform: translateX(-50%);
+  transition: transform 220ms ease;
   box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(16px);
+  will-change: transform;
 }
+.tabs.about-scroll-hidden { transform: translate(-50%, calc(-100% - 2rem)); }
 .tab {
   min-height: 2.15rem;
   display: grid;

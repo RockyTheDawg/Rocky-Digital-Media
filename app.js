@@ -21,9 +21,13 @@ const galleryLightboxCounter = document.querySelector("#gallery-lightbox-counter
 const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
 const galleryLightboxPrevious = document.querySelector("#gallery-lightbox-previous");
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
+const tabs = document.querySelector(".tabs");
+const aboutPanel = document.querySelector("#about");
 const faqQuestions = [...document.querySelectorAll(".faq-question")];
 let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
+let lastAboutScrollPosition = 0;
+let aboutScrollFrame = null;
 
 const formConfirmations = {
   booking: {
@@ -140,6 +144,39 @@ function resetSubmittedForm(tabName) {
   }
 }
 
+function getAboutScrollPosition() {
+  return Math.max(window.scrollY, aboutPanel?.scrollTop || 0);
+}
+
+function showTabs() {
+  tabs?.classList.remove("about-scroll-hidden");
+}
+
+function updateAboutTabsOnScroll() {
+  aboutScrollFrame = null;
+
+  if (!aboutPanel?.classList.contains("active")) {
+    showTabs();
+    return;
+  }
+
+  const currentPosition = getAboutScrollPosition();
+  const scrollDifference = currentPosition - lastAboutScrollPosition;
+
+  if (currentPosition <= 24 || scrollDifference < -2) {
+    showTabs();
+  } else if (scrollDifference > 2) {
+    tabs?.classList.add("about-scroll-hidden");
+  }
+
+  lastAboutScrollPosition = currentPosition;
+}
+
+function scheduleAboutTabsUpdate() {
+  if (aboutScrollFrame !== null) return;
+  aboutScrollFrame = requestAnimationFrame(updateAboutTabsOnScroll);
+}
+
 function activateTab(name, updateHash = true) {
   const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
   const previousName = panels.find((panel) => panel.classList.contains("active"))?.dataset.tabPanel;
@@ -166,6 +203,8 @@ function activateTab(name, updateHash = true) {
     history.replaceState(null, "", `#${validName}`);
   }
 
+  showTabs();
+  lastAboutScrollPosition = validName === "about" ? getAboutScrollPosition() : 0;
 }
 
 tabLinks.forEach((link) => {
@@ -176,6 +215,9 @@ tabLinks.forEach((link) => {
 });
 
 window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
+window.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true });
+aboutPanel?.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true });
+tabs?.addEventListener("focusin", showTabs);
 activateTab(location.hash.slice(1) || "home", false);
 
 function buildConventionOptions() {
