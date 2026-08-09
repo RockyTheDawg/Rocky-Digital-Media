@@ -1,87 +1,48 @@
-# Rocky Digital Media!
+# Rocky Digital Media
 
-### Furry Convention Photography
+### Furry Convention Photography & Digital Media
 
-Hey! I'm **Rocky**, the creator of **Rocky Digital Media** — a furry-owned photography and digital media project focused on capturing the people, fursuits, creativity, and unforgettable moments that make conventions special!
+Rocky Digital Media is a **furry-owned photography project** focused on capturing the people, fursuits, creativity, and memorable moments that make conventions special.
 
-**Furry Owned & Operated**
-
-**Convention & Fursuit Photography**
-
-**Developer & Digital Creator**
+**Furry Owned & Operated** · **Convention Photography** · **Fursuit Portraits** · **Digital Creator**
 
 ---
 
-## About Rocky Digital Media
+## About
 
-**Rocky Digital Media** was created from my interest in photography, technology, and the furry community.
-
-My goal is to capture memorable moments at furry conventions — from fursuit photos and portraits to unforgettable convention moments — while creating a welcoming and comfortable photography experience for everyone!
-
-Whether you're showing off a new suit, attending your first convention, hanging out with friends, or just want a great photo to remember the weekend, I want to help capture it.
-
----
+Created by **Rocky** from a love of photography, technology, and the furry community. Every session is designed to feel welcoming, comfortable, and memorable—whether it is your first convention, a new suit reveal, or time spent with friends.
 
 ## Photography
 
-Some of the things I'm interested in photographing include:
+- Fursuit and character portraits
+- Convention and event coverage
+- Group photos and candid moments
+- Outdoor and location sessions
 
-* Fursuit Photography
-* Furry Conventions
-* Portrait Photography
-* Group Photos
-* Convention & Event Photography
-* Outdoor / Location Photography
+I am continuing to develop my photography skills, experiment with new visual styles, and grow the Rocky Digital Media portfolio.
 
-I'm continuing to grow my photography skills, experiment with new styles, and build my portfolio through Rocky Digital Media.
+## Community
 
----
-
-## The Furry Community
-
-Rocky Digital Media is proudly **furry-owned**.
-
-The furry community is filled with artists, makers, performers, photographers, developers, and incredibly creative people.
-
-My goal is for Rocky Digital Media to contribute to that community by documenting the moments and people that make conventions memorable.
+Rocky Digital Media is proudly furry-owned and focused on documenting the artists, makers, performers, and friends who bring conventions to life.
 
 **Creativity. Community. Memories.**
 
----
+## Currently Building
 
-## What I'm Working On
+- A growing convention photography portfolio
+- More convention and community coverage
+- New photography and digital media projects
 
-* Building the Rocky Digital Media photography portfolio
-* Expanding into more furry convention photography
-* Developing Rocky Digital Media's online presence
-* Experimenting with photography and digital media
-* Hopefully photographing more conventions in the future
+## Gallery
 
----
+The website gallery displays selected public photos tagged to `photographer:rockythedog` without profile or post links.
 
-## Rocky Digital Media
+## Website
 
-Interested in photography at a convention, collaborating on a project, or just checking out my work?
+[www.rockydigitalmedia.com](https://www.rockydigitalmedia.com/)
 
-Head over to my live website below
-
-## Furtrack Gallery
-
-The website gallery shows the public photos currently visible under the `photographer:rockythedog` tag without adding profile or post links.
-
----
-
-# Live Website!
-
-https://www.rockydigitalmedia.com/
-
----
-
-# Contacts
-
-Email me at 
 ---
 
 ### See you at the next con!
 
-> This site is not up for sale, ownership transfer, or trade in any way! Report any unauthorized copies or infringement to GitHub, as this is not allowed!
+> This site is not for sale, ownership transfer, or trade. Please report unauthorized copies or infringement to GitHub.
