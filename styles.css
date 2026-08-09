@@ -87,7 +87,7 @@ main { position: relative; z-index: 1; }
   margin: 0;
   color: #d19a6f;
   font-family: var(--font-home-title);
-  font-size: clamp(3.25rem, 7vw, 6rem);
+  font-size: clamp(3rem, 6.25vw, 5.4rem);
   font-weight: 400;
   line-height: 0.92;
   letter-spacing: -0.025em;
