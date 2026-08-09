@@ -147,6 +147,11 @@
 
     <section class="panel faq-panel" id="faq" data-tab-panel="faq" aria-label="Frequently asked questions">
       <div class="faq-shell">
+        <header class="faq-heading">
+          <h2>Frequently Asked Questions</h2>
+          <p>You can find answers to commonly asked questions here. If you don’t see your question, feel free to email us!</p>
+        </header>
+
         <div class="faq-list">
           <article class="faq-item">
             <h3>
@@ -225,45 +230,42 @@
     <section class="panel gallery-panel" id="gallery" data-tab-panel="gallery" aria-label="Gallery">
       <div class="furtrack-grid" id="furtrack-grid" aria-label="Gallery photographs"></div>
       <p class="gallery-disclaimer">These photos were taken and are managed by RockyTheDog through Furtrack.</p>
+
+      <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Expanded gallery photograph" hidden>
+        <button class="gallery-lightbox-close" id="gallery-lightbox-close" type="button" aria-label="Close expanded photograph">&times;</button>
+        <button class="gallery-lightbox-arrow gallery-lightbox-previous" id="gallery-lightbox-previous" type="button" aria-label="View previous photograph">&#8249;</button>
+        <figure class="gallery-lightbox-stage">
+          <img id="gallery-lightbox-image" src="" alt="" draggable="false">
+          <span class="gallery-lightbox-watermark" aria-hidden="true">© Rocky Digital Media</span>
+          <span class="gallery-lightbox-copyright" aria-hidden="true">© Rocky Digital Media</span>
+          <figcaption id="gallery-lightbox-counter" aria-live="polite"></figcaption>
+        </figure>
+        <button class="gallery-lightbox-arrow gallery-lightbox-next" id="gallery-lightbox-next" type="button" aria-label="View next photograph">&#8250;</button>
+      </div>
     </section>
     <section class="panel about-panel" id="about" data-tab-panel="about" aria-label="About">
       <article class="about-shell">
-        <header class="about-intro about-reveal" style="--reveal-order: 0">
+        <header class="about-intro">
           <p class="about-lead"><strong>Hey! I’m Rocky, the photographer and creator behind Rocky Digital Media.</strong></p>
           <p class="about-summary">Rocky Digital Media is a furry-owned and operated photography and digital media project that grew from my love for photography, technology, and the furry community. I created it to capture the people, fursuits, creativity, friendships, and unforgettable moments that make conventions so special.</p>
           <p class="about-summary">For me, photography isn’t just about getting a good picture. It’s about capturing a moment and giving someone something they can look back on and remember.</p>
-          <ul class="about-highlights" aria-label="Rocky Digital Media highlights">
-            <li>Furry-Owned &amp; Operated</li>
-            <li>Convention Photography</li>
-            <li>Fursuit Portraits</li>
-            <li>Digital Creator</li>
-          </ul>
         </header>
 
         <div class="about-grid">
-          <section class="about-card about-reveal" style="--reveal-order: 1">
-            <p class="card-number" aria-hidden="true">01</p>
+          <section class="about-card">
             <h3>Behind the Camera</h3>
             <p>Everyone is camera shy at some point, so why not step into the spotlight and share your memories with friends—whether you just met or have been lifelong friends?</p>
             <p>Whether it’s your first convention, your second, or you’ve attended enough to lose count, my goal is to capture photos that feel genuine to you and your character—whether you’re showing off your fursuit, taking photos with friends, or simply being part of a group.</p>
             <p>I’m always improving my photography, trying new styles and techniques, and learning from every convention and session. Rocky Digital Media is still growing, and I’m excited to see where photography takes it next.</p>
           </section>
 
-          <section class="about-card about-reveal" style="--reveal-order: 2">
-            <p class="card-number" aria-hidden="true">02</p>
+          <section class="about-card">
             <h3>What I Photograph</h3>
-            <p>My photography currently focuses on:</p>
-            <ul class="service-list">
-              <li>Fursuit portraits</li>
-              <li>Convention coverage</li>
-              <li>Group photos</li>
-              <li>Outdoor and location sessions at conventions I attend</li>
-            </ul>
+            <p>My photography currently focuses on fursuit portraits, convention coverage, group photos, and outdoor or location sessions at conventions I attend.</p>
             <p>As Rocky Digital Media grows, I hope to photograph more conventions, meet more people throughout the community, and continue experimenting with new photography and digital media projects.</p>
           </section>
 
-          <section class="about-card about-reveal" style="--reveal-order: 3">
-            <p class="card-number" aria-hidden="true">03</p>
+          <section class="about-card">
             <h3>Part of the Community</h3>
             <p>Rocky Digital Media is proudly furry-owned and operated.</p>
             <p>One of my favorite things about the furry community is the creativity behind it. Artists, makers, performers, fursuiters, photographers, creators, and friends all help make conventions what they are.</p>
@@ -272,28 +274,18 @@
             <p class="about-motto">Creativity. Community. Memories.</p>
           </section>
 
-          <section class="about-card about-reveal" style="--reveal-order: 4">
-            <p class="card-number" aria-hidden="true">04</p>
+          <section class="about-card">
             <h3>Gallery</h3>
             <p>The Rocky Digital Media gallery features selected public photography tagged with <strong>photographer:rockythedog</strong>.</p>
           </section>
 
-          <section class="about-card about-reveal" style="--reveal-order: 5">
-            <p class="card-number" aria-hidden="true">05</p>
+          <section class="about-card">
             <h3>What’s Next?</h3>
-            <p>Rocky Digital Media is continuing to grow. Right now, I’m focused on:</p>
-            <ul>
-              <li>Building a larger convention photography portfolio</li>
-              <li>Photographing more conventions and community events</li>
-              <li>Exploring new photography styles and techniques</li>
-              <li>Creating new photography and digital media projects</li>
-              <li>Continuing to grow and improve as a photographer</li>
-            </ul>
+            <p>Rocky Digital Media is continuing to grow. Right now, I’m focused on building a larger convention photography portfolio, photographing more conventions and community events, exploring new styles and techniques, creating new digital media projects, and continuing to improve as a photographer.</p>
             <p>There’s plenty more to come, and I’m looking forward to capturing more memories along the way.</p>
           </section>
 
-          <section class="about-card copyright-card about-reveal" style="--reveal-order: 6">
-            <p class="card-number" aria-hidden="true">06</p>
+          <section class="about-card copyright-card">
             <h3>Copyright &amp; Ownership</h3>
             <p><strong>© Rocky Digital Media. All rights reserved.</strong></p>
             <p>Rocky Digital Media, this website, and its original content are not offered for sale, ownership transfer, or trade.</p>
@@ -302,7 +294,7 @@
           </section>
         </div>
 
-        <footer class="about-closing about-reveal" style="--reveal-order: 7">
+        <footer class="about-closing">
           <p>There are plenty more memories ahead.</p>
           <strong>See you at the next con!</strong>
         </footer>
@@ -323,7 +315,7 @@
       </div>
     </section>
     <section class="panel contact-panel" id="contact" data-tab-panel="contact" aria-label="Contact">
-      <form class="contact-form" id="contact-form" action="https://formspree.io/f/xojoqobk" method="post">
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/xwlelkke" method="post">
         <input type="hidden" name="_subject" value="New Rocky Digital Media contact message">
         <input type="hidden" name="formType" value="Contact page message">
 

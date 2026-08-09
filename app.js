@@ -15,13 +15,56 @@ const creditsTrigger = document.querySelector("#credits-trigger");
 const creditsPanel = document.querySelector("#credits-panel");
 const creditsClose = document.querySelector("#credits-close");
 const furtrackGrid = document.querySelector("#furtrack-grid");
+const galleryLightbox = document.querySelector("#gallery-lightbox");
+const galleryLightboxImage = document.querySelector("#gallery-lightbox-image");
+const galleryLightboxCounter = document.querySelector("#gallery-lightbox-counter");
+const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
+const galleryLightboxPrevious = document.querySelector("#gallery-lightbox-previous");
+const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 const aboutPanel = document.querySelector("#about");
-const aboutRevealItems = [...document.querySelectorAll(".about-reveal")];
+const aboutRevealItems = aboutPanel
+  ? [...aboutPanel.querySelectorAll(".about-intro > *, .about-card > *, .about-closing > *")]
+  : [];
 const faqQuestions = [...document.querySelectorAll(".faq-question")];
 let aboutRevealObserver;
+let activeGalleryIndex = 0;
+let lastGalleryTrigger = null;
+
+aboutRevealItems.forEach((item, index) => {
+  item.classList.add("about-reveal");
+  item.style.setProperty("--reveal-order", String(index % 3));
+});
+
+function resetSubmittedForm(tabName) {
+  if (tabName === "booking" && bookingForm?.dataset.submitted === "true") {
+    bookingForm.reset();
+    delete bookingForm.dataset.submitted;
+    updateContactDetailField();
+    if (bookingOutput) bookingOutput.innerHTML = "";
+    bookingOutput?.classList.remove("error");
+    bookingSubmit?.removeAttribute("disabled");
+    if (bookingSubmit) bookingSubmit.textContent = "Send booking request";
+  }
+
+  if (tabName === "contact" && contactForm?.dataset.submitted === "true") {
+    contactForm.reset();
+    delete contactForm.dataset.submitted;
+    if (contactOutput) contactOutput.innerHTML = "";
+    contactOutput?.classList.remove("error");
+    contactSubmit?.removeAttribute("disabled");
+    if (contactSubmit) contactSubmit.textContent = "Send message";
+  }
+}
 
 function activateTab(name, updateHash = true) {
   const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
+  const previousName = panels.find((panel) => panel.classList.contains("active"))?.dataset.tabPanel;
+
+  if (previousName && previousName !== validName) {
+    resetSubmittedForm(previousName);
+  }
+
+  if (validName !== "gallery") closeGalleryLightbox(false);
 
   panels.forEach((panel) => {
     const active = panel.dataset.tabPanel === validName;
@@ -66,6 +109,8 @@ function initializeAboutReveal() {
 
 function restartAboutReveal() {
   if (!aboutRevealObserver) return;
+
+  if (aboutPanel) aboutPanel.scrollTop = 0;
 
   aboutRevealItems.forEach((item) => {
     item.classList.remove("is-visible");
@@ -190,9 +235,10 @@ bookingForm?.addEventListener("submit", async (event) => {
   bookingSubmit?.setAttribute("disabled", "");
   if (bookingSubmit) bookingSubmit.textContent = "Sending…";
   bookingOutput?.classList.remove("error");
+  delete bookingForm.dataset.submitted;
 
   try {
-    const response = await fetch("https://formspree.io/f/xojoqobk", {
+    const response = await fetch(bookingForm.action, {
       method: "POST",
       body: new FormData(bookingForm),
       headers: { Accept: "application/json" }
@@ -200,12 +246,11 @@ bookingForm?.addEventListener("submit", async (event) => {
 
     if (!response.ok) throw new Error("Formspree did not accept the request.");
 
+    bookingForm.dataset.submitted = "true";
     bookingOutput.innerHTML = `
       <strong>Booking request sent!</strong>
       <span>Thanks! Rocky Digital Media will contact you using your selected method.</span>
     `;
-    bookingForm.reset();
-    updateContactDetailField();
   } catch {
     bookingOutput?.classList.add("error");
     bookingOutput.innerHTML = `
@@ -213,8 +258,13 @@ bookingForm?.addEventListener("submit", async (event) => {
       <span>Please check your connection and try again.</span>
     `;
   } finally {
-    bookingSubmit?.removeAttribute("disabled");
-    if (bookingSubmit) bookingSubmit.textContent = originalButtonText || "Send booking request";
+    if (bookingForm.dataset.submitted === "true") {
+      bookingSubmit?.setAttribute("disabled", "");
+      if (bookingSubmit) bookingSubmit.textContent = "Submitted";
+    } else {
+      bookingSubmit?.removeAttribute("disabled");
+      if (bookingSubmit) bookingSubmit.textContent = originalButtonText || "Send booking request";
+    }
   }
 });
 
@@ -229,9 +279,10 @@ contactForm?.addEventListener("submit", async (event) => {
   contactSubmit?.setAttribute("disabled", "");
   if (contactSubmit) contactSubmit.textContent = "Sending…";
   contactOutput?.classList.remove("error");
+  delete contactForm.dataset.submitted;
 
   try {
-    const response = await fetch("https://formspree.io/f/xojoqobk", {
+    const response = await fetch(contactForm.action, {
       method: "POST",
       body: new FormData(contactForm),
       headers: { Accept: "application/json" }
@@ -239,11 +290,11 @@ contactForm?.addEventListener("submit", async (event) => {
 
     if (!response.ok) throw new Error("Formspree did not accept the message.");
 
+    contactForm.dataset.submitted = "true";
     contactOutput.innerHTML = `
       <strong>Message sent!</strong>
       <span>Thanks for reaching out. Rocky Digital Media will reply to the email address you provided.</span>
     `;
-    contactForm.reset();
   } catch {
     contactOutput?.classList.add("error");
     contactOutput.innerHTML = `
@@ -251,8 +302,13 @@ contactForm?.addEventListener("submit", async (event) => {
       <span>Please check your connection and try again.</span>
     `;
   } finally {
-    contactSubmit?.removeAttribute("disabled");
-    if (contactSubmit) contactSubmit.textContent = originalButtonText || "Send message";
+    if (contactForm.dataset.submitted === "true") {
+      contactSubmit?.setAttribute("disabled", "");
+      if (contactSubmit) contactSubmit.textContent = "Submitted";
+    } else {
+      contactSubmit?.removeAttribute("disabled");
+      if (contactSubmit) contactSubmit.textContent = originalButtonText || "Send message";
+    }
   }
 });
 
@@ -263,19 +319,98 @@ function buildFurtrackGallery() {
     const card = document.createElement("figure");
     card.className = "furtrack-card";
 
+    const openButton = document.createElement("button");
+    openButton.className = "furtrack-open";
+    openButton.type = "button";
+    openButton.setAttribute("aria-label", `Expand gallery photograph ${index + 1}`);
+
     const photo = document.createElement("img");
     photo.src = media.thumbnail;
     photo.alt = `Gallery photograph ${index + 1}`;
     photo.loading = "lazy";
     photo.decoding = "async";
+    photo.draggable = false;
 
-    card.appendChild(photo);
+    const watermark = document.createElement("span");
+    watermark.className = "furtrack-watermark";
+    watermark.textContent = "© Rocky Digital Media";
+    watermark.setAttribute("aria-hidden", "true");
+
+    photo.addEventListener("error", () => {
+      card.classList.add("load-error");
+      photo.alt = `Gallery photograph ${index + 1} is temporarily unavailable`;
+    });
+
+    openButton.addEventListener("click", () => openGalleryLightbox(index, openButton));
+
+    openButton.append(photo, watermark);
+    card.appendChild(openButton);
     furtrackGrid.appendChild(card);
   });
 }
 
+function updateGalleryLightbox(index) {
+  const mediaItems = window.rockyFurtrackMedia || [];
+  if (!galleryLightboxImage || !galleryLightboxCounter || mediaItems.length === 0) return;
+
+  activeGalleryIndex = (index + mediaItems.length) % mediaItems.length;
+  const media = mediaItems[activeGalleryIndex];
+  galleryLightboxImage.src = media.full || media.thumbnail;
+  galleryLightboxImage.alt = `Expanded gallery photograph ${activeGalleryIndex + 1}`;
+  galleryLightboxCounter.textContent = `${activeGalleryIndex + 1} of ${mediaItems.length}`;
+}
+
+function openGalleryLightbox(index, trigger) {
+  if (!galleryLightbox) return;
+
+  lastGalleryTrigger = trigger;
+  updateGalleryLightbox(index);
+  galleryLightbox.hidden = false;
+  document.body.classList.add("lightbox-open");
+  galleryLightboxClose?.focus();
+}
+
+function closeGalleryLightbox(returnFocus = true) {
+  if (!galleryLightbox || galleryLightbox.hidden) return;
+
+  galleryLightbox.hidden = true;
+  document.body.classList.remove("lightbox-open");
+  if (galleryLightboxImage) galleryLightboxImage.src = "";
+  if (returnFocus) lastGalleryTrigger?.focus();
+  lastGalleryTrigger = null;
+}
+
+function moveGalleryLightbox(direction) {
+  updateGalleryLightbox(activeGalleryIndex + direction);
+}
+
 buildConventionOptions();
 buildFurtrackGallery();
+
+galleryLightboxClose?.addEventListener("click", () => closeGalleryLightbox());
+galleryLightboxPrevious?.addEventListener("click", () => moveGalleryLightbox(-1));
+galleryLightboxNext?.addEventListener("click", () => moveGalleryLightbox(1));
+galleryLightbox?.addEventListener("click", (event) => {
+  if (event.target === galleryLightbox) closeGalleryLightbox();
+});
+
+furtrackGrid?.addEventListener("contextmenu", (event) => event.preventDefault());
+galleryLightboxImage?.addEventListener("contextmenu", (event) => event.preventDefault());
+
+document.addEventListener("keydown", (event) => {
+  if (!galleryLightbox || galleryLightbox.hidden) return;
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    moveGalleryLightbox(-1);
+  } else if (event.key === "ArrowRight") {
+    event.preventDefault();
+    moveGalleryLightbox(1);
+  } else if (event.key === "Escape") {
+    event.preventDefault();
+    closeGalleryLightbox();
+  }
+});
 
 faqQuestions.forEach((question) => {
   question.addEventListener("click", () => {
