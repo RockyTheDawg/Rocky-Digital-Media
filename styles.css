@@ -188,15 +188,24 @@ main { position: relative; z-index: 1; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.5rem 0 0; background: transparent; font: 800 0.88rem/1.4 var(--font-body); }
 .about-closing p { margin: 0; color: var(--muted); }
 .about-closing strong { color: var(--accent); white-space: nowrap; }
-.policy-panel { align-items: start; }
-.policy-document { width: min(56rem, 100%); display: grid; gap: clamp(0.75rem, 2vw, 1.25rem); }
-.policy-page {
+.policy-panel { align-items: start; justify-items: center; }
+.policy-document {
   width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin-inline: auto;
+}
+.policy-page {
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 10rem);
   display: block;
   border-radius: 0.35rem;
   background: #fff;
   box-shadow: 0 1.1rem 3rem rgba(0, 0, 0, 0.28);
+  object-fit: contain;
 }
 .booking-panel { align-content: center; }
 .contact-panel { align-content: center; }
