@@ -14,9 +14,9 @@ For me, photography isn’t just about getting a good picture. It’s about capt
 
 ## Behind the Camera
 
-Everyone is camera shy at some point, so why not step into the spotlight and share your memories with friends—whether you just met or have been lifelong friends?
+Everyone is camera-shy at some point, so why not step into the spotlight and share your memories with friends—whether you just met or have been lifelong friends?
 
-Whether it’s your first convention, your second, or enough that you’ve lost count—showing off your fursuit, getting photos with friends, or simply being part of a group—my goal is to capture photos that feel genuine to you and your character.
+Whether it’s your first convention, your second, or you’ve attended enough to lose count, my goal is to capture photos that feel genuine to you and your character—whether you’re showing off your fursuit, taking photos with friends, or simply being part of a group.
 
 I’m always improving my photography, trying new styles and techniques, and learning from every convention and session. Rocky Digital Media is still growing, and I’m excited to see where photography takes it next.
 
@@ -35,17 +35,13 @@ As Rocky Digital Media grows, I hope to photograph more conventions, meet more p
 
 Rocky Digital Media is proudly furry-owned and operated.
 
-One of my favorite things about the furry community is the creativity behind it. Artists, makers, performers, fursuiters, photographers, creators, and friends all help make conventions what they are.
+One of my favourite things about the furry community is the creativity behind it. Artists, makers, performers, fursuiters, photographers, creators, and friends all help make conventions what they are.
 
 Being part of that community gives me the opportunity to photograph it from within—not just the suits and events, but the personalities, friendships, and memories behind them.
 
 At the end of the day, that’s what Rocky Digital Media is about:
 
 **Creativity. Community. Memories.**
-
-## Gallery
-
-The Rocky Digital Media gallery features selected public photography connected through photo/media tags listed on the `RockyTheDog` Furtrack profile.
 
 ## What’s Next?
 
@@ -58,8 +54,6 @@ Rocky Digital Media is continuing to grow. Right now, I’m focused on:
 - Continuing to grow and improve as a photographer
 
 There’s plenty more to come, and I’m looking forward to capturing more memories along the way.
-
-### See you at the next con!
 
 ---
 
