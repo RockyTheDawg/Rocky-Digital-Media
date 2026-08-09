@@ -23,11 +23,21 @@ const galleryLightboxPrevious = document.querySelector("#gallery-lightbox-previo
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 const tabs = document.querySelector(".tabs");
 const aboutPanel = document.querySelector("#about");
+const policyViewport = document.querySelector("#policy-viewport");
+const policyDocument = document.querySelector("#policy-document");
+const policyPages = [...document.querySelectorAll(".policy-page")];
+const policyZoomOut = document.querySelector("#policy-zoom-out");
+const policyZoomIn = document.querySelector("#policy-zoom-in");
+const policyZoomLevel = document.querySelector("#policy-zoom-level");
 const faqQuestions = [...document.querySelectorAll(".faq-question")];
 let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
 let lastAboutScrollPosition = 0;
 let aboutScrollFrame = null;
+let policyZoomIndex = 0;
+let policyResizeFrame = null;
+
+const policyZoomSteps = [1, 1.25, 1.5, 1.75, 2];
 
 const formConfirmations = {
   booking: {
@@ -177,6 +187,56 @@ function scheduleAboutTabsUpdate() {
   aboutScrollFrame = requestAnimationFrame(updateAboutTabsOnScroll);
 }
 
+function updatePolicyZoom() {
+  policyResizeFrame = null;
+  if (!policyViewport || !policyDocument || policyPages.length === 0) return;
+
+  const viewportWidth = policyViewport.clientWidth;
+  if (viewportWidth === 0) return;
+
+  const firstPage = policyPages[0];
+  const pageAspectRatio = firstPage.naturalWidth && firstPage.naturalHeight
+    ? firstPage.naturalWidth / firstPage.naturalHeight
+    : 17 / 22;
+  const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const availableHeight = Math.max(window.innerHeight - (10 * rootFontSize), 240);
+  const fittedWidth = Math.min(viewportWidth, availableHeight * pageAspectRatio);
+  const zoom = policyZoomSteps[policyZoomIndex];
+  const pageWidth = fittedWidth * zoom;
+  const previousCentre = policyViewport.scrollWidth > 0
+    ? (policyViewport.scrollLeft + (viewportWidth / 2)) / policyViewport.scrollWidth
+    : 0.5;
+
+  policyDocument.style.width = `${Math.max(viewportWidth, pageWidth)}px`;
+  policyPages.forEach((page) => {
+    page.style.width = `${pageWidth}px`;
+  });
+
+  if (policyZoomLevel) policyZoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+  if (policyZoomOut) policyZoomOut.disabled = policyZoomIndex === 0;
+  if (policyZoomIn) policyZoomIn.disabled = policyZoomIndex === policyZoomSteps.length - 1;
+
+  requestAnimationFrame(() => {
+    policyViewport.scrollLeft = Math.max(
+      0,
+      (previousCentre * policyViewport.scrollWidth) - (policyViewport.clientWidth / 2)
+    );
+  });
+}
+
+function schedulePolicyZoomUpdate() {
+  if (policyResizeFrame !== null) return;
+  policyResizeFrame = requestAnimationFrame(updatePolicyZoom);
+}
+
+function changePolicyZoom(direction) {
+  policyZoomIndex = Math.min(
+    policyZoomSteps.length - 1,
+    Math.max(0, policyZoomIndex + direction)
+  );
+  updatePolicyZoom();
+}
+
 function activateTab(name, updateHash = true) {
   const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
   const previousName = panels.find((panel) => panel.classList.contains("active"))?.dataset.tabPanel;
@@ -205,6 +265,7 @@ function activateTab(name, updateHash = true) {
 
   showTabs();
   lastAboutScrollPosition = validName === "about" ? getAboutScrollPosition() : 0;
+  if (validName === "policy") requestAnimationFrame(updatePolicyZoom);
 }
 
 tabLinks.forEach((link) => {
@@ -216,8 +277,14 @@ tabLinks.forEach((link) => {
 
 window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
 window.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true });
+window.addEventListener("resize", schedulePolicyZoomUpdate, { passive: true });
 aboutPanel?.addEventListener("scroll", scheduleAboutTabsUpdate, { passive: true });
 tabs?.addEventListener("focusin", showTabs);
+policyZoomOut?.addEventListener("click", () => changePolicyZoom(-1));
+policyZoomIn?.addEventListener("click", () => changePolicyZoom(1));
+policyPages.forEach((page) => {
+  if (!page.complete) page.addEventListener("load", schedulePolicyZoomUpdate, { once: true });
+});
 activateTab(location.hash.slice(1) || "home", false);
 
 function buildConventionOptions() {

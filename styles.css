@@ -188,7 +188,40 @@ main { position: relative; z-index: 1; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.5rem 0 0; background: transparent; font: 800 0.88rem/1.4 var(--font-body); }
 .about-closing p { margin: 0; color: var(--muted); }
 .about-closing strong { color: var(--accent); white-space: nowrap; }
-.policy-panel { align-items: start; justify-items: center; }
+.policy-panel { align-content: start; align-items: start; justify-items: center; gap: 0.75rem; }
+.policy-zoom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.3rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--glass);
+  box-shadow: 0 0.65rem 2rem rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+}
+.policy-zoom-controls button {
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: rgba(255, 250, 241, 0.1);
+  font-size: 1.25rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+.policy-zoom-controls button:hover:not(:disabled) { background: rgba(255, 250, 241, 0.18); }
+.policy-zoom-controls button:disabled { color: rgba(255, 250, 241, 0.35); cursor: default; }
+.policy-zoom-controls output { min-width: 3.5rem; color: var(--ink); font: 800 0.78rem/1 var(--font-body); text-align: center; }
+.policy-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--accent) rgba(2, 5, 4, 0.3);
+}
 .policy-document {
   width: 100%;
   display: grid;
@@ -199,8 +232,8 @@ main { position: relative; z-index: 1; }
 .policy-page {
   width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: calc(100svh - 10rem);
+  max-width: none;
+  max-height: none;
   display: block;
   border-radius: 0.35rem;
   background: #fff;
