@@ -26,10 +26,9 @@ body {
   background-image:
     linear-gradient(90deg, rgba(40, 16, 9, 0.66), rgba(8, 14, 13, 0.58) 48%, rgba(4, 39, 33, 0.67)),
     linear-gradient(rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.57)),
-    var(--page-background),
     var(--page-background);
-  background-position: center, center, var(--page-background-position), var(--page-background-position);
-  background-size: cover, cover, var(--page-background-size), cover;
+  background-position: center, center, var(--page-background-position);
+  background-size: cover, cover, var(--page-background-size);
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
