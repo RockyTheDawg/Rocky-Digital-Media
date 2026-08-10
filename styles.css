@@ -26,14 +26,15 @@ body {
   background-image:
     linear-gradient(90deg, rgba(40, 16, 9, 0.66), rgba(8, 14, 13, 0.58) 48%, rgba(4, 39, 33, 0.67)),
     linear-gradient(rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.57)),
+    var(--page-background),
     var(--page-background);
-  background-position: center, center, var(--page-background-position);
-  background-size: cover, cover, var(--page-background-size);
+  background-position: center, center, var(--page-background-position), var(--page-background-position);
+  background-size: cover, cover, var(--page-background-size), cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
 body[data-active-tab="home"] { --page-background: url("assets/tab-bg-home.webp"); --page-background-position: center; --page-background-size: cover; }
-body[data-active-tab="booking"] { --page-background: url("assets/tab-bg-booking.webp"); --page-background-position: center 38%; --page-background-size: cover; }
+body[data-active-tab="booking"] { --page-background: url("assets/tab-bg-booking.webp"); --page-background-position: center; --page-background-size: contain; }
 body[data-active-tab="faq"] { --page-background: url("assets/tab-bg-faq.webp"); --page-background-position: center; --page-background-size: contain; }
 body[data-active-tab="gallery"] { --page-background: url("assets/tab-bg-gallery.webp"); --page-background-position: center; --page-background-size: cover; }
 body[data-active-tab="contact"] { --page-background: url("assets/tab-bg-contact.webp"); --page-background-position: center; --page-background-size: contain; }
