@@ -33,27 +33,23 @@ body {
   background-repeat: no-repeat;
 }
 body[data-active-tab="home"] { --page-background: url("assets/tab-bg-home.webp"); --page-background-position: center; --page-background-size: cover; }
-body[data-active-tab="booking"],
-body[data-active-tab="faq"],
-body[data-active-tab="contact"] {
+body[data-active-tab="faq"] {
   background-color: #fff;
   background-image: linear-gradient(#fff, #fff);
 }
-body[data-active-tab="booking"]::before,
-body[data-active-tab="faq"]::before,
-body[data-active-tab="contact"]::before { background: none; }
+body[data-active-tab="faq"]::before { background: none; }
 body[data-active-tab="faq"] .faq-panel {
   --ink: #211a16;
   --muted: rgba(33, 26, 22, 0.74);
   --line: rgba(33, 26, 22, 0.24);
   color: var(--ink);
 }
-body[data-active-tab="booking"] .credits-trigger,
-body[data-active-tab="faq"] .credits-trigger,
-body[data-active-tab="contact"] .credits-trigger { color: #3b302a; }
+body[data-active-tab="faq"] .credits-trigger { color: #3b302a; }
+body[data-active-tab="booking"],
 body[data-active-tab="gallery"],
 body[data-active-tab="policy"],
-body[data-active-tab="about"] { --page-background: linear-gradient(#050505, #050505); --page-background-position: center; --page-background-size: cover; }
+body[data-active-tab="about"],
+body[data-active-tab="contact"] { --page-background: linear-gradient(#050505, #050505); --page-background-position: center; --page-background-size: cover; }
 body::before {
   content: "";
   position: fixed;
