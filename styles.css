@@ -13,17 +13,31 @@
 * { box-sizing: border-box; }
 html { min-height: 100%; -webkit-text-size-adjust: 100%; }
 body {
+  --page-background: url("assets/tab-bg-home.webp");
+  --page-background-position: center;
   min-height: 100vh;
   min-height: 100svh;
   margin: 0;
   color: var(--ink);
   font-family: var(--font-body);
   overflow-x: hidden;
-  background:
+  background-color: #050505;
+  background-image:
     linear-gradient(90deg, rgba(40, 16, 9, 0.66), rgba(8, 14, 13, 0.58) 48%, rgba(4, 39, 33, 0.67)),
     linear-gradient(rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.57)),
-    url("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=2000&q=88") center / cover fixed;
+    var(--page-background);
+  background-position: center, center, var(--page-background-position);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
+body[data-active-tab="home"] { --page-background: url("assets/tab-bg-home.webp"); --page-background-position: center; }
+body[data-active-tab="booking"] { --page-background: url("assets/tab-bg-booking.webp"); --page-background-position: center 38%; }
+body[data-active-tab="faq"] { --page-background: url("assets/tab-bg-faq.webp"); --page-background-position: center 58%; }
+body[data-active-tab="gallery"] { --page-background: url("assets/tab-bg-gallery.webp"); --page-background-position: center; }
+body[data-active-tab="contact"] { --page-background: url("assets/tab-bg-contact.webp"); --page-background-position: center 38%; }
+body[data-active-tab="policy"],
+body[data-active-tab="about"] { --page-background: linear-gradient(#050505, #050505); --page-background-position: center; }
 body::before {
   content: "";
   position: fixed;
@@ -347,6 +361,7 @@ select option, select optgroup { color: var(--ink); background: #121716; }
 .credits-panel button { border: 0; color: var(--ink); background: transparent; font-size: 1.5rem; cursor: pointer; }
 .credits-logo { margin: 0.65rem 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
 .credits-logo strong { padding: 0.06rem 0.2rem; border-radius: 0.2rem; color: #1f4d78; background: #e8eef5; }
+.credits-artists { margin: 0.55rem 0 0; color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
 .credits-copyright { display: block; margin: 0.65rem 0 0; color: var(--muted); font-size: 0.7rem; line-height: 1.5; }
 
 @keyframes panel-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }

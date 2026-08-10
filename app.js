@@ -359,6 +359,8 @@ function activateTab(name, updateHash = true) {
   const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
   const previousName = panels.find((panel) => panel.classList.contains("active"))?.dataset.tabPanel;
 
+  document.body.dataset.activeTab = validName;
+
   if (previousName && previousName !== validName) {
     resetSubmittedForm(previousName);
   }
