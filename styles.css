@@ -33,10 +33,10 @@ body {
   background-repeat: no-repeat;
 }
 body[data-active-tab="home"] { --page-background: url("assets/tab-bg-home.webp"); --page-background-position: center; --page-background-size: cover; }
-body[data-active-tab="booking"] { --page-background: url("assets/tab-bg-booking.webp"); --page-background-position: center; --page-background-size: contain; }
-body[data-active-tab="faq"] { --page-background: url("assets/tab-bg-faq.webp"); --page-background-position: center; --page-background-size: contain; }
 body[data-active-tab="gallery"] { --page-background: url("assets/tab-bg-gallery.webp"); --page-background-position: center; --page-background-size: cover; }
-body[data-active-tab="contact"] { --page-background: url("assets/tab-bg-contact.webp"); --page-background-position: center; --page-background-size: contain; }
+body[data-active-tab="booking"],
+body[data-active-tab="faq"],
+body[data-active-tab="contact"],
 body[data-active-tab="policy"],
 body[data-active-tab="about"] { --page-background: linear-gradient(#050505, #050505); --page-background-position: center; --page-background-size: cover; }
 body::before {
