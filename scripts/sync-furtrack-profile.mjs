@@ -21,17 +21,33 @@ async function collectThumbnailIds(page) {
   return sources.flatMap((source) => source.match(/\/thumb\/(\d+)\.jpg/i)?.[1] ?? []);
 }
 
+async function collectProfileTagPaths(page) {
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    await page.goto(profileUrl, { waitUntil: "domcontentloaded", timeout: 60_000 });
+    try {
+      await page.waitForSelector('a[href^="/index/photographer:"]', { timeout: 30_000 });
+    } catch (error) {
+      if (attempt === 3) return [];
+      await page.waitForTimeout(1_000);
+      continue;
+    }
+
+    const paths = await page.locator('a[href^="/index/photographer:"]').evaluateAll((links) =>
+      [...new Set(links.map((link) => link.getAttribute("href")).filter(Boolean))]
+    );
+    if (paths.length > 0) return paths;
+    await page.waitForTimeout(1_000);
+  }
+
+  return [];
+}
+
 try {
   const context = await browser.newContext({
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140.0 Safari/537.36"
   });
   const page = await context.newPage();
-  await page.goto(profileUrl, { waitUntil: "domcontentloaded", timeout: 60_000 });
-  await page.waitForSelector('a[href^="/index/photographer:"]', { timeout: 30_000 });
-
-  const profileTagPaths = await page.locator('a[href^="/index/photographer:"]').evaluateAll((links) =>
-    [...new Set(links.map((link) => link.getAttribute("href")).filter(Boolean))]
-  );
+  const profileTagPaths = await collectProfileTagPaths(page);
   if (profileTagPaths.length === 0) {
     throw new Error("The RockyTheDog profile exposed no photography media tags; existing gallery data was preserved.");
   }
