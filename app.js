@@ -22,6 +22,7 @@ const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
 const galleryLightboxPrevious = document.querySelector("#gallery-lightbox-previous");
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 const tabs = document.querySelector(".tabs");
+const galleryPanel = document.querySelector("#gallery");
 const aboutPanel = document.querySelector("#about");
 const policyPanel = document.querySelector("#policy");
 const policyViewport = document.querySelector("#policy-viewport");
@@ -33,7 +34,7 @@ const policyZoomOut = document.querySelector("#policy-zoom-out");
 const policyZoomIn = document.querySelector("#policy-zoom-in");
 const policyZoomLevel = document.querySelector("#policy-zoom-level");
 const faqQuestions = [...document.querySelectorAll(".faq-question")];
-const autoHideNavPanels = [aboutPanel, policyPanel].filter(Boolean);
+const autoHideNavPanels = [galleryPanel, aboutPanel, policyPanel].filter(Boolean);
 let activeGalleryIndex = 0;
 let lastGalleryTrigger = null;
 let lastAutoHideScrollPosition = 0;
@@ -355,6 +356,23 @@ function preventPolicyNativeGesture(event) {
   event.preventDefault();
 }
 
+function resetPolicyZoom() {
+  if (policyPinchFrame !== null) {
+    cancelAnimationFrame(policyPinchFrame);
+    policyPinchFrame = null;
+  }
+
+  policyZoom = policyZoomMinimum;
+  policyPinchStartDistance = 0;
+  policyPinchStartZoom = policyZoomMinimum;
+  pendingPolicyPinchZoom = policyZoomMinimum;
+  policyPinchAnchorX = null;
+  if (policyViewport) policyViewport.scrollLeft = 0;
+  if (policyZoomLevel) policyZoomLevel.textContent = "100%";
+  if (policyZoomOut) policyZoomOut.disabled = true;
+  if (policyZoomIn) policyZoomIn.disabled = false;
+}
+
 function activateTab(name, updateHash = true) {
   const validName = panels.some((panel) => panel.dataset.tabPanel === name) ? name : "home";
   const previousName = panels.find((panel) => panel.classList.contains("active"))?.dataset.tabPanel;
@@ -366,6 +384,10 @@ function activateTab(name, updateHash = true) {
   }
 
   if (validName !== "gallery") closeGalleryLightbox(false);
+
+  if (validName === "policy" && previousName !== "policy") {
+    resetPolicyZoom();
+  }
 
   panels.forEach((panel) => {
     const active = panel.dataset.tabPanel === validName;
@@ -387,7 +409,7 @@ function activateTab(name, updateHash = true) {
   }
 
   showTabs();
-  lastAutoHideScrollPosition = ["about", "policy"].includes(validName)
+  lastAutoHideScrollPosition = ["gallery", "about", "policy"].includes(validName)
     ? getAutoHideScrollPosition()
     : 0;
   if (validName === "policy") {

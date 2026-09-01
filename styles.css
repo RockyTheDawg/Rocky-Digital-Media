@@ -32,7 +32,14 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
-body[data-active-tab="home"] { --page-background: url("assets/tab-bg-home.webp"); --page-background-position: center; --page-background-size: cover; }
+body[data-active-tab="home"] {
+  --page-background: url("assets/tab-bg-home.webp");
+  --page-background-position: center;
+  --page-background-size: cover;
+  background-image: var(--page-background);
+  background-position: var(--page-background-position);
+  background-size: var(--page-background-size);
+}
 body[data-active-tab="booking"],
 body[data-active-tab="faq"],
 body[data-active-tab="gallery"],
@@ -50,6 +57,7 @@ body::before {
   pointer-events: none;
   background: radial-gradient(circle at 50% 42%, transparent 0 18rem, rgba(0, 0, 0, 0.18) 54rem);
 }
+body[data-active-tab="home"]::before { background: none; }
 body.lightbox-open { overflow: hidden; }
 body.lightbox-open .gallery-panel { animation: none; transform: none; }
 a { color: inherit; }
@@ -173,6 +181,9 @@ main { position: relative; z-index: 1; }
 .furtrack-watermark { position: absolute; right: 0.45rem; bottom: 0.4rem; padding: 0.2rem 0.35rem; border-radius: 0.25rem; color: rgba(255, 255, 255, 0.88); background: rgba(0, 0, 0, 0.48); font-size: 0.58rem; font-weight: 800; letter-spacing: 0.02em; pointer-events: none; }
 .furtrack-card.load-error::after { content: "Photograph unavailable"; position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem; color: var(--muted); background: var(--glass); text-align: center; pointer-events: none; }
 .gallery-disclaimer { width: min(56rem, 100%); margin: 0; color: rgba(219, 219, 216, 0.68); font: 600 0.73rem/1.5 var(--font-body); text-align: center; }
+.gallery-disclaimer a { color: rgba(255, 250, 241, 0.9); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+.gallery-disclaimer a:hover { color: var(--accent); }
+.gallery-disclaimer a:focus-visible { border-radius: 0.15rem; outline: 2px solid var(--accent); outline-offset: 3px; }
 .gallery-lightbox { position: fixed; z-index: 60; inset: 0; display: grid; place-items: center; padding: 4rem clamp(3.5rem, 8vw, 7rem); background: rgba(3, 6, 5, 0.93); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 .gallery-lightbox-stage { position: relative; margin: 0; display: grid; place-items: center; }
 .gallery-lightbox-stage img { display: block; max-width: min(82vw, 80rem); max-height: 82vh; border: 1px solid var(--line); border-radius: 0.75rem; object-fit: contain; background: #090d0c; box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.45); user-select: none; }
@@ -187,7 +198,7 @@ main { position: relative; z-index: 1; }
 .gallery-lightbox-copyright { position: absolute; z-index: 2; right: 0.75rem; bottom: 2.35rem; padding: 0.3rem 0.45rem; border-radius: 0.3rem; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.55); font-size: 0.7rem; pointer-events: none; user-select: none; }
 .gallery-lightbox-stage figcaption { margin-top: 0.65rem; color: var(--muted); font-size: 0.8rem; text-align: center; }
 
-.about-panel { align-items: start; overflow-y: auto; }
+.about-panel { --muted: rgba(255, 250, 241, 0.86); align-items: start; overflow-y: auto; }
 .about-shell {
   width: min(58rem, 100%);
   display: grid;
@@ -198,14 +209,14 @@ main { position: relative; z-index: 1; }
   padding: clamp(1.2rem, 3vw, 2rem) 0 2rem;
   background: transparent;
 }
-.about-lead { max-width: 52rem; margin: 0.75rem 0 0; color: var(--muted); font: 700 clamp(0.95rem, 2vw, 1.08rem)/1.55 var(--font-body); }
+.about-lead { max-width: 52rem; margin: 0.75rem 0 0; color: var(--muted); font: 700 clamp(1.12rem, 2vw, 1.32rem)/1.6 var(--font-body); }
 .about-lead strong { color: var(--ink); }
-.about-summary { max-width: 64rem; margin: 0.65rem 0 0; color: var(--muted); font: 700 0.9rem/1.58 var(--font-body); }
+.about-summary { max-width: 64rem; margin: 0.8rem 0 0; color: var(--muted); font: 700 clamp(1rem, 1.4vw, 1.08rem)/1.7 var(--font-body); }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
 .about-card { min-height: 0; padding: 1.15rem 0; background: transparent; }
-.about-card h3 { margin: 0 0 0.55rem; color: var(--ink); font-size: 1.15rem; }
-.about-card p, .about-card li { color: var(--muted); font: 700 0.88rem/1.52 var(--font-body); }
-.about-card p { margin: 0 0 0.7rem; }
+.about-card h3 { margin: 0 0 0.65rem; color: var(--ink); font-size: clamp(1.25rem, 2vw, 1.45rem); line-height: 1.3; }
+.about-card p, .about-card li { color: var(--muted); font: 700 clamp(1rem, 1.35vw, 1.07rem)/1.7 var(--font-body); }
+.about-card p { margin: 0 0 0.85rem; }
 .about-card p:last-child { margin-bottom: 0; }
 .about-card strong { color: var(--ink); }
 .about-card .about-motto {
@@ -226,7 +237,7 @@ main { position: relative; z-index: 1; }
     animation: aussie-motto-colour-flow 5.5s ease-in-out infinite alternate;
   }
 }
-.copyright-card p { font-size: 0.76rem; line-height: 1.55; }
+.copyright-card p { font-size: 0.88rem; line-height: 1.65; }
 .about-closing { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.5rem 0 0; background: transparent; font: 800 0.88rem/1.4 var(--font-body); }
 .about-closing p { margin: 0; color: var(--muted); }
 .about-closing strong { color: var(--accent); white-space: nowrap; }
@@ -450,8 +461,8 @@ select option, select optgroup { color: var(--ink); background: #121716; }
   .about-intro { padding: 0.5rem 0 1rem; }
   .about-card { min-height: 0; }
   .about-card { padding: 0.95rem 0; }
-  .about-card p, .about-card li { font-size: 0.94rem; line-height: 1.62; }
-  .copyright-card p { font-size: 0.8rem; }
+  .about-card p, .about-card li { font-size: 1rem; line-height: 1.7; }
+  .copyright-card p { font-size: 0.88rem; line-height: 1.65; }
   .about-closing { align-items: flex-start; flex-direction: column; }
   .gallery-lightbox {
     padding-top: calc(4rem + env(safe-area-inset-top));
