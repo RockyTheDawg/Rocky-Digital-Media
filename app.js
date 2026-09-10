@@ -7,6 +7,9 @@ const bookingSubmit = document.querySelector("#booking-submit");
 const contactForm = document.querySelector("#contact-form");
 const contactOutput = document.querySelector("#contact-output");
 const contactSubmit = document.querySelector("#contact-submit");
+const contactSubject = document.querySelector("#contact-subject");
+const contactOtherSubjectField = document.querySelector("#contact-other-subject-field");
+const contactOtherSubject = document.querySelector("#contact-other-subject");
 const contactMethod = document.querySelector("#contact-method");
 const contactDetailField = document.querySelector("#contact-detail-field");
 const contactDetailLabel = document.querySelector("#contact-detail-label");
@@ -78,6 +81,7 @@ function showFormConfirmation(name) {
 
   confirmation.form.reset();
   if (name === "booking") updateContactDetailField();
+  if (name === "contact") updateContactSubjectField();
   confirmation.form.dataset.submitted = "true";
   confirmation.output.classList.remove("error");
   confirmation.output.innerHTML = confirmation.message;
@@ -159,6 +163,7 @@ function resetSubmittedForm(tabName) {
   if (tabName === "contact" && contactForm?.dataset.submitted === "true") {
     contactForm.reset();
     delete contactForm.dataset.submitted;
+    updateContactSubjectField();
     if (contactOutput) contactOutput.innerHTML = "";
     contactOutput?.classList.remove("error");
     contactSubmit?.removeAttribute("disabled");
@@ -543,6 +548,20 @@ function updateContactDetailField() {
 
 contactMethod?.addEventListener("change", updateContactDetailField);
 updateContactDetailField();
+
+function updateContactSubjectField() {
+  if (!contactOtherSubjectField || !contactOtherSubject) return;
+
+  const needsCustomSubject = contactSubject?.value === "other";
+  contactOtherSubjectField.hidden = !needsCustomSubject;
+  contactOtherSubject.disabled = !needsCustomSubject;
+  contactOtherSubject.required = needsCustomSubject;
+
+  if (!needsCustomSubject) contactOtherSubject.value = "";
+}
+
+contactSubject?.addEventListener("change", updateContactSubjectField);
+updateContactSubjectField();
 restoreFormConfirmation();
 
 bookingForm?.addEventListener("submit", async (event) => {

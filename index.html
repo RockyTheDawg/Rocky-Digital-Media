@@ -365,7 +365,24 @@
 
           <label class="form-wide">
             <span>Subject</span>
-            <input type="text" name="subject" placeholder="What is your message about?" required>
+            <select name="subject" id="contact-subject" required>
+              <option value="" selected disabled>Select a subject</option>
+              <option value="General enquiry">General enquiry</option>
+              <option value="Booking question">Booking question</option>
+              <option value="Existing booking change">Existing booking change</option>
+              <option value="Photography session">Photography session</option>
+              <option value="Convention or event coverage">Convention or event coverage</option>
+              <option value="Photo delivery or editing">Photo delivery or editing</option>
+              <option value="Privacy or photo removal">Privacy or photo removal</option>
+              <option value="Collaboration or business enquiry">Collaboration or business enquiry</option>
+              <option value="Website issue">Website issue</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label class="form-wide" id="contact-other-subject-field" hidden>
+            <span>Other subject</span>
+            <input type="text" id="contact-other-subject" name="otherSubject" placeholder="What is your message about?" disabled required>
           </label>
 
           <label class="form-wide">
@@ -390,6 +407,6 @@
 
   <script src="conventions.js"></script>
   <script src="furtrack-media.js?v=20260810-1"></script>
-  <script src="app.js?v=20260831-1"></script>
+  <script src="app.js?v=20260910-1"></script>
 </body>
 </html>
