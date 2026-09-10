@@ -13,3 +13,13 @@ window.rockyFurtrackMedia = [
   { id: "1745533", thumbnail: "https://orca2.furtrack.com/thumb/1745533.jpg" },
   { id: "1745532", thumbnail: "https://orca2.furtrack.com/thumb/1745532.jpg" }
 ];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryDisclaimer = document.querySelector(".gallery-disclaimer");
+  if (!galleryDisclaimer || document.querySelector(".gallery-device-note")) return;
+
+  const deviceNote = document.createElement("p");
+  deviceNote.className = "gallery-disclaimer gallery-device-note";
+  deviceNote.textContent = "Please note: Some photos may be taken using the fursuiter’s device, while others may be taken using the photographer’s device.";
+  galleryDisclaimer.insertAdjacentElement("afterend", deviceNote);
+});
