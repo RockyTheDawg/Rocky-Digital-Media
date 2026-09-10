@@ -24,10 +24,15 @@ window.rockyFurtrackMedia = [
 
 document.addEventListener("DOMContentLoaded", () => {
   const galleryDisclaimer = document.querySelector(".gallery-disclaimer");
-  if (!galleryDisclaimer || document.querySelector(".gallery-device-note")) return;
+  if (galleryDisclaimer && !document.querySelector(".gallery-device-note")) {
+    const deviceNote = document.createElement("p");
+    deviceNote.className = "gallery-disclaimer gallery-device-note";
+    deviceNote.textContent = "Please note: Some photos may be taken using the fursuiter’s device, while others may be taken using the photographer’s device.";
+    galleryDisclaimer.insertAdjacentElement("afterend", deviceNote);
+  }
 
-  const deviceNote = document.createElement("p");
-  deviceNote.className = "gallery-disclaimer gallery-device-note";
-  deviceNote.textContent = "Please note: Some photos may be taken using the fursuiter’s device, while others may be taken using the photographer’s device.";
-  galleryDisclaimer.insertAdjacentElement("afterend", deviceNote);
+  const contactNameInput = document.querySelector('#contact-form input[name="name"]');
+  const contactNameLabel = contactNameInput?.closest("label")?.querySelector("span");
+  if (contactNameLabel) contactNameLabel.textContent = "Name or fursona name";
+  if (contactNameInput) contactNameInput.placeholder = "Your name or fursona name";
 });
